@@ -1,0 +1,123 @@
+body.active {
+    background-image: url("img/ilove.jpg");
+    background-repeat: repeat;
+}
+
+h1 {
+    position: relative;
+    height: 50%;
+    display: flex;
+    top: 100px;
+    left: 31%;
+    font-size: 200%;
+    align-items: center;
+    justify-content: center;
+    background-color: #09d2ec;
+    width: 32%;
+    border: 2px solid #000000;
+    border-radius: 10px;
+}
+
+#Message1 {
+    position: relative;
+    height: 50%;
+    display: flex;
+    top: 150px;
+    left: 37%;
+    align-items: center;
+    justify-content: center;
+    background-color: #d0db34;
+    width: 20%;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    visibility: hidden;
+}
+
+#Message2 {
+    position: relative;
+    height: 50%;
+    display: flex;
+    top: 200px;
+    left: 37%;
+    align-items: center;
+    justify-content: center;
+    background-color: #56e052;
+    width: 20%;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    visibility: hidden;
+}
+
+#Message3 {
+    position: relative;
+    height: 50%;
+    display: flex;
+    top: 250px;
+    left: 37%;
+    align-items: center;
+    justify-content: center;
+    background-color: #e44ac3;
+    width: 20%;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    visibility: hidden;
+}
+h1.hover {
+    color:red;
+    height: 50%;
+    display: flex;
+    top: 100px;
+    left: 31%;
+    font-size: 200%;
+    align-items: center;
+    justify-content: center;
+    background-color: #09d2ec;
+    width: 32%;
+    border: 2px solid #000000;
+    border-radius: 10px;
+}
+#Message1.hover {
+    position: relative;
+    height: 50%;
+    display: flex;
+    top: 150px;
+    left: 37%;
+    align-items: center;
+    justify-content: center;
+    background-color: #d0db34;
+    width: 20%;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    visibility: hidden;
+    color: red;
+}
+#Message2.hover {
+    position: relative;
+    height: 50%;
+    display: flex;
+    top: 200px;
+    left: 37%;
+    align-items: center;
+    justify-content: center;
+    background-color: #56e052;
+    width: 20%;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    visibility: hidden;
+    color: red;
+}
+#Message3.hover {
+    position: relative;
+    height: 50%;
+    display: flex;
+    top: 250px;
+    left: 37%;
+    align-items: center;
+    justify-content: center;
+    background-color: #e44ac3;
+    width: 20%;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    visibility: hidden;
+    color: red;
+}
