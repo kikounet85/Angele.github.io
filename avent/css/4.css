@@ -16,6 +16,7 @@ h1 {
     width: 32%;
     border: 2px solid #000000;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 #Message1 {
@@ -31,6 +32,7 @@ h1 {
     border: 2px solid #000000;
     border-radius: 10px;
     visibility: hidden;
+    cursor: pointer;
 }
 
 #Message2 {
@@ -46,6 +48,7 @@ h1 {
     border: 2px solid #000000;
     border-radius: 10px;
     visibility: hidden;
+    cursor: pointer;
 }
 
 #Message3 {
@@ -61,6 +64,7 @@ h1 {
     border: 2px solid #000000;
     border-radius: 10px;
     visibility: hidden;
+    cursor: pointer;
 }
 h1.hover {
     color:red;
@@ -75,6 +79,7 @@ h1.hover {
     width: 32%;
     border: 2px solid #000000;
     border-radius: 10px;
+    cursor: pointer;
 }
 #Message1.hover {
     position: relative;
@@ -90,6 +95,7 @@ h1.hover {
     border-radius: 10px;
     visibility: hidden;
     color: red;
+    cursor: pointer;
 }
 #Message2.hover {
     position: relative;
@@ -105,6 +111,7 @@ h1.hover {
     border-radius: 10px;
     visibility: hidden;
     color: red;
+    cursor: pointer;
 }
 #Message3.hover {
     position: relative;
@@ -120,4 +127,5 @@ h1.hover {
     border-radius: 10px;
     visibility: hidden;
     color: red;
+    cursor: pointer;
 }
