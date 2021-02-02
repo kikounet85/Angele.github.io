@@ -1,0 +1,36 @@
+.calendrier {
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 23%;
+    height: 100%;
+    padding: 4px 10px 10px 10px;
+    position: relative;
+    top: 100px;
+    left: 300px;
+    cursor: pointer;
+}
+body {
+    background-color: azure;
+}
+h3 {
+    color: rgb(31, 103, 236);
+}
+.vérité {
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 23%;
+    height: 100%;
+    padding: 4px 10px 10px 10px;
+    position: relative;
+    top: -25px;
+    left: 700px;
+    cursor: pointer;
+}
+h1 {
+    text-align: center;
+}
+
