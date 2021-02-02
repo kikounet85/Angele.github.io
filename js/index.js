@@ -7,3 +7,12 @@ $(".vérité").on('click', function () {
 $("div").on("click", function () {
     $(this).ripples();
 });
+$(document).ready(function() {
+    $("div").animate({top: "-=50"}, 750);
+});
+$("div").hover(function () {
+    $(this).animate({top: "+=25"}, 250)
+},
+function () {
+    $(this).animate({top: "-=25"}, 250)
+});
