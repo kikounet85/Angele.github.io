@@ -54,7 +54,7 @@ $(document).ready(function () {
             var weather_description;
             var apiKey = "5ac0c007ae8d872392d6a4bbe5fc7080";
 
-            $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + longit + "&appid=" + apiKey, function (data) {
+            $.getJSON("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + longit + "&appid=" + apiKey, function (data) {
 
                 city_name = data["name"];
                 country_name = data["sys"]["country"];
