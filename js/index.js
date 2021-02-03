@@ -1,22 +1,19 @@
-var city = "rien"
 $(".calendrier").on('click', function () {
     window.location.href = "avent/avent.html";
 });
 $(".vérité").on('click', function () {
     window.location.href = "vérité.html";
 });
-$("div").on("click", function () {
-    $(this).ripples();
-});
 $(document).ready(function () {
     setTimeout(function () {
-        $("div").animate({ top: "-=50", opacity: "1" }, 750);
+        $(".calendrier, .vérité").animate({ top: "-=50", opacity: "1" }, 750);
+        $("#weather, h1").animate({ opacity: "1"}, 750)
     }, 1200)
     $("#TB").animate({ top: "+=100px", left: "-=100px", opacity: "1", width: "50%" }, 1000);
     $("#TH").animate({ top: "-=100px", left: "+=100px", opacity: "1", width: "50%" }, 1000)
 });
-$("div").hover(function () {
-    $(this).animate({ top: "+=25" }, 250)
+$(".calendrier, .vérité").hover(function () {
+    $(this).animate({ top: "+=25" }, 250);
 },
     function () {
         $(this).animate({ top: "-=25" }, 250)
@@ -54,7 +51,7 @@ $(document).ready(function () {
             var weather_description;
             var apiKey = "5ac0c007ae8d872392d6a4bbe5fc7080";
 
-            $.getJSON("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + longit + "&appid=" + apiKey, function (data) {
+            $.getJSON("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + longit + "&appid=" + apiKey +"&units=metric", function (data) {
 
                 city_name = data["name"];
                 country_name = data["sys"]["country"];
@@ -63,8 +60,8 @@ $(document).ready(function () {
                 pressure = data["main"]["pressure"];
                 wind_speed = data["wind"]["speed"];
 
-                $("#cityname").html(city_name + " &#40;" + country_name + "&#41; " + "has " + weather_description);
-                $(".temp").html(temp);
+                $("#cityname").html(city_name);
+                $(".temp").html(Math.round(temp)+"°");
                 $(".pressure").html(pressure + " mBar");
                 $(".wind-spd").html(wind_speed + " m/s");
 
@@ -75,4 +72,28 @@ $(document).ready(function () {
     }
 
 })
-
+var mode = 0;
+var dt = new Date();
+var time = dt.getHours()
+$(document).ready(function () {
+    if (time > 18 || time < 10) {
+$("body").addClass("night");
+$(".vérité, .calendrier, #mode").css({"background-color" : "black"});
+$("#mode").addClass("night");
+$("#mode.night").text("Nuit");
+mode++;
+    }
+})
+$("#mode").on('click', function() {
+    $("body").toggleClass("night");
+    $("#mode").toggleClass("night");
+    if (mode == 1) {
+    $(".vérité, .calendrier, #mode").css({"background-color" : "azure"});
+    $("#mode").text("Jour");
+    mode--;
+    } else {
+        $(".vérité, .calendrier, #mode").css({"background-color" : "black"});
+        $("#mode.night").text("Nuit");
+        mode++ 
+    }
+})

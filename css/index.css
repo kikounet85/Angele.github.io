@@ -3,37 +3,40 @@
     background-color: white;
     border-radius: 10px;
     text-align: center;
-    width: 23%;
-    height: 100%;
+    width: 20%;
+    height: 17%;
     padding: 4px 10px 10px 10px;
-    position: relative;
-    top: 150px;
+    position: absolute;
+    top: 200px;
     left: 300px;
     cursor: pointer;
     opacity: 0;
 }
 body {
     background-color: azure;
+    font-family: 'Open Sans', sans-serif;
 }
 h3 {
-    color: rgb(31, 103, 236);
+    color: rgb(20, 63, 143);
 }
 .vérité {
     box-shadow: 0px 0px 5px rgb(0, 0, 0);
     background-color: white;
     border-radius: 10px;
     text-align: center;
-    width: 23%;
-    height: 100%;
+    width: 20%;
+    height: 17%;
     padding: 4px 10px 10px 10px;
-    position: relative;
-    top: 23px;
+    position: absolute;
+    top: 200px;
     left: 700px;
     cursor: pointer;
     opacity: 0;
 }
 h1 {
     text-align: center;
+    cursor: default;
+    opacity: 0;
 }
 #TB {
     position: absolute;
@@ -53,4 +56,47 @@ img {
     -webkit-filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
     filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
   }
+#bouton {
+    border: 0px solid rgb(31, 103, 236);
+}
 html, body {margin: 0; overflow: hidden}
+#weather {
+    position: absolute;
+    left: 960px;
+    font-size: small;
+    top: -5px;
+    color: white;
+    cursor: default;
+    opacity: 0;
+}
+
+#cityname {
+position: relative;
+font-size: smaller;
+left: 200px;
+top: -43px;
+}
+.temp {
+    position: absolute;
+    left: 227px;
+    top: 70px;
+    font-size: smaller;
+}
+body.night {
+    background-color: rgb(39, 38, 38);
+    color: white;
+}
+#mode {
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 8%;
+    height: 4%;
+    padding: 4px 10px 10px 10px;
+    position: absolute;
+    top: 590px;
+    left: 1190px;
+    cursor: pointer;
+    opacity: 1;
+}
