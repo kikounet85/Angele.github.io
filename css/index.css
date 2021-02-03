@@ -10,6 +10,7 @@
     top: 150px;
     left: 300px;
     cursor: pointer;
+    opacity: 0;
 }
 body {
     background-color: azure;
@@ -26,11 +27,30 @@ h3 {
     height: 100%;
     padding: 4px 10px 10px 10px;
     position: relative;
-    top: 25px;
+    top: 23px;
     left: 700px;
     cursor: pointer;
+    opacity: 0;
 }
 h1 {
     text-align: center;
 }
-
+#TB {
+    position: absolute;
+    top: 429px;
+    left: 100px;
+    opacity: 0;
+    width: 50%;
+}
+#TH {
+    position: absolute;
+    top: 99px;
+    left: 563px;
+    opacity: 0;
+    width: 50%;
+}
+img {
+    -webkit-filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
+    filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
+  }
+html, body {margin: 0; overflow: hidden}
