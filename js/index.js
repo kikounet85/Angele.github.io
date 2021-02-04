@@ -100,7 +100,7 @@ $("#mode").on('click', function () {
     }
 })
 $(document).ready(function () {
-    if ( weather_description == "clear") {
+    if ( weather_description == "Clear") {
         $("#TB").attr("src", "img/triangle bas sun.png");
     };
 })
