@@ -118,8 +118,8 @@ $("#mode").on('click', function () {
     } else if (mode == 1 && meteo == "Rain" || mode == 1 && meteo == "Drizzle") {
         $(".vérité, .calendrier, #mode").css({ "background-color": "azure" });
         $("#mode").text("Jour");
-        $("#TB").attr("src", "img/triangle bas rain.png");
-        $("#TH").attr("src", "img/triangle haut rain.png");
+        $("#TB").attr("src", "img/triangle bas.png");
+        $("#TH").attr("src", "img/triangle haut.png");
         mode--;
     } else if (mode == 1 && meteo == "Atmosphere" || mode == 1 && meteo == "Clouds") {
         $(".vérité, .calendrier, #mode").css({ "background-color": "azure" });
