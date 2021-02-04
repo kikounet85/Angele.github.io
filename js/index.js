@@ -1,3 +1,8 @@
+var mode = 0;
+var meteo = "lol";
+function updatemeteo(number) {
+    meteo = number ;
+};
 $(".calendrier").on('click', function () {
     window.location.href = "avent/avent.html";
 });
@@ -19,6 +24,19 @@ $(".calendrier, .vérité").hover(function () {
     function () {
         $(this).animate({ top: "-=6%" }, 250)
     });
+var dt = new Date();
+var time = dt.getHours()
+$(document).ready(function () {
+    if (time > 17 || time < 10) {
+        $("body").addClass("night");
+        $(".vérité, .calendrier, #mode").css({ "background-color": "black" });
+        $("#mode").addClass("night");
+        $("#mode.night").text("Nuit");
+        $("#TB").attr("src", "img/triangle bas night.png");
+        $("#TH").attr("src", "img/triangle haut night.png");
+        mode++;
+    }
+});
 $.ajax({
     url: "https://geolocation-db.com/jsonp",
     jsonpCallback: "callback",
@@ -66,41 +84,55 @@ $(document).ready(function () {
                 $(".pressure").html(pressure + " mBar");
                 $(".wind-spd").html(wind_speed + " m/s");
                 $(".what").html(weather_description);
-
+                if (weather_description == "Clear" && mode == 0) {
+                    $("#TB").attr("src", "img/triangle bas sun.png");
+                    $("#TH").attr("src", "img/triangle haut sun.png");
+                    updatemeteo(1);
+                } else if (weather_description == "Rain" && mode == 0 || weather_description == "Drizzle" && mode == 0) {
+                    $("#TB").attr("src", "img/triangle bas.png");
+                    $("#TH").attr("src", "img/triangle haut.png");
+                    updatemeteo(2);
+                } else if (weather_description == "Atmosphere" || weather_description == "Clouds" && mode == 0) {
+                    $("#TB").attr("src", "img/triangle bas cloud.png");
+                    $("#TH").attr("src", "img/triangle haut cloud.png");
+                   updatemeteo(3);
+                }
             })
 
         }
 
     }
 
-})
-var mode = 0;
-var dt = new Date();
-var time = dt.getHours()
-$(document).ready(function () {
-    if (time > 18 || time < 10) {
-        $("body").addClass("night");
-        $(".vérité, .calendrier, #mode").css({ "background-color": "black" });
-        $("#mode").addClass("night");
-        $("#mode.night").text("Nuit");
-        mode++;
-    }
-})
+});
+meteo = $(".what").text();
 $("#mode").on('click', function () {
+    meteo = $(".what").text();
     $("body").toggleClass("night");
     $("#mode").toggleClass("night");
-    if (mode == 1) {
+    if (mode == 1 && meteo == "Clear") {
         $(".vérité, .calendrier, #mode").css({ "background-color": "azure" });
         $("#mode").text("Jour");
+        $("#TB").attr("src", "img/triangle bas sun.png");
+        $("#TH").attr("src", "img/triangle haut sun.png");
         mode--;
-    } else {
+    } else if (mode == 1 && meteo == "Rain" || mode == 1 && meteo == "Drizzle") {
+        $(".vérité, .calendrier, #mode").css({ "background-color": "azure" });
+        $("#mode").text("Jour");
+        $("#TB").attr("src", "img/triangle bas rain.png");
+        $("#TH").attr("src", "img/triangle haut rain.png");
+        mode--;
+    } else if (mode == 1 && meteo == "Atmosphere" || mode == 1 && meteo == "Clouds") {
+        $(".vérité, .calendrier, #mode").css({ "background-color": "azure" });
+        $("#mode").text("Jour");
+        $("#TB").attr("src", "img/triangle bas cloud.png");
+        $("#TH").attr("src", "img/triangle haut cloud.png");
+        mode--;
+    }
+    else {
         $(".vérité, .calendrier, #mode").css({ "background-color": "black" });
         $("#mode.night").text("Nuit");
-        mode++
+        $("#TB").attr("src", "img/triangle bas night.png");
+        $("#TH").attr("src", "img/triangle haut night.png");
+        mode++;
     }
-})
-$(document).ready(function () {
-    if ( weather_description == "Clear") {
-        $("#TB").attr("src", "img/triangle bas sun.png");
-    };
-})
+});

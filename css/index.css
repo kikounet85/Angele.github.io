@@ -101,3 +101,6 @@ body.night {
     cursor: pointer;
     opacity: 0;
 }
+.what {
+    display: none;
+}
