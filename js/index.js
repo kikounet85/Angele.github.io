@@ -55,7 +55,7 @@ $(document).ready(function () {
 
                 city_name = data["name"];
                 country_name = data["sys"]["country"];
-                weather_description = data["weather"][0]["description"];
+                weather_description = data["weather"][0]["main"];
                 temp = data["main"]["temp"];
                 pressure = data["main"]["pressure"];
                 wind_speed = data["wind"]["speed"];
@@ -64,6 +64,7 @@ $(document).ready(function () {
                 $(".temp").html(Math.round(temp)+"°");
                 $(".pressure").html(pressure + " mBar");
                 $(".wind-spd").html(wind_speed + " m/s");
+                $(".what").html(weather_description);
 
             })
 
