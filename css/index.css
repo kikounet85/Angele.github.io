@@ -62,9 +62,9 @@ img {
 html, body {margin: 0; overflow: hidden}
 #weather {
     position: absolute;
-    left: 960px;
+    left: 75%;
     font-size: small;
-    top: -5px;
+    top: -0.05%;
     color: white;
     cursor: default;
     opacity: 0;
@@ -93,10 +93,10 @@ body.night {
     text-align: center;
     width: 8%;
     height: 4%;
-    padding: 4px 10px 10px 10px;
+    padding: 0.3% 0.5% 0.5% ;
     position: absolute;
-    top: 590px;
-    left: 1190px;
+    top: 89.5%;
+    left: 89.5%;
     cursor: pointer;
     opacity: 1;
 }
