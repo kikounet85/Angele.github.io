@@ -9,8 +9,8 @@ $(document).ready(function () {
         $(".calendrier, .vérité").animate({ top: "-=50", opacity: "1" }, 750);
         $("#weather, h1").animate({ opacity: "1"}, 750)
     }, 1200)
-    $("#TB").animate({ top: "+=100px", left: "-=100px", opacity: "1", width: "50%" }, 1000);
-    $("#TH").animate({ top: "-=100px", left: "+=100px", opacity: "1", width: "50%" }, 1000)
+    $("#TB").animate({ top: "+=8.09%", left: "-=8.09%", opacity: "1", width: "50%" }, 1000);
+    $("#TH").animate({ top: "-=8.09%", left: "+=8.09%", opacity: "1", width: "50%" }, 1000)
 });
 $(".calendrier, .vérité").hover(function () {
     $(this).animate({ top: "+=25" }, 250);
