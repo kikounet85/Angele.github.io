@@ -1,40 +1,8 @@
+// initialisation : var + ajax
 var mode = 0;
 var meteo = "lol";
-function updatemeteo(number) {
-    meteo = number;
-};
-$(".calendrier").on('click', function () {
-    window.location.href = "avent/avent.html";
-});
-$(".vérité").on('click', function () {
-    window.location.href = "vérité.html";
-});
-$(document).ready(function () {
-    setTimeout(function () {
-        $(".calendrier, .vérité").animate({ top: "-=7%", opacity: "1" }, 750);
-        $("#weather, h1").animate({ opacity: "1" }, 750);
-        $("#mode").animate({ opacity: "1", top: "-=5%" }, 750);
-    }, 1200)
-    $("#TB").animate({ top: "+=8.09%", left: "-=8.09%", opacity: "1", width: "50%" }, 1000);
-    $("#TH").animate({ top: "-=8.09%", left: "+=8.09%", opacity: "1", width: "50%" }, 1000);
-});
-$(".calendrier, .vérité").hover(function () {
-    $(this).animate({ top: "+=6%" }, 250);
-},
-    function () {
-        $(this).animate({ top: "-=6%" }, 250)
-    });
 var dt = new Date();
 var time = dt.getHours()
-$(document).ready(function () {
-    if (time > 17 || time < 10) {
-        $(".vérité, .calendrier, body, #mode").toggleClass("night");
-        $("#mode").text("Nuit");
-        $("#TB").attr("src", "img/triangle bas night.png");
-        $("#TH").attr("src", "img/triangle haut night.png");
-        mode++;
-    }
-});
 $.ajax({
     url: "https://geolocation-db.com/jsonp",
     jsonpCallback: "callback",
@@ -99,22 +67,76 @@ $(document).ready(function () {
     }
 
 });
-meteo = $(".what").text();
+// night mode auto 18h - 10h
+$(document).ready(function () {
+    if (time > 17 || time < 10) {
+        $(".vérité, .calendrier, body, #mode").toggleClass("night");
+        $("#mode").text("Nuit");
+        $("#TB").attr("src", "img/triangle bas night.png");
+        $("#TH").attr("src", "img/triangle haut night.png");
+        mode++;
+    }
+});
+// animations de départ
+$(document).ready(function () {
+    setTimeout(function () {
+        $(".calendrier, .vérité").animate({ top: "-=7%", opacity: "1" }, 750);
+        $("#weather, h1").animate({ opacity: "1" }, 750);
+        $("#mode").animate({ opacity: "1", top: "-=5%" }, 750);
+    }, 1200)
+    $("#TB").animate({ top: "+=8.09%", left: "-=8.09%", opacity: "1", width: "50%" }, 1000);
+    $("#TH").animate({ top: "-=8.09%", left: "+=8.09%", opacity: "1", width: "50%" }, 1000);
+});
+// var météo
+$(document).ajaxStop(function () {
+    var temps;
+    temps = $(".what").text();
+    if (temps == "Clear") {
+        meteo = 0
+    }
+
+    else if (temps == "Rain" || meteo == "Drizzle") {
+        meteo = 1
+    }
+    else {
+        meteo = 2
+    }
+});
+// animation hover + triangles
+$(".calendrier, .vérité").hover(function () {
+    $(this).animate({ top: "+=6%" }, 250);
+},
+    function () {
+        $(this).animate({ top: "-=6%" }, 250)
+    });
+$("#hoverhaut, #weather").hover(function () {
+    $("#TH").toggleClass("wow");
+})
+$("#hoverbas").hover(function () {
+    $("#TB").toggleClass("wow");
+})
+// redirection boutons
+$(".calendrier").on('click', function () {
+    window.location.href = "avent/avent.html";
+});
+$(".vérité").on('click', function () {
+    window.location.href = "vérité.html";
+});
+// night mode bouton
 $("#mode").on('click', function () {
-    meteo = $(".what").text();
-    if (mode == 1 && meteo == "Clear") {
+    if (mode == 1 && meteo == 0) {
         $(".vérité, .calendrier, body, #mode").toggleClass("night");
         $("#mode").text("Jour");
         $("#TB").attr("src", "img/triangle bas sun.png");
         $("#TH").attr("src", "img/triangle haut sun.png");
         mode--;
-    } else if (mode == 1 && meteo == "Rain" || mode == 1 && meteo == "Drizzle") {
+    } else if (mode == 1 && meteo == 1) {
         $(".vérité, .calendrier, body, #mode").toggleClass("night");
         $("#mode").text("Jour");
         $("#TB").attr("src", "img/triangle bas.png");
         $("#TH").attr("src", "img/triangle haut.png");
         mode--;
-    } else if (mode == 1 && meteo == "Atmosphere" || mode == 1 && meteo == "Clouds" || mode == 1 && meteo == "Mist") {
+    } else if (mode == 1 && meteo == 2) {
         $(".vérité, .calendrier, body, #mode").toggleClass("night");
         $("#mode").text("Jour");
         $("#TB").attr("src", "img/triangle bas cloud.png");
@@ -129,12 +151,7 @@ $("#mode").on('click', function () {
         mode++;
     }
 });
-$("#hoverhaut, #weather").hover(function () {
-    $("#TH").toggleClass("wow");
-})
-$("#hoverbas").hover(function () {
-    $("#TB").toggleClass("wow");
-})
+// bouton météo
 $("#hoverhaut, #weather").on("click", function () {
     $("#TH").animate({ top: "+= 40%" }, 1000);
 });
