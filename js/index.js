@@ -107,32 +107,39 @@ $(document).ready(function () {
 meteo = $(".what").text();
 $("#mode").on('click', function () {
     meteo = $(".what").text();
-    $("body").toggleClass("night");
-    $("#mode").toggleClass("night");
     if (mode == 1 && meteo == "Clear") {
-        $(".vérité, .calendrier, #mode").css({ "background-color": "azure" });
+        $(".vérité, .calendrier, body, #mode").toggleClass("night");
         $("#mode").text("Jour");
         $("#TB").attr("src", "img/triangle bas sun.png");
         $("#TH").attr("src", "img/triangle haut sun.png");
         mode--;
     } else if (mode == 1 && meteo == "Rain" || mode == 1 && meteo == "Drizzle") {
-        $(".vérité, .calendrier, #mode").css({ "background-color": "azure" });
+        $(".vérité, .calendrier, body, #mode").toggleClass("night");
         $("#mode").text("Jour");
         $("#TB").attr("src", "img/triangle bas.png");
         $("#TH").attr("src", "img/triangle haut.png");
         mode--;
-    } else if (mode == 1 && meteo == "Atmosphere" || mode == 1 && meteo == "Clouds") {
-        $(".vérité, .calendrier, #mode").css({ "background-color": "azure" });
+    } else if (mode == 1 && meteo == "Atmosphere" || mode == 1 && meteo == "Clouds" || mode == 1 && meteo == "Mist" ) {
+        $(".vérité, .calendrier, body, #mode").toggleClass("night");
         $("#mode").text("Jour");
         $("#TB").attr("src", "img/triangle bas cloud.png");
         $("#TH").attr("src", "img/triangle haut cloud.png");
         mode--;
     }
-    else {
-        $(".vérité, .calendrier, #mode").css({ "background-color": "black" });
-        $("#mode.night").text("Nuit");
+    else if (mode == 0) {
+        $(".vérité, .calendrier, body, #mode").toggleClass("night");
+        $("#mode").text("Nuit");
         $("#TB").attr("src", "img/triangle bas night.png");
         $("#TH").attr("src", "img/triangle haut night.png");
         mode++;
     }
+});
+$("#hoverhaut, #weather").hover( function () {
+    $("#TH").toggleClass("wow");
+})
+$("#hoverbas").hover( function () {
+    $("#TB").toggleClass("wow");
+})
+$("#hoverhaut").on("click", function () {
+$("#TH").animate({ top : "+= 40%"}, 1000);
 });

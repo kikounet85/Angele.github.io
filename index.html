@@ -7,6 +7,7 @@
     </title>
     <link href="css/index.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -32,14 +33,21 @@
     <h3 id="mode">
         Jour
     </h3>
-    <img src="img/triangle bas.png" id="TB">
-    <img src="img/triangle haut.png" id="TH">
+    <img src="img/triangle bas.png" id="TB" usemap="#bas">
+    <img src="img/triangle haut.png" id="TH" usemap="#haut">
     <div id="weather">
         <h2 class="text-center">Météo</h2>
         <h2 class="text-center" id="cityname"></h2>
         <h2 class="what"></h2>
         <h2 class="temp"></h2> 
     </div>
+    <map name="haut" id="hoverhaut">
+        <area coords="0,2,873,170,873,1" shape="poly">
+        </map>
+        <map name="bas" id="hoverbas">
+            <area coords="0,1,0,169,874,170" shape="poly">
+            </map>
     <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
     <script src="js/index.js"></script>
 </body>

@@ -11,14 +11,16 @@
     left: 26%;
     cursor: pointer;
     opacity: 0;
+    transition: background-color 0.8s;
 }
 body {
     background-color: azure;
-    font-family: 'Open Sans', sans-serif;
+    transition: 0.5s;
 }
 h3 {
     color: rgb(20, 63, 143);
     font-size: 125%;
+    font-family: 'Ubuntu', sans-serif;
 }
 .vérité {
     box-shadow: 0px 0px 5px rgb(0, 0, 0);
@@ -33,11 +35,13 @@ h3 {
     left: 54%;
     cursor: pointer;
     opacity: 0;
+    transition: background-color 0.8s;
 }
 h1 {
     text-align: center;
     cursor: default;
     opacity: 0;
+    font-family: 'Ubuntu', sans-serif;
 }
 #TB {
     position: absolute;
@@ -45,6 +49,7 @@ h1 {
     left: 8%;
     opacity: 0;
     width: 40%;
+    transition: filter 0.5s;
 }
 #TH {
     position: absolute;
@@ -52,6 +57,7 @@ h1 {
     left: 42%;
     opacity: 0;
     width: 40%;
+    transition: filter 0.5s;
 }
 img {
     -webkit-filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
@@ -59,6 +65,7 @@ img {
   }
 #bouton {
     border: 0px solid rgb(31, 103, 236);
+    transition: background-color 1s;
 }
 html, body {margin: 0; overflow: hidden}
 #weather {
@@ -69,6 +76,7 @@ html, body {margin: 0; overflow: hidden}
     color: white;
     cursor: default;
     opacity: 0;
+    cursor: pointer;
 }
 
 #cityname {
@@ -100,7 +108,36 @@ body.night {
     left: 89.5%;
     cursor: pointer;
     opacity: 0;
+    transition: transform 0.2s, background-color 0.8s;
 }
 .what {
     display: none;
+}
+p {
+    font-family: 'Open Sans', sans-serif;
+}
+h2 {
+    font-family: 'Ubuntu', sans-serif;
+}
+#mode:hover {
+    transform: scale(1.2);
+  } 
+.vérité.night {
+    background-color: black;
+    color: white;
+}
+.calendrier.night {
+    background-color: black;
+    color: white;
+}
+#mode.night {
+    background-color: black;
+    transition: transform 0.2s, background-color 0.8s;
+}
+#TH.wow, #TB.wow {
+    -webkit-filter: drop-shadow(0px 0px 25px rgb(0, 0, 0));
+    filter: drop-shadow(0px 0px 15px rgb(0, 0, 0));
+}
+#hoverhaut, #hoverbas {
+    cursor: pointer;
 }
