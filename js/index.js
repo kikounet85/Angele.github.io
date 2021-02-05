@@ -1,7 +1,7 @@
 var mode = 0;
 var meteo = "lol";
 function updatemeteo(number) {
-    meteo = number ;
+    meteo = number;
 };
 $(".calendrier").on('click', function () {
     window.location.href = "avent/avent.html";
@@ -28,10 +28,8 @@ var dt = new Date();
 var time = dt.getHours()
 $(document).ready(function () {
     if (time > 17 || time < 10) {
-        $("body").addClass("night");
-        $(".vérité, .calendrier, #mode").css({ "background-color": "black" });
-        $("#mode").addClass("night");
-        $("#mode.night").text("Nuit");
+        $(".vérité, .calendrier, body, #mode").toggleClass("night");
+        $("#mode").text("Nuit");
         $("#TB").attr("src", "img/triangle bas night.png");
         $("#TH").attr("src", "img/triangle haut night.png");
         mode++;
@@ -87,15 +85,12 @@ $(document).ready(function () {
                 if (weather_description == "Clear" && mode == 0) {
                     $("#TB").attr("src", "img/triangle bas sun.png");
                     $("#TH").attr("src", "img/triangle haut sun.png");
-                    updatemeteo(1);
                 } else if (weather_description == "Rain" && mode == 0 || weather_description == "Drizzle" && mode == 0) {
                     $("#TB").attr("src", "img/triangle bas.png");
                     $("#TH").attr("src", "img/triangle haut.png");
-                    updatemeteo(2);
                 } else if (weather_description == "Atmosphere" || weather_description == "Clouds" && mode == 0) {
                     $("#TB").attr("src", "img/triangle bas cloud.png");
                     $("#TH").attr("src", "img/triangle haut cloud.png");
-                   updatemeteo(3);
                 }
             })
 
@@ -119,7 +114,7 @@ $("#mode").on('click', function () {
         $("#TB").attr("src", "img/triangle bas.png");
         $("#TH").attr("src", "img/triangle haut.png");
         mode--;
-    } else if (mode == 1 && meteo == "Atmosphere" || mode == 1 && meteo == "Clouds" || mode == 1 && meteo == "Mist" ) {
+    } else if (mode == 1 && meteo == "Atmosphere" || mode == 1 && meteo == "Clouds" || mode == 1 && meteo == "Mist") {
         $(".vérité, .calendrier, body, #mode").toggleClass("night");
         $("#mode").text("Jour");
         $("#TB").attr("src", "img/triangle bas cloud.png");
@@ -134,12 +129,12 @@ $("#mode").on('click', function () {
         mode++;
     }
 });
-$("#hoverhaut, #weather").hover( function () {
+$("#hoverhaut, #weather").hover(function () {
     $("#TH").toggleClass("wow");
 })
-$("#hoverbas").hover( function () {
+$("#hoverbas").hover(function () {
     $("#TB").toggleClass("wow");
 })
-$("#hoverhaut").on("click", function () {
-$("#TH").animate({ top : "+= 40%"}, 1000);
+$("#hoverhaut, #weather").on("click", function () {
+    $("#TH").animate({ top: "+= 40%" }, 1000);
 });
