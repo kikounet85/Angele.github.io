@@ -8,7 +8,7 @@
     padding: 4px 10px 10px 10px;
     position: absolute;
     top: 30.5%;
-    left: 26%;
+    left: 26.5%;
     cursor: pointer;
     opacity: 0;
     transition: background-color 0.8s;
@@ -32,7 +32,7 @@ h3 {
     padding: 4px 10px 10px 10px;
     position: absolute;
     top: 30.5%;
-    left: 54%;
+    left: 51.5%;
     cursor: pointer;
     opacity: 0;
     transition: background-color 0.8s;
@@ -74,7 +74,6 @@ html, body {margin: 0; overflow: hidden}
     font-size: small;
     top: -0.05%;
     color: white;
-    cursor: default;
     opacity: 0;
     cursor: pointer;
 }
@@ -82,8 +81,8 @@ html, body {margin: 0; overflow: hidden}
 #cityname {
 position: relative;
 font-size: smaller;
-left: 200px;
-top: -43px;
+left: 280%;
+top: 20%;
 }
 .temp {
     position: absolute;
@@ -122,11 +121,7 @@ h2 {
 #mode:hover {
     transform: scale(1.2);
   } 
-.vérité.night {
-    background-color: black;
-    color: white;
-}
-.calendrier.night {
+.vérité.night, .calendrier.night, #météo1.night, #météo2.night, #météo3.night, #météo4.night {
     background-color: black;
     color: white;
 }
@@ -156,4 +151,68 @@ h2 {
     top: 81%;
     left: -9%;
     width: 9.5%;
+}
+#météo {
+    position: absolute;
+    width: 40%;
+}
+#météo1 {
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 20%;
+    height: 17%;
+    padding: 4px 10px 10px 10px;
+    position: absolute;
+    top: 300%;
+    left: 1.5%;
+    cursor: pointer;
+    opacity: 0;
+    transition: background-color 0.8s;
+}
+#météo2 {
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 20%;
+    height: 17%;
+    padding: 4px 10px 10px 10px;
+    position: absolute;
+    top: 300%;
+    left: 26.5%;
+    cursor: pointer;
+    opacity: 0;
+    transition: background-color 0.8s;
+}
+#météo3 {
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 20%;
+    height: 17%;
+    padding: 4px 10px 10px 10px;
+    position: absolute;
+    top: 300%;
+    left: 51.5%;
+    cursor: pointer;
+    opacity: 0;
+    transition: background-color 0.8s;
+}
+#météo4 {
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 20%;
+    height: 17%;
+    padding: 4px 10px 10px 10px;
+    position: absolute;
+    top: 300%;
+    left: 76.5%;
+    cursor: pointer;
+    opacity: 0;
+    transition: background-color 0.8s;
 }

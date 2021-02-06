@@ -74,7 +74,7 @@ $(document).ready(function () {
 // night mode auto 18h - 10h
 $(document).ready(function () {
     if (time > 17 || time < 10) {
-        $(".vérité, .calendrier, body, #mode").toggleClass("night");
+        $(".vérité, .calendrier, body, #mode, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
         $("#mode").text("Nuit");
         $("#TB").attr("src", "img/triangle bas night.png");
         $("#TH").attr("src", "img/triangle haut night.png");
@@ -108,11 +108,11 @@ $(document).ajaxStop(function () {
     }
 });
 // animation hover + triangles
-$(".calendrier, .vérité").hover(function () {
-    $(this).animate({ top: "+=6%" }, 250);
+$(".calendrier, .vérité, #météo1, #météo2, #météo3, #météo4").hover(function () {
+    $(this).animate({ top: "+=4%" }, 250);
 },
     function () {
-        $(this).animate({ top: "-=6%" }, 250)
+        $(this).animate({ top: "-=4%" }, 250)
     });
 $("#hoverhaut, #weather").hover(function () {
     $("#TH").toggleClass("wow");
@@ -130,21 +130,21 @@ $(".vérité").on('click', function () {
 // night mode bouton
 $("#mode").on('click', function () {
     if (mode == 1 && meteo == 0) {
-        $(".vérité, .calendrier, body, #mode").toggleClass("night");
+        $(".vérité, .calendrier, body, #mode, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
         $("#mode").text("Jour");
         $("#TB").attr("src", "img/triangle bas sun.png");
         $("#TH").attr("src", "img/triangle haut sun.png");
         $("#carréhaut, #carrébas").attr("src", "img/carré sun.png");
         mode--;
     } else if (mode == 1 && meteo == 1) {
-        $(".vérité, .calendrier, body, #mode").toggleClass("night");
+        $(".vérité, .calendrier, body, #mode, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
         $("#mode").text("Jour");
         $("#TB").attr("src", "img/triangle bas.png");
         $("#TH").attr("src", "img/triangle haut.png");
         $("#carréhaut, #carrébas").attr("src", "img/carré rain.png");
         mode--;
     } else if (mode == 1 && meteo == 2) {
-        $(".vérité, .calendrier, body, #mode").toggleClass("night");
+        $(".vérité, .calendrier, body, #mode, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
         $("#mode").text("Jour");
         $("#TB").attr("src", "img/triangle bas cloud.png");
         $("#TH").attr("src", "img/triangle haut cloud.png");
@@ -152,11 +152,12 @@ $("#mode").on('click', function () {
         mode--;
     }
     else if (mode == 0) {
-        $(".vérité, .calendrier, body, #mode").toggleClass("night");
+        $(".vérité, .calendrier, body, #mode, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
         $("#mode").text("Nuit");
         $("#TB").attr("src", "img/triangle bas night.png");
         $("#TH").attr("src", "img/triangle haut night.png");
         $("#carréhaut, #carrébas").attr("src", "img/carré night.png");
+        $("#backweather").attr("src", "img/backnight.png")
         mode++;
     }
 });
@@ -164,25 +165,44 @@ $("#mode").on('click', function () {
 $("#hoverhaut, #weather").on("click", function () {
    $("#carréhaut, #carrébas").css({ opacity: "1"});
     if (modemétéo == 0) {
-    $("#carréhaut").animate({ top: "+=99%" }, 900);
+    $("#weather").animate({ top: "-=1%", left: "-=28%"}, 1300);
+    $("#cityname").animate({ fontSize: "200%"}, 1300);
+    $("h1").animate({opacity: "0"}, 1500);
+    $("#météo").animate({ fontSize: "+=100%", color: "black" }, 1300);  
+    $(".temp").animate({ opacity: "0"}, 250);
+    $(".vérité, .calendrier").animate({ top: "+=20%", opacity: "0"}, 1300);
+    $(".vérité, .calendrier").animate({ top: "300%"}, 1);
+    $("#carréhaut").animate({ top: "+=99%" }, 700);
     setTimeout( function () { 
-    $("#carréhaut").animate({ left: "-=99%" }, 1000);
-    }, 900);
-    $("#carrébas").animate({ top: "-=99%" }, 900);
+    $("#carréhaut").animate({ left: "-=99%" }, 500);
+    }, 700);
+    $("#carrébas").animate({ top: "-=99%" }, 700);
     setTimeout( function () { 
-    $("#carrébas").animate({ left: "+=99%" }, 1000);
-    }, 900);
+    $("#carrébas").animate({ left: "+=99%" }, 500);
+    }, 700);
+    $("#météo1, #météo2, #météo3, #météo4").css({ top: "20.5%"})
+    $("#météo1, #météo2, #météo3, #météo4").animate({ opacity: "1", top: "+=20%"}, 1300);
     modemétéo++;
 }
 else {
-    $("#carréhaut").animate({ left: "+=99%" }, 900);
+    $("h1").animate({opacity: "1"}, 1500);
+    $("#cityname").animate({ fontSize: "90%", left: "260%"}, 1300);
+    $("#weather").animate({ top: "+=1%", left: "+=28%", color: "white"}, 1300);
+    $("h1").animate({opacity: "1"}, 1500)
+    $("#météo").animate({ fontSize: "-=100%", color: "white" }, 1300);  
+    $(".temp, #cityname").animate({ opacity: "1"}, 250);
+    $(".vérité, .calendrier").css({ top: "43.8%"})
+    $(".vérité, .calendrier").animate({ top: "-=20%", opacity: "1"}, 1300);
+    $("#carréhaut").animate({ left: "+=99%" }, 500);
     setTimeout( function () { 
-    $("#carréhaut").animate({ top: "-=99%" }, 1000);
-    }, 900);
-    $("#carrébas").animate({ left: "-=99%" }, 900);
+    $("#carréhaut").animate({ top: "-=99%" }, 700);
+    }, 500);
+    $("#carrébas").animate({ left: "-=99%" }, 500);
     setTimeout( function () { 
-    $("#carrébas").animate({ top: "+=99%" }, 1000);
-    }, 900);
+    $("#carrébas").animate({ top: "+=99%" }, 700);
+    }, 500);
+    $("#météo1, #météo2, #météo3, #météo4").animate({ opacity: "0", top: "-=20%"}, 1300);
+    $("#météo1, #météo2, #météo3, #météo4").animate({ top: "300%"}, 1);
     modemétéo--;
 }
 });
