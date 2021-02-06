@@ -157,7 +157,6 @@ $("#mode").on('click', function () {
         $("#TB").attr("src", "img/triangle bas night.png");
         $("#TH").attr("src", "img/triangle haut night.png");
         $("#carréhaut, #carrébas").attr("src", "img/carré night.png");
-        $("#backweather").attr("src", "img/backnight.png")
         mode++;
     }
 });
