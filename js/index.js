@@ -1,6 +1,7 @@
 // initialisation : var + ajax
 var mode = 0;
 var meteo = "lol";
+var modemétéo = 0;
 var dt = new Date();
 var time = dt.getHours()
 $.ajax({
@@ -53,12 +54,15 @@ $(document).ready(function () {
                 if (weather_description == "Clear" && mode == 0) {
                     $("#TB").attr("src", "img/triangle bas sun.png");
                     $("#TH").attr("src", "img/triangle haut sun.png");
+                    $("#carréhaut, #carrébas").attr("src", "img/carré sun.png");
                 } else if (weather_description == "Rain" && mode == 0 || weather_description == "Drizzle" && mode == 0) {
                     $("#TB").attr("src", "img/triangle bas.png");
                     $("#TH").attr("src", "img/triangle haut.png");
-                } else if (weather_description == "Atmosphere" || weather_description == "Clouds" && mode == 0) {
+                    $("#carréhaut, #carrébas").attr("src", "img/carré rain.png");
+                } else if (weather_description == "Atmosphere" && mode == 0 || weather_description == "Clouds" && mode == 0 || weather_description == "Mist" && mode == 0) {
                     $("#TB").attr("src", "img/triangle bas cloud.png");
                     $("#TH").attr("src", "img/triangle haut cloud.png");
+                    $("#carréhaut, #carrébas").attr("src", "img/carré cloud.png");
                 }
             })
 
@@ -74,6 +78,7 @@ $(document).ready(function () {
         $("#mode").text("Nuit");
         $("#TB").attr("src", "img/triangle bas night.png");
         $("#TH").attr("src", "img/triangle haut night.png");
+        $("#carréhaut, #carrébas").attr("src", "img/carré night.png");
         mode++;
     }
 });
@@ -129,18 +134,21 @@ $("#mode").on('click', function () {
         $("#mode").text("Jour");
         $("#TB").attr("src", "img/triangle bas sun.png");
         $("#TH").attr("src", "img/triangle haut sun.png");
+        $("#carréhaut, #carrébas").attr("src", "img/carré sun.png");
         mode--;
     } else if (mode == 1 && meteo == 1) {
         $(".vérité, .calendrier, body, #mode").toggleClass("night");
         $("#mode").text("Jour");
         $("#TB").attr("src", "img/triangle bas.png");
         $("#TH").attr("src", "img/triangle haut.png");
+        $("#carréhaut, #carrébas").attr("src", "img/carré rain.png");
         mode--;
     } else if (mode == 1 && meteo == 2) {
         $(".vérité, .calendrier, body, #mode").toggleClass("night");
         $("#mode").text("Jour");
         $("#TB").attr("src", "img/triangle bas cloud.png");
         $("#TH").attr("src", "img/triangle haut cloud.png");
+        $("#carréhaut, #carrébas").attr("src", "img/carré cloud.png");
         mode--;
     }
     else if (mode == 0) {
@@ -148,10 +156,33 @@ $("#mode").on('click', function () {
         $("#mode").text("Nuit");
         $("#TB").attr("src", "img/triangle bas night.png");
         $("#TH").attr("src", "img/triangle haut night.png");
+        $("#carréhaut, #carrébas").attr("src", "img/carré night.png");
         mode++;
     }
 });
 // bouton météo
 $("#hoverhaut, #weather").on("click", function () {
-    $("#TH").animate({ top: "+= 40%" }, 1000);
+   $("#carréhaut, #carrébas").css({ opacity: "1"});
+    if (modemétéo == 0) {
+    $("#carréhaut").animate({ top: "+=99%" }, 900);
+    setTimeout( function () { 
+    $("#carréhaut").animate({ left: "-=99%" }, 1000);
+    }, 900);
+    $("#carrébas").animate({ top: "-=99%" }, 900);
+    setTimeout( function () { 
+    $("#carrébas").animate({ left: "+=99%" }, 1000);
+    }, 900);
+    modemétéo++;
+}
+else {
+    $("#carréhaut").animate({ left: "+=99%" }, 900);
+    setTimeout( function () { 
+    $("#carréhaut").animate({ top: "-=99%" }, 1000);
+    }, 900);
+    $("#carrébas").animate({ left: "-=99%" }, 900);
+    setTimeout( function () { 
+    $("#carrébas").animate({ top: "+=99%" }, 1000);
+    }, 900);
+    modemétéo--;
+}
 });
