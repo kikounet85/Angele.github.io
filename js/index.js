@@ -151,7 +151,7 @@ $("#mode").on('click', function () {
         $("#carréhaut, #carrébas").attr("src", "img/carré cloud.png");
         mode--;
     }
-    else if (mode == 0) {
+    else {
         $(".vérité, .calendrier, body, #mode, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
         $("#mode").text("Nuit");
         $("#TB").attr("src", "img/triangle bas night.png");
@@ -159,50 +159,57 @@ $("#mode").on('click', function () {
         $("#carréhaut, #carrébas").attr("src", "img/carré night.png");
         mode++;
     }
+    if (mode == 1 && modemétéo == 1) {
+        $("#météo").animate({color: "white" }, 800);
+    }
 });
 // bouton météo
 $("#hoverhaut, #weather").on("click", function () {
-   $("#carréhaut, #carrébas").css({ opacity: "1"});
+    $("#carréhaut, #carrébas").css({ opacity: "1" });
     if (modemétéo == 0) {
-    $("#weather").animate({ top: "-=1%", left: "-=28%"}, 1300);
-    $("#cityname").animate({ fontSize: "200%"}, 1300);
-    $("h1").animate({opacity: "0"}, 1500);
-    $("#météo").animate({ fontSize: "+=100%", color: "black" }, 1300);  
-    $(".temp").animate({ opacity: "0"}, 250);
-    $(".vérité, .calendrier").animate({ top: "+=20%", opacity: "0"}, 1300);
-    $(".vérité, .calendrier").animate({ top: "300%"}, 1);
-    $("#carréhaut").animate({ top: "+=99%" }, 700);
-    setTimeout( function () { 
-    $("#carréhaut").animate({ left: "-=99%" }, 500);
-    }, 700);
-    $("#carrébas").animate({ top: "-=99%" }, 700);
-    setTimeout( function () { 
-    $("#carrébas").animate({ left: "+=99%" }, 500);
-    }, 700);
-    $("#météo1, #météo2, #météo3, #météo4").css({ top: "20.5%"})
-    $("#météo1, #météo2, #météo3, #météo4").animate({ opacity: "1", top: "+=20%"}, 1300);
-    modemétéo++;
-}
-else {
-    $("h1").animate({opacity: "1"}, 1500);
-    $("#cityname").animate({ fontSize: "90%", left: "260%"}, 1300);
-    $("#weather").animate({ top: "+=1%", left: "+=28%", color: "white"}, 1300);
-    $("h1").animate({opacity: "1"}, 1500)
-    $("#météo").animate({ fontSize: "-=100%", color: "white" }, 1300);  
-    $(".temp, #cityname").animate({ opacity: "1"}, 250);
-    $(".vérité, .calendrier").css({ top: "43.8%"})
-    $(".vérité, .calendrier").animate({ top: "-=20%", opacity: "1"}, 1300);
-    $("#carréhaut").animate({ left: "+=99%" }, 500);
-    setTimeout( function () { 
-    $("#carréhaut").animate({ top: "-=99%" }, 700);
-    }, 500);
-    $("#carrébas").animate({ left: "-=99%" }, 500);
-    setTimeout( function () { 
-    $("#carrébas").animate({ top: "+=99%" }, 700);
-    }, 500);
-    $("#météo1, #météo2, #météo3, #météo4").animate({ opacity: "0", top: "-=20%"}, 1300);
-    $("#météo1, #météo2, #météo3, #météo4").animate({ top: "300%"}, 1);
-    modemétéo--;
-}
+        $("h1").animate({ opacity: "0" }, 1000);
+        $("#weather").animate({ top: "-=1%", left: "-=28%" }, 1300);
+        $("#cityname").animate({ fontSize: "200%" }, 1300);
+        $(".temp").animate({ opacity: "0" }, 250);
+        $(".vérité, .calendrier").animate({ top: "+=20%", opacity: "0" }, 1300);
+        $(".vérité, .calendrier").animate({ top: "300%" }, 1);
+        $("#carréhaut").animate({ top: "+=99%" }, 700);
+        setTimeout(function () {
+            $("#carréhaut").animate({ left: "-=99%" }, 500);
+        }, 700);
+        $("#carrébas").animate({ top: "-=99%" }, 700);
+        setTimeout(function () {
+            $("#carrébas").animate({ left: "+=99%" }, 500);
+        }, 700);
+        $("#météo1, #météo2, #météo3, #météo4").css({ top: "20.5%" })
+        $("#météo1, #météo2, #météo3, #météo4").animate({ opacity: "1", top: "+=20%" }, 1300);
+        modemétéo++;
+        if (mode == 1) {
+            $("#météo").animate({ fontSize: "+=100%", color: "white" }, 1300);
+        } else {
+            $("#météo").animate({ fontSize: "+=100%", color: "black" }, 1300);
+        }
+    }
+    else {
+        $("h1").animate({ opacity: "1" }, 1000);
+        $("#cityname").animate({ fontSize: "90%", left: "260%" }, 1300);
+        $("#weather").animate({ top: "+=1%", left: "+=28%", color: "white" }, 1300);
+        $("h1").animate({ opacity: "1" }, 1500)
+        $("#météo").animate({ fontSize: "-=100%", color: "white" }, 1300);
+        $(".temp, #cityname").animate({ opacity: "1" }, 250);
+        $(".vérité, .calendrier").css({ top: "43.8%" })
+        $(".vérité, .calendrier").animate({ top: "-=20%", opacity: "1" }, 1300);
+        $("#carréhaut").animate({ left: "+=99%" }, 500);
+        setTimeout(function () {
+            $("#carréhaut").animate({ top: "-=99%" }, 700);
+        }, 500);
+        $("#carrébas").animate({ left: "-=99%" }, 500);
+        setTimeout(function () {
+            $("#carrébas").animate({ top: "+=99%" }, 700);
+        }, 500);
+        $("#météo1, #météo2, #météo3, #météo4").animate({ opacity: "0", top: "-=20%" }, 1300);
+        $("#météo1, #météo2, #météo3, #météo4").animate({ top: "300%" }, 1);
+        modemétéo--;
+    }
 });
 l

@@ -216,3 +216,6 @@ h2 {
     opacity: 0;
     transition: background-color 0.8s;
 }
+#météo.night {
+    color: white;
+}
