@@ -121,12 +121,12 @@ $("#hoverbas").hover(function () {
     $("#TB").toggleClass("wow");
 })
 // redirection boutons
-$(".calendrier").on('click', function () {
-    window.location.href = "avent/avent.html";
-});
-$(".vérité").on('click', function () {
-    window.location.href = "vérité.html";
-});
+//$(".calendrier").on('click', function () {
+//    window.location.href = "avent/avent.html";
+//});
+//$(".vérité").on('click', function () {
+//    window.location.href = "vérité.html";
+//});
 // night mode bouton
 $("#mode").on('click', function () {
     if (mode == 1 && meteo == 0) {
@@ -161,8 +161,9 @@ $("#mode").on('click', function () {
     }
     if (mode == 1 && modemétéo == 1) {
         $("#météo").animate({color: "white" }, 800);
-    }
-});
+    } else  if (mode == 0 && modemétéo == 1) {
+        $("#météo").animate({color: "black" }, 800);
+}});
 // bouton météo
 $("#hoverhaut, #weather").on("click", function () {
     $("#carréhaut, #carrébas").css({ opacity: "1" });
