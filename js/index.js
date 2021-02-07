@@ -1,9 +1,38 @@
 // initialisation : var + ajax
-var mode = 0;
+var mode = false;
 var meteo = "lol";
-var modemétéo = 0;
+var modemétéo = false;
 var dt = new Date();
-var time = dt.getHours()
+var time = dt.getHours();
+$.fn.nightmode = function () {
+    var weather;
+    if (meteo == 0) {
+        weather = "sun";
+    } else if (meteo == 1) {
+        weather = "rain";
+    } else {
+        weather = "cloud"
+    }
+    if (mode == true) {
+        $(".vérité, .calendrier, body, #mode, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
+        $("#mode").text("Jour");
+        $("#TB").attr("src", "img/triangle bas " + weather + ".png");
+        $("#TH").attr("src", "img/triangle haut " + weather + ".png");
+        $("#carréhaut, #carrébas").attr("src", "img/carré " + weather + ".png");
+        mode = false;
+    } else {
+        $(".vérité, .calendrier, body, #mode, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
+        $("#mode").text("Nuit");
+        $("#TB").attr("src", "img/triangle bas night.png");
+        $("#TH").attr("src", "img/triangle haut night.png");
+        $("#carréhaut, #carrébas").attr("src", "img/carré night.png");
+        mode = true;
+    } if (mode == true && modemétéo == true) {
+        $("#météo").animate({ color: "white" }, 800);
+    } else if (mode == false && modemétéo == true) {
+        $("#météo").animate({ color: "black" }, 800);
+    }
+}
 $.ajax({
     url: "https://geolocation-db.com/jsonp",
     jsonpCallback: "callback",
@@ -39,7 +68,7 @@ $(document).ready(function () {
 
             $.getJSON("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + longit + "&appid=" + apiKey + "&units=metric", function (data) {
 
-                city_name = data["name"];
+                city_name = data["name"]; 
                 country_name = data["sys"]["country"];
                 weather_description = data["weather"][0]["main"];
                 temp = data["main"]["temp"];
@@ -79,7 +108,7 @@ $(document).ready(function () {
         $("#TB").attr("src", "img/triangle bas night.png");
         $("#TH").attr("src", "img/triangle haut night.png");
         $("#carréhaut, #carrébas").attr("src", "img/carré night.png");
-        mode++;
+        mode = true;
     }
 });
 // animations de départ
@@ -129,45 +158,12 @@ $("#hoverbas").hover(function () {
 //});
 // night mode bouton
 $("#mode").on('click', function () {
-    if (mode == 1 && meteo == 0) {
-        $(".vérité, .calendrier, body, #mode, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
-        $("#mode").text("Jour");
-        $("#TB").attr("src", "img/triangle bas sun.png");
-        $("#TH").attr("src", "img/triangle haut sun.png");
-        $("#carréhaut, #carrébas").attr("src", "img/carré sun.png");
-        mode--;
-    } else if (mode == 1 && meteo == 1) {
-        $(".vérité, .calendrier, body, #mode, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
-        $("#mode").text("Jour");
-        $("#TB").attr("src", "img/triangle bas.png");
-        $("#TH").attr("src", "img/triangle haut.png");
-        $("#carréhaut, #carrébas").attr("src", "img/carré rain.png");
-        mode--;
-    } else if (mode == 1 && meteo == 2) {
-        $(".vérité, .calendrier, body, #mode, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
-        $("#mode").text("Jour");
-        $("#TB").attr("src", "img/triangle bas cloud.png");
-        $("#TH").attr("src", "img/triangle haut cloud.png");
-        $("#carréhaut, #carrébas").attr("src", "img/carré cloud.png");
-        mode--;
-    }
-    else {
-        $(".vérité, .calendrier, body, #mode, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
-        $("#mode").text("Nuit");
-        $("#TB").attr("src", "img/triangle bas night.png");
-        $("#TH").attr("src", "img/triangle haut night.png");
-        $("#carréhaut, #carrébas").attr("src", "img/carré night.png");
-        mode++;
-    }
-    if (mode == 1 && modemétéo == 1) {
-        $("#météo").animate({color: "white" }, 800);
-    } else  if (mode == 0 && modemétéo == 1) {
-        $("#météo").animate({color: "black" }, 800);
-}});
+    $(this).nightmode();
+});
 // bouton météo
 $("#hoverhaut, #weather").on("click", function () {
     $("#carréhaut, #carrébas").css({ opacity: "1" });
-    if (modemétéo == 0) {
+    if (modemétéo == false) {
         $("h1").animate({ opacity: "0" }, 1000);
         $("#weather").animate({ top: "-=1%", left: "-=28%" }, 1300);
         $("#cityname").animate({ fontSize: "200%" }, 1300);
@@ -184,8 +180,8 @@ $("#hoverhaut, #weather").on("click", function () {
         }, 700);
         $("#météo1, #météo2, #météo3, #météo4").css({ top: "20.5%" })
         $("#météo1, #météo2, #météo3, #météo4").animate({ opacity: "1", top: "+=20%" }, 1300);
-        modemétéo++;
-        if (mode == 1) {
+        modemétéo = true;
+        if (mode == true) {
             $("#météo").animate({ fontSize: "+=100%", color: "white" }, 1300);
         } else {
             $("#météo").animate({ fontSize: "+=100%", color: "black" }, 1300);
@@ -210,6 +206,30 @@ $("#hoverhaut, #weather").on("click", function () {
         }, 500);
         $("#météo1, #météo2, #météo3, #météo4").animate({ opacity: "0", top: "-=20%" }, 1300);
         $("#météo1, #météo2, #météo3, #météo4").animate({ top: "300%" }, 1);
-        modemétéo--;
+        modemétéo = false;
     }
 });
+$(document).ready(function(){
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(showcityname);
+        function showcityname(position) {
+            var lat = position.coords.latitude;
+            var longit = position.coords.longitude;
+            var altitude = position.coords.altitude;
+            var latitude_text = document.getElementById("latitude-val");
+            var altitude_text = document.getElementById("altit");
+            var city_name;
+            var temp;
+            var pressure;
+            var wind_speed;
+            var country_name;
+            var weather_description;
+            var apiKey = "5ac0c007ae8d872392d6a4bbe5fc7080";
+    $.getJSON("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + longit + "&appid=" + apiKey + "&units=metric", function(data){
+        for (var i = 0 ; i< 40 ; i++) {
+        console.log(data["list"][i]["weather"][0]["main"]);
+        };
+    }).fail(function(){
+        console.log("An error has occurred.");
+    });
+}}});
