@@ -212,4 +212,3 @@ $("#hoverhaut, #weather").on("click", function () {
         modemétéo--;
     }
 });
-l
