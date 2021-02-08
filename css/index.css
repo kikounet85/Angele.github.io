@@ -100,6 +100,22 @@ p {
 #météo {
     position: absolute;
     width: 40%;
+    transition: color 0.8s;
+}
+#météo0 {
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 20%;
+    height: 17%;
+    padding: 4px 10px 10px 10px;
+    position: absolute;
+    top: 300%;
+    left: 39%;
+    cursor: pointer;
+    opacity: 1;
+    transition: background-color 0.8s;
 }
 
 #météo1 {
@@ -234,7 +250,7 @@ body.night {
     transform: scale(1.2);
 }
 
-.vérité.night, .calendrier.night, #météo1.night, #météo2.night, #météo3.night, #météo4.night {
+.vérité.night, .calendrier.night, #météo1.night, #météo2.night, #météo3.night, #météo4.night, #météo0.night {
     background-color: black;
     color: white;
 }

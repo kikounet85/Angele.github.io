@@ -2,8 +2,11 @@
 var mode = false;
 var meteo = "lol";
 var modemétéo = false;
+var weatherlist = [];
+var templist = [];
 var dt = new Date();
 var time = dt.getHours();
+var météo0list, météo1list, météo2list, météo3list, météo4list;
 $.fn.nightmode = function () {
     var weather;
     if (meteo == 0) {
@@ -14,14 +17,14 @@ $.fn.nightmode = function () {
         weather = "cloud"
     }
     if (mode == true) {
-        $(".vérité, .calendrier, body, #mode, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
+        $(".vérité, .calendrier, body, #mode, #météo0, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
         $("#mode").text("Jour");
         $("#TB").attr("src", "img/triangle bas " + weather + ".png");
         $("#TH").attr("src", "img/triangle haut " + weather + ".png");
         $("#carréhaut, #carrébas").attr("src", "img/carré " + weather + ".png");
         mode = false;
     } else {
-        $(".vérité, .calendrier, body, #mode, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
+        $(".vérité, .calendrier, body, #mode, #météo0, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
         $("#mode").text("Nuit");
         $("#TB").attr("src", "img/triangle bas night.png");
         $("#TH").attr("src", "img/triangle haut night.png");
@@ -31,7 +34,7 @@ $.fn.nightmode = function () {
         $("#météo").animate({ color: "white" }, 800);
     } else if (mode == false && modemétéo == true) {
         $("#météo").animate({ color: "black" }, 800);
-    }
+    };
 }
 $.ajax({
     url: "https://geolocation-db.com/jsonp",
@@ -68,7 +71,7 @@ $(document).ready(function () {
 
             $.getJSON("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + longit + "&appid=" + apiKey + "&units=metric", function (data) {
 
-                city_name = data["name"]; 
+                city_name = data["name"];
                 country_name = data["sys"]["country"];
                 weather_description = data["weather"][0]["main"];
                 temp = data["main"]["temp"];
@@ -103,7 +106,7 @@ $(document).ready(function () {
 // night mode auto 18h - 10h
 $(document).ready(function () {
     if (time > 17 || time < 10) {
-        $(".vérité, .calendrier, body, #mode, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
+        $(".vérité, .calendrier, body, #mode, #météo0, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
         $("#mode").text("Nuit");
         $("#TB").attr("src", "img/triangle bas night.png");
         $("#TH").attr("src", "img/triangle haut night.png");
@@ -137,7 +140,7 @@ $(document).ajaxStop(function () {
     }
 });
 // animation hover + triangles
-$(".calendrier, .vérité, #météo1, #météo2, #météo3, #météo4").hover(function () {
+$(".calendrier, .vérité, #météo0, #météo1, #météo2, #météo3, #météo4").hover(function () {
     $(this).animate({ top: "+=4%" }, 250);
 },
     function () {
@@ -178,8 +181,10 @@ $("#hoverhaut, #weather").on("click", function () {
         setTimeout(function () {
             $("#carrébas").animate({ left: "+=99%" }, 500);
         }, 700);
-        $("#météo1, #météo2, #météo3, #météo4").css({ top: "20.5%" })
+        $("#météo0").css({ top: "-3%" });
+        $("#météo1, #météo2, #météo3, #météo4").css({ top: "24%" });
         $("#météo1, #météo2, #météo3, #météo4").animate({ opacity: "1", top: "+=20%" }, 1300);
+        $("#météo0").animate({ opacity: "1", top: "+=20%" }, 1300);
         modemétéo = true;
         if (mode == true) {
             $("#météo").animate({ fontSize: "+=100%", color: "white" }, 1300);
@@ -204,12 +209,12 @@ $("#hoverhaut, #weather").on("click", function () {
         setTimeout(function () {
             $("#carrébas").animate({ top: "+=99%" }, 700);
         }, 500);
-        $("#météo1, #météo2, #météo3, #météo4").animate({ opacity: "0", top: "-=20%" }, 1300);
-        $("#météo1, #météo2, #météo3, #météo4").animate({ top: "300%" }, 1);
+        $("#météo0, #météo1, #météo2, #météo3, #météo4").animate({ opacity: "0", top: "-=20%" }, 1300);
+        $("#météo0, #météo1, #météo2, #météo3, #météo4").animate({ top: "300%" }, 1);
         modemétéo = false;
     }
 });
-$(document).ready(function(){
+$(document).ready(function () {
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(showcityname);
         function showcityname(position) {
@@ -224,12 +229,101 @@ $(document).ready(function(){
             var wind_speed;
             var country_name;
             var weather_description;
+            var cntjson;
+            var plus1;
             var apiKey = "5ac0c007ae8d872392d6a4bbe5fc7080";
-    $.getJSON("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + longit + "&appid=" + apiKey + "&units=metric", function(data){
-        for (var i = 0 ; i< 40 ; i++) {
-        console.log(data["list"][i]["weather"][0]["main"]);
-        };
-    }).fail(function(){
-        console.log("An error has occurred.");
-    });
-}}});
+            $.getJSON("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + longit + "&appid=" + apiKey + "&units=metric", function (data) {
+                if (time == 0 || time >= 22 ) {
+                    cntjson = 39
+                    plus1 = false
+                }
+                else if (time >= 1 && time <= 3) {
+                    cntjson = 39
+                    plus1 = true
+                }
+                else if (time >= 4 && time <= 6) {
+                    cntjson = 38
+                }
+                else if (time >= 7 && time <= 9) {
+                    cntjson = 37
+                }
+                else if (time >= 10 && time <= 12) {
+                    cntjson = 36
+                }
+                else if (time >= 13 && time <= 15) {
+                    cntjson = 35
+                }
+                else if (time >= 16 && time <= 18) {
+                    cntjson = 34
+                }
+                else if (time >= 19 && time <= 21) {
+                    cntjson = 33
+                };
+                for (var i = 0; i <= cntjson; i++) {
+                    weatherlist.push(+data["list"][i]["weather"][0]["main"]);
+                    templist.push(data["list"][i]["main"]["temp"]);
+                };  if (cntjson == 39 && plus1 == false) {
+                    météo0list = templist.slice(0, 9);
+                    météo1list = templist.slice(8, 17);
+                    météo2list = templist.slice(16, 25);
+                    météo3list = templist.slice(24, 33);
+                    météo4list = templist.slice(32, 40);
+                }
+                else if (cntjson == 39 && plus1 == true) {
+                    météo0list = templist.slice(0, 8);
+                    météo1list = templist.slice(7, 16);
+                    météo2list = templist.slice(15, 24);
+                    météo3list = templist.slice(23, 32);
+                    météo4list = templist.slice(31, 40);   
+                }
+                else if (cntjson == 38) {
+                    météo0list = templist.slice(0, 7);
+                    météo1list = templist.slice(6, 15);
+                    météo2list = templist.slice(14, 23);
+                    météo3list = templist.slice(22, 31);
+                    météo4list = templist.slice(30, 39);  
+                }
+                else if (cntjson == 37) {
+                    météo0list = templist.slice(0, 6);
+                    météo1list = templist.slice(5, 14);
+                    météo2list = templist.slice(13, 22);
+                    météo3list = templist.slice(21, 30);
+                    météo4list = templist.slice(29, 38);  
+                }
+                else if (cntjson == 36) {
+                    météo0list = templist.slice(0, 5);
+                    météo1list = templist.slice(4, 13);
+                    météo2list = templist.slice(12, 21);
+                    météo3list = templist.slice(20, 29);
+                    météo4list = templist.slice(28, 37);  
+                }
+                else if (cntjson == 35) {
+                    météo0list = templist.slice(0, 4);
+                    météo1list = templist.slice(3, 12);
+                    météo2list = templist.slice(11, 20);
+                    météo3list = templist.slice(19, 28);
+                    météo4list = templist.slice(27, 36);  
+                }
+                else if (cntjson == 34) {
+                    météo0list = templist.slice(0, 3);
+                    météo1list = templist.slice(2, 11);
+                    météo2list = templist.slice(10, 19);
+                    météo3list = templist.slice(18, 27);
+                    météo4list = templist.slice(26, 35);  
+                }
+                else if (cntjson == 33) {
+                    météo0list = templist.slice(0, 2);
+                    météo1list = templist.slice(1, 10);
+                    météo2list = templist.slice(9, 18);
+                    météo3list = templist.slice(17, 26);
+                    météo4list = templist.slice(25, 34);  
+                }
+                $("#temp0").html(météo0list);
+                $("#temp1").html(météo1list);
+                $("#temp2").html(météo2list);
+                $("#temp3").html(météo3list);
+                $("#temp4").html(météo4list);
+            });
+        }
+    }
+});
