@@ -68,10 +68,10 @@ p {
 }
 
 #cityname {
-    position: relative;
+    position: absolute;
     font-size: smaller;
-    left: 280%;
-    top: 20%;
+    left: 90.5%;
+    top: 0%;
 }
 
 #hoverhaut, #hoverbas {
@@ -263,8 +263,4 @@ body.night {
 #TH.wow, #TB.wow {
     -webkit-filter: drop-shadow(0px 0px 25px rgb(0, 0, 0));
     filter: drop-shadow(0px 0px 15px rgb(0, 0, 0));
-}
-
-#météo.night {
-    color: white;
 }

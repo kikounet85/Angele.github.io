@@ -31,11 +31,124 @@ $.fn.nightmode = function () {
         $("#carréhaut, #carrébas").attr("src", "img/carré night.png");
         mode = true;
     } if (mode == true && modemétéo == true) {
-        $("#météo").animate({ color: "white" }, 800);
+        $("#météo").css({ color: "white"})
     } else if (mode == false && modemétéo == true) {
-        $("#météo").animate({ color: "black" }, 800);
+        $("#météo").css({ color: "black"})
     };
 }
+$(document).ready(function () {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(showcityname);
+        function showcityname(position) {
+            var lat = position.coords.latitude;
+            var longit = position.coords.longitude;
+            var altitude = position.coords.altitude;
+            var latitude_text = document.getElementById("latitude-val");
+            var altitude_text = document.getElementById("altit");
+            var city_name;
+            var temp;
+            var pressure;
+            var wind_speed;
+            var country_name;
+            var weather_description;
+            var cntjson;
+            var plus1;
+            var apiKey = "5ac0c007ae8d872392d6a4bbe5fc7080";
+            $.getJSON("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + longit + "&appid=" + apiKey + "&units=metric", function (data) {
+                if (time == 0 || time >= 22 ) {
+                    cntjson = 39
+                    plus1 = false
+                }
+                else if (time >= 1 && time <= 3) {
+                    cntjson = 39
+                    plus1 = true
+                }
+                else if (time >= 4 && time <= 6) {
+                    cntjson = 38
+                }
+                else if (time >= 7 && time <= 9) {
+                    cntjson = 37
+                }
+                else if (time >= 10 && time <= 12) {
+                    cntjson = 36
+                }
+                else if (time >= 13 && time <= 15) {
+                    cntjson = 35
+                }
+                else if (time >= 16 && time <= 18) {
+                    cntjson = 34
+                }
+                else if (time >= 19 && time <= 21) {
+                    cntjson = 33
+                };
+                for (var i = 0; i <= cntjson; i++) {
+                    weatherlist.push(+data["list"][i]["weather"][0]["main"]);
+                    templist.push(data["list"][i]["main"]["temp"]);
+                };  if (cntjson == 39 && plus1 == false) {
+                    météo0list = templist.slice(0, 9);
+                    météo1list = templist.slice(8, 17);
+                    météo2list = templist.slice(16, 25);
+                    météo3list = templist.slice(24, 33);
+                    météo4list = templist.slice(32, 40);
+                }
+                else if (cntjson == 39 && plus1 == true) {
+                    météo0list = templist.slice(0, 8);
+                    météo1list = templist.slice(7, 16);
+                    météo2list = templist.slice(15, 24);
+                    météo3list = templist.slice(23, 32);
+                    météo4list = templist.slice(31, 40);   
+                }
+                else if (cntjson == 38) {
+                    météo0list = templist.slice(0, 7);
+                    météo1list = templist.slice(6, 15);
+                    météo2list = templist.slice(14, 23);
+                    météo3list = templist.slice(22, 31);
+                    météo4list = templist.slice(30, 39);  
+                }
+                else if (cntjson == 37) {
+                    météo0list = templist.slice(0, 6);
+                    météo1list = templist.slice(5, 14);
+                    météo2list = templist.slice(13, 22);
+                    météo3list = templist.slice(21, 30);
+                    météo4list = templist.slice(29, 38);  
+                }
+                else if (cntjson == 36) {
+                    météo0list = templist.slice(0, 5);
+                    météo1list = templist.slice(4, 13);
+                    météo2list = templist.slice(12, 21);
+                    météo3list = templist.slice(20, 29);
+                    météo4list = templist.slice(28, 37);  
+                }
+                else if (cntjson == 35) {
+                    météo0list = templist.slice(0, 4);
+                    météo1list = templist.slice(3, 12);
+                    météo2list = templist.slice(11, 20);
+                    météo3list = templist.slice(19, 28);
+                    météo4list = templist.slice(27, 36);  
+                }
+                else if (cntjson == 34) {
+                    météo0list = templist.slice(0, 3);
+                    météo1list = templist.slice(2, 11);
+                    météo2list = templist.slice(10, 19);
+                    météo3list = templist.slice(18, 27);
+                    météo4list = templist.slice(26, 35);  
+                }
+                else if (cntjson == 33) {
+                    météo0list = templist.slice(0, 2);
+                    météo1list = templist.slice(1, 10);
+                    météo2list = templist.slice(9, 18);
+                    météo3list = templist.slice(17, 26);
+                    météo4list = templist.slice(25, 34);  
+                }
+                $("#temp0").html(météo0list);
+                $("#temp1").html(météo1list);
+                $("#temp2").html(météo2list);
+                $("#temp3").html(météo3list);
+                $("#temp4").html(météo4list);
+            });
+        }
+    }
+});
 $.ajax({
     url: "https://geolocation-db.com/jsonp",
     jsonpCallback: "callback",
@@ -169,7 +282,7 @@ $("#hoverhaut, #weather").on("click", function () {
     if (modemétéo == false) {
         $("h1").animate({ opacity: "0" }, 1000);
         $("#weather").animate({ top: "-=1%", left: "-=28%" }, 1300);
-        $("#cityname").animate({ fontSize: "200%" }, 1300);
+        $("#cityname").animate({ fontSize: "200%", left: "-=6%" }, 1300);
         $(".temp").animate({ opacity: "0" }, 250);
         $(".vérité, .calendrier").animate({ top: "+=20%", opacity: "0" }, 1300);
         $(".vérité, .calendrier").animate({ top: "300%" }, 1);
@@ -182,22 +295,27 @@ $("#hoverhaut, #weather").on("click", function () {
             $("#carrébas").animate({ left: "+=99%" }, 500);
         }, 700);
         $("#météo0").css({ top: "-3%" });
+        $("#météo0").animate({ opacity: "1", top: "+=20%" }, 1300);
+        setTimeout(function () {
         $("#météo1, #météo2, #météo3, #météo4").css({ top: "24%" });
         $("#météo1, #météo2, #météo3, #météo4").animate({ opacity: "1", top: "+=20%" }, 1300);
-        $("#météo0").animate({ opacity: "1", top: "+=20%" }, 1300);
+        }, 1300);
         modemétéo = true;
         if (mode == true) {
             $("#météo").animate({ fontSize: "+=100%", color: "white" }, 1300);
+            $("#météo").css({ color: "white"})
         } else {
             $("#météo").animate({ fontSize: "+=100%", color: "black" }, 1300);
+            $("#météo").css({ color: "black"})
         }
     }
     else {
         $("h1").animate({ opacity: "1" }, 1000);
-        $("#cityname").animate({ fontSize: "90%", left: "260%" }, 1300);
+        $("#cityname").animate({ fontSize: "90%", left: "+=6%" }, 1300);
         $("#weather").animate({ top: "+=1%", left: "+=28%", color: "white" }, 1300);
         $("h1").animate({ opacity: "1" }, 1500)
         $("#météo").animate({ fontSize: "-=100%", color: "white" }, 1300);
+        $("#météo").css({ color: "white"})
         $(".temp, #cityname").animate({ opacity: "1" }, 250);
         $(".vérité, .calendrier").css({ top: "43.8%" })
         $(".vérité, .calendrier").animate({ top: "-=20%", opacity: "1" }, 1300);
@@ -212,118 +330,5 @@ $("#hoverhaut, #weather").on("click", function () {
         $("#météo0, #météo1, #météo2, #météo3, #météo4").animate({ opacity: "0", top: "-=20%" }, 1300);
         $("#météo0, #météo1, #météo2, #météo3, #météo4").animate({ top: "300%" }, 1);
         modemétéo = false;
-    }
-});
-$(document).ready(function () {
-    if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(showcityname);
-        function showcityname(position) {
-            var lat = position.coords.latitude;
-            var longit = position.coords.longitude;
-            var altitude = position.coords.altitude;
-            var latitude_text = document.getElementById("latitude-val");
-            var altitude_text = document.getElementById("altit");
-            var city_name;
-            var temp;
-            var pressure;
-            var wind_speed;
-            var country_name;
-            var weather_description;
-            var cntjson;
-            var plus1;
-            var apiKey = "5ac0c007ae8d872392d6a4bbe5fc7080";
-            $.getJSON("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + longit + "&appid=" + apiKey + "&units=metric", function (data) {
-                if (time == 0 || time >= 22 ) {
-                    cntjson = 39
-                    plus1 = false
-                }
-                else if (time >= 1 && time <= 3) {
-                    cntjson = 39
-                    plus1 = true
-                }
-                else if (time >= 4 && time <= 6) {
-                    cntjson = 38
-                }
-                else if (time >= 7 && time <= 9) {
-                    cntjson = 37
-                }
-                else if (time >= 10 && time <= 12) {
-                    cntjson = 36
-                }
-                else if (time >= 13 && time <= 15) {
-                    cntjson = 35
-                }
-                else if (time >= 16 && time <= 18) {
-                    cntjson = 34
-                }
-                else if (time >= 19 && time <= 21) {
-                    cntjson = 33
-                };
-                for (var i = 0; i <= cntjson; i++) {
-                    weatherlist.push(+data["list"][i]["weather"][0]["main"]);
-                    templist.push(data["list"][i]["main"]["temp"]);
-                };  if (cntjson == 39 && plus1 == false) {
-                    météo0list = templist.slice(0, 9);
-                    météo1list = templist.slice(8, 17);
-                    météo2list = templist.slice(16, 25);
-                    météo3list = templist.slice(24, 33);
-                    météo4list = templist.slice(32, 40);
-                }
-                else if (cntjson == 39 && plus1 == true) {
-                    météo0list = templist.slice(0, 8);
-                    météo1list = templist.slice(7, 16);
-                    météo2list = templist.slice(15, 24);
-                    météo3list = templist.slice(23, 32);
-                    météo4list = templist.slice(31, 40);   
-                }
-                else if (cntjson == 38) {
-                    météo0list = templist.slice(0, 7);
-                    météo1list = templist.slice(6, 15);
-                    météo2list = templist.slice(14, 23);
-                    météo3list = templist.slice(22, 31);
-                    météo4list = templist.slice(30, 39);  
-                }
-                else if (cntjson == 37) {
-                    météo0list = templist.slice(0, 6);
-                    météo1list = templist.slice(5, 14);
-                    météo2list = templist.slice(13, 22);
-                    météo3list = templist.slice(21, 30);
-                    météo4list = templist.slice(29, 38);  
-                }
-                else if (cntjson == 36) {
-                    météo0list = templist.slice(0, 5);
-                    météo1list = templist.slice(4, 13);
-                    météo2list = templist.slice(12, 21);
-                    météo3list = templist.slice(20, 29);
-                    météo4list = templist.slice(28, 37);  
-                }
-                else if (cntjson == 35) {
-                    météo0list = templist.slice(0, 4);
-                    météo1list = templist.slice(3, 12);
-                    météo2list = templist.slice(11, 20);
-                    météo3list = templist.slice(19, 28);
-                    météo4list = templist.slice(27, 36);  
-                }
-                else if (cntjson == 34) {
-                    météo0list = templist.slice(0, 3);
-                    météo1list = templist.slice(2, 11);
-                    météo2list = templist.slice(10, 19);
-                    météo3list = templist.slice(18, 27);
-                    météo4list = templist.slice(26, 35);  
-                }
-                else if (cntjson == 33) {
-                    météo0list = templist.slice(0, 2);
-                    météo1list = templist.slice(1, 10);
-                    météo2list = templist.slice(9, 18);
-                    météo3list = templist.slice(17, 26);
-                    météo4list = templist.slice(25, 34);  
-                }
-                $("#temp0").html(météo0list);
-                $("#temp1").html(météo1list);
-                $("#temp2").html(météo2list);
-                $("#temp3").html(météo3list);
-                $("#temp4").html(météo4list);
-            });
-        }
     }
 });
