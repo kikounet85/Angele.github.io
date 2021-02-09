@@ -7,7 +7,7 @@ var templist = [];
 var dt = new Date();
 var time = dt.getHours();
 var météo0list, météo1list, météo2list, météo3list, météo4list;
-$.fn.nightmode = function () {
+$.fn.nightmode = function () { 
     var weather;
     if (meteo == 0) {
         weather = "sun";
@@ -22,6 +22,7 @@ $.fn.nightmode = function () {
         $("#TB").attr("src", "img/triangle bas " + weather + ".png");
         $("#TH").attr("src", "img/triangle haut " + weather + ".png");
         $("#carréhaut, #carrébas").attr("src", "img/carré " + weather + ".png");
+        $("#cityname").css({ color: "white"});
         mode = false;
     } else {
         $(".vérité, .calendrier, body, #mode, #météo0, #météo1, #météo2, #météo3, #météo4").toggleClass("night");
@@ -29,6 +30,7 @@ $.fn.nightmode = function () {
         $("#TB").attr("src", "img/triangle bas night.png");
         $("#TH").attr("src", "img/triangle haut night.png");
         $("#carréhaut, #carrébas").attr("src", "img/carré night.png");
+        $("#cityname").css({ color: "white"});
         mode = true;
     } if (mode == true && modemétéo == true) {
         $("#météo").css({ color: "white"})
@@ -42,15 +44,6 @@ $(document).ready(function () {
         function showcityname(position) {
             var lat = position.coords.latitude;
             var longit = position.coords.longitude;
-            var altitude = position.coords.altitude;
-            var latitude_text = document.getElementById("latitude-val");
-            var altitude_text = document.getElementById("altit");
-            var city_name;
-            var temp;
-            var pressure;
-            var wind_speed;
-            var country_name;
-            var weather_description;
             var cntjson;
             var plus1;
             var apiKey = "5ac0c007ae8d872392d6a4bbe5fc7080";
@@ -171,9 +164,6 @@ $(document).ready(function () {
         function showcityname(position) {
             var lat = position.coords.latitude;
             var longit = position.coords.longitude;
-            var altitude = position.coords.altitude;
-            var latitude_text = document.getElementById("latitude-val");
-            var altitude_text = document.getElementById("altit");
             var city_name;
             var temp;
             var pressure;
@@ -296,9 +286,13 @@ $("#hoverhaut, #weather").on("click", function () {
         }, 700);
         $("#météo0").css({ top: "-3%" });
         $("#météo0").animate({ opacity: "1", top: "+=20%" }, 1300);
+        $("#météo1").css({top: "44%"})
+        $("#météo1").animate({ opacity: "1", left: "+=20%" }, 1300);
+        $("#météo4").css({top: "44%"})
+        $("#météo4").animate({ opacity: "1", left: "-=20%" }, 1300);
         setTimeout(function () {
-        $("#météo1, #météo2, #météo3, #météo4").css({ top: "24%" });
-        $("#météo1, #météo2, #météo3, #météo4").animate({ opacity: "1", top: "+=20%" }, 1300);
+        $("#météo2, #météo3").css({ top: "64%" });
+        $("#météo2, #météo3").animate({ opacity: "1", top: "-=20%" }, 1300);
         }, 1300);
         modemétéo = true;
         if (mode == true) {
@@ -327,8 +321,12 @@ $("#hoverhaut, #weather").on("click", function () {
         setTimeout(function () {
             $("#carrébas").animate({ top: "+=99%" }, 700);
         }, 500);
-        $("#météo0, #météo1, #météo2, #météo3, #météo4").animate({ opacity: "0", top: "-=20%" }, 1300);
+        $("#météo0").animate({ opacity: "0", top: "-=20%" }, 1300);
+        $("#météo0").animate({ top: "300%" }, 1);
+        setTimeout(function () {
+        $("#météo0, #météo1, #météo2, #météo3, #météo4").animate({ opacity: "0", top: "+=33%" }, 1300);
         $("#météo0, #météo1, #météo2, #météo3, #météo4").animate({ top: "300%" }, 1);
+    }, 1300);
         modemétéo = false;
     }
 });

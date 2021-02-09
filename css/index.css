@@ -72,6 +72,7 @@ p {
     font-size: smaller;
     left: 90.5%;
     top: 0%;
+    cursor: pointer;
 }
 
 #hoverhaut, #hoverbas {
@@ -128,7 +129,7 @@ p {
     padding: 4px 10px 10px 10px;
     position: absolute;
     top: 300%;
-    left: 1.5%;
+    left: -18.5%;
     cursor: pointer;
     opacity: 0;
     transition: background-color 0.8s;
@@ -176,7 +177,7 @@ p {
     padding: 4px 10px 10px 10px;
     position: absolute;
     top: 300%;
-    left: 76.5%;
+    left: 96.5%;
     cursor: pointer;
     opacity: 0;
     transition: background-color 0.8s;
