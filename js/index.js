@@ -221,7 +221,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     setTimeout(function () {
         $(".calendrier, .vérité").animate({ top: "-=7%", opacity: "1" }, 750);
-        $("#weather, h1").animate({ opacity: "1" }, 750);
+        $("#weather, h1, #cityname").animate({ opacity: "1" }, 750);
         $("#mode").animate({ opacity: "1", top: "-=5%" }, 750);
     }, 1200)
     $("#TB").animate({ top: "+=8.09%", left: "-=8.09%", opacity: "1", width: "50%" }, 1000);
