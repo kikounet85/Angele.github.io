@@ -178,7 +178,7 @@ $(document).ready(function () {
             ciel3 = weatherlist[21];
             ciel4 = weatherlist[29];
           }
-          ciellist = [ciel0, ciel1, ciel2, ciel3, ciel4];
+          ciellist = [$(".what").text(), ciel1, ciel2, ciel3, ciel4];
           météolist = ["#météo0", "#météo1", "#météo2", "#météo3", "#météo4"];
           colorlist = [color0, color1, color2, color3, color4];
           $("#temp0").html(météo0list);
@@ -186,7 +186,7 @@ $(document).ready(function () {
           $("#temp2").html(météo2list);
           $("#temp3").html(météo3list);
           $("#temp4").html(météo4list);
-          for (var i = 1; i <= 4; i++) {
+          for (var i = 0; i <= 4; i++) {
             if (ciellist[i] == "Clear") {
               $(météolist[i]).addClass("sun");
               colorlist[i] = 0;
@@ -197,17 +197,6 @@ $(document).ready(function () {
               $(météolist[i]).addClass("cloud");
               colorlist[i] = 2;
             }
-          }
-          if ($(".what").text() == "Clear") {
-            $("#météo0").addClass("sun");
-            $("#météo0").ccs({ backgroundColor: "rgb(236, 215, 33)" });
-          } else if (
-            $(".what").text() == "Rain" ||
-            $(".what").text() == "Drizzle"
-          ) {
-            $("#météo0").addClass("rain");
-          } else {
-            $("#météo0").addClass("cloud");
           }
         }
       );
