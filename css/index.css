@@ -276,12 +276,15 @@ body.night {
     background-color: rgb(6, 15, 35);
     color: white;
 }
+
 #météo0.sun, #météo1.sun, #météo2.sun, #météo3.sun, #météo4.sun {
     background-color: rgb(236, 215, 33);
 }
+
 #météo0.rain, #météo1.rain, #météo2.rain, #météo3.rain, #météo4.rain {
     background-color: rgb(31, 103, 236);
 }
+
 #météo0.cloud, #météo1.cloud, #météo2.cloud, #météo3.cloud, #météo4.cloud {
     background-color: rgb(99, 96, 89);
 }
