@@ -387,13 +387,13 @@ $("#hoverhaut, #weather").hover(function () {
 $("#hoverbas").hover(function () {
     $("#TB").toggleClass("wow");
 })
-// redirection boutons
-//$(".calendrier").on('click', function () {
-//    window.location.href = "avent/avent.html";
-//});
-//$(".vérité").on('click', function () {
-//    window.location.href = "vérité.html";
-//});
+//redirection boutons
+$(".calendrier").on('click', function () {
+    window.location.href = "avent/avent.html";
+});
+$(".vérité").on('click', function () {
+    window.location.href = "vérité.html";
+});
 // night mode bouton
 $("#mode").on('click', function () {
     $(this).nightmode();
