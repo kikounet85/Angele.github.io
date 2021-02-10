@@ -2,8 +2,10 @@
 var mode = false;
 var meteo = "lol";
 var modemétéo = false;
+var trier = false;
 var weatherlist = [];
 var templist = [];
+var minmaxlist = [];
 var dt = new Date();
 var time = dt.getHours();
 var météo0list, météo1list, météo2list, météo3list, météo4list;
@@ -16,6 +18,8 @@ var date3 = moment().add(3, "days").format("dddd");
 var date4 = moment().add(4, "days").format("dddd");
 var datelist = [];
 var datetext = ["#date0", "#date1", "#date2", "#date3", "#date4"];
+var mid0, mid1, mid2, mid3, mid4;
+var midlist = [mid0, mid1, mid2, mid3, mid4];
 var dateFR = [
   "Lundi",
   "Mardi",
@@ -34,6 +38,7 @@ var dateEN = [
   "Saturday",
   "Sunday",
 ];
+var minmax0, minmax1, minmax2, minmax3, minmax4;
 $.ajax({
   url: "https://geolocation-db.com/jsonp",
   jsonpCallback: "callback",
@@ -202,6 +207,12 @@ $(document).ready(function () {
               colorlist[i] = 2;
             }
           }
+          minmax0 = météo0list;
+          minmax1 = météo1list;
+          minmax2 = météo2list;
+          minmax3 = météo3list;
+          minmax4 = météo4list;
+          minmaxlist = [minmax0, minmax1, minmax2, minmax3, minmax4];
         }
       );
     }
@@ -517,7 +528,7 @@ $("#hoverhaut, #weather").on("click", function () {
   if (modemétéo == false) {
     $("h1").animate({ opacity: "0" }, 1000);
     $("#weather").animate({ top: "-=1%", left: "-=28%" }, 1300);
-    $("#cityname").animate({ fontSize: "200%", left: "-=6%" }, 1300);
+    $("#cityname").animate({ fontSize: "190%", left: "-=6%" }, 1300);
     $(".temp").animate({ opacity: "0" }, 250);
     $(".vérité, .calendrier").animate({ top: "+=20%", opacity: "0" }, 1300);
     $(".vérité, .calendrier").animate({ top: "300%" }, 1);
@@ -581,5 +592,31 @@ $("#hoverhaut, #weather").on("click", function () {
       $("body").css({ backgroundImage: "" });
     }, 2601);
     modemétéo = false;
+  }
+  if (trier == false) {
+    for (var i = 0; i <= 4; i++) {
+      minmaxlist[i].sort(function (a, b) {
+        return a - b;
+      });
+    }
+    for (var i = 0; i <= 4; i++) {
+      $("#min" + i).text(minmaxlist[i][0]);
+      var k = minmaxlist[i].length;
+      k -= 1;
+      $("#max" + i).text(minmaxlist[i][k]);
+    }
+    for (var i = 0; i <= 4; i++) {
+      var z = minmaxlist[i].length;
+      var e = 0;
+      z--;
+      for (var k = 0; k < minmaxlist[i].length; k++) {
+        e += minmaxlist[i][k];
+        if (k == z) {
+          midlist[i] = Math.round((e / minmaxlist[i].length) * 100) / 100;
+          $("#mid" + i).text(midlist[i]);
+        }
+      }
+    }
+    trier = true;
   }
 });
