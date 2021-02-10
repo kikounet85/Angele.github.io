@@ -186,14 +186,18 @@ $(document).ready(function () {
           $("#temp2").html(météo2list);
           $("#temp3").html(météo3list);
           $("#temp4").html(météo4list);
-          for (var i = 0; i <= 4; i++) {
+          for (var i = 1; i <= 4; i++) {
             if (ciellist[i] == "Clear") {
               $(météolist[i]).addClass("sun");
               colorlist[i] = 0;
             } else if (ciellist[i] == "Rain" || ciellist[i] == "Drizzle") {
               $(météolist[i]).addClass("rain");
               colorlist[i] = 1;
-            } else {
+            } else if (
+              ciellist[i] == "Atmosphere" ||
+              ciellist[i] == "Clouds" ||
+              ciellist[i] == "Mist"
+            ) {
               $(météolist[i]).addClass("cloud");
               colorlist[i] = 2;
             }
@@ -203,23 +207,32 @@ $(document).ready(function () {
     }
   }
 });
-$("#météo0").hover(function () {
-  if (mode == false) {
-    if ($(".what").text() == "Clear") {
-      $("body").css({
-        "background-image": "url(img/backsun.jpg)",
-      });
-    } else if ($(".what").text() == "Rain" || $(".what").text() == "Drizzle") {
-      $("body").css({
-        "background-image": "url(img/backrain.jpg)",
-      });
-    } else {
-      $("body").css({
-        "background-image": "url(img/backcloud.jpg)",
-      });
+$("#météo0").hover(
+  function () {
+    if (mode == false) {
+      if ($(".what").text() == "Clear") {
+        $("body").css({
+          "background-image": "url(img/backsun.jpg)",
+        });
+      } else if (
+        $(".what").text() == "Rain" ||
+        $(".what").text() == "Drizzle"
+      ) {
+        $("body").css({
+          "background-image": "url(img/backrain.jpg)",
+        });
+      } else {
+        $("body").css({
+          "background-image": "url(img/backcloud.jpg)",
+        });
+      }
     }
+    $("#date0t").text(date0);
+  },
+  function () {
+    $("#date0t").text("Aujourd'hui");
   }
-});
+);
 $("#météo1").hover(function () {
   if (mode == false) {
     if (colorlist[1] == 0) {
@@ -458,10 +471,18 @@ $(document).ajaxStop(function () {
   temps = $(".what").text();
   if (temps == "Clear") {
     meteo = 0;
-  } else if (temps == "Rain" || meteo == "Drizzle") {
+  } else if (temps == "Rain" || temps == "Drizzle") {
     meteo = 1;
   } else {
     meteo = 2;
+  }
+  $("#météo0").removeClass("cloud");
+  if (temps == "Clear") {
+    $("#météo0").addClass("sun");
+  } else if (temps == "Rain" || meteo == "Drizzle") {
+    $("#météo0").addClass("rain");
+  } else {
+    $("#météo0").addClass("cloud");
   }
 });
 // animation hover + triangles
@@ -558,7 +579,7 @@ $("#hoverhaut, #weather").on("click", function () {
     }, 1300);
     setTimeout(function () {
       $("body").css({ backgroundImage: "" });
-    }, 1301);
+    }, 2601);
     modemétéo = false;
   }
 });
