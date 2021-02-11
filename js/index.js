@@ -724,7 +724,7 @@ var chart = new Chart(ctx, {
 });
 function showGraph(i) {
   $("#météo0").animate({ top: "-=40%", opacity: "0" }, 750);
-  $("#météo2, #météo3").animate({ top: "+=40%", opacity: "0" }, 750);
+  $("#météo2, #météo3").animate({ top: "+=60%", opacity: "0" }, 850);
   $("#météo1").animate({ left: "-=30%", opacity: "0" }, 750);
   $("#météo4").animate({ left: "+=30%", opacity: "0" }, 750);
   $("#Graph").animate({ top: "30%", opacity: "1" }, 1000);
