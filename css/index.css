@@ -342,7 +342,7 @@ body.night {
     opacity: 0;
     transition: background-color 0.8s;
     transition: transform 0.2s;
-    background-color: beige;
+    background-color: gainsboro;
 }
 
 #Graph:hover {
