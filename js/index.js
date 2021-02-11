@@ -450,23 +450,26 @@ $(document).ready(function () {
   );
   for (var i = 0; i <= 7; i++) {
     if (date0 == dateEN[i]) {
+      k = dateFR.length;
+      k--;
+      console.log(k);
       date0 = dateFR[i];
-      if (i++ > dateFR.length) {
+      if (i++ >= k) {
         date1 = dateFR[0];
         date2 = dateFR[1];
         date3 = dateFR[2];
         date4 = dateFR[3];
       } else date1 = dateFR[i];
-      if (i++ > dateFR.length) {
+      if (i++ >= k) {
         date2 = dateFR[0];
         date3 = dateFR[1];
         date4 = dateFR[2];
       } else date2 = dateFR[i];
-      if (i++ > dateFR.length) {
+      if (i++ >= k) {
         date3 = dateFR[0];
         date4 = dateFR[1];
       } else date3 = dateFR[i];
-      if (i++ > dateFR.length) {
+      if (i++ >= k) {
         date4 = dateFR[0];
       } else date4 = dateFR[i];
     }
