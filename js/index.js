@@ -859,6 +859,7 @@ $("#TempératureBouton").on("click", function () {
   updateWeatherChart(2, Graph3);
   updateWeatherChart(3, Graph4);
   $("#graphTitle").text("Température");
+  updateYaxis("Température (°)");
 });
 $("#VentBouton").on("click", function () {
   updateWeatherChart(0, wind1);
