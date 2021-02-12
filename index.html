@@ -13,6 +13,9 @@
 </header>
 
 <body>
+    <h4 id="MétéoTitle" style="cursor: default;">
+     Graphique
+    </h4>
     <div class="calendrier" id="bouton">
         <h3 id="calendrier">
             Calendrier
@@ -29,7 +32,7 @@
             Clique dessus pour savoir la vérité...
         </p>
     </div>
-    <h1>
+    <h1 style="cursor: default;">
         Le site à Kéké
     </h1>
     <h3 id="mode">
@@ -65,10 +68,6 @@
         <p id="mid4"></p>
         <p id="max4"></p>
     </div>
-    <div id="Graph">
-        <h2> Graphique</h2>
-        <canvas id="Graphtemp"></canvas>
-    </div>
     <img src="img/carré rain.png" id="carrébas">
     <img src="img/carré rain.png" id="carréhaut">
     <img src="img/triangle bas rain.png" id="TB" usemap="#bas">
@@ -85,6 +84,14 @@
     <map name="bas">
         <area id="hoverbas" coords="0,1,0,169,874,170" shape="poly">
     </map>
+    <div id="Graph">
+        <h2 style="cursor: default;" id="graphTitle"> Graphique</h2>
+        <h4 id="TempératureBouton" class="Boutonmétéo">Température</h4>
+        <h4 id="VentBouton" class="Boutonmétéo">Vent</h4>
+<h4 id="HumiditéBouton" class="Boutonmétéo">Humidité</h4>
+<h4 id="RetourBouton"><</h4>
+        <canvas id="Graphtemp"></canvas>
+    </div>
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/moment.min.js"></script>
     <script src="js/Chart.min.js"></script>

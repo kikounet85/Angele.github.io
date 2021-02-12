@@ -275,6 +275,7 @@ body.night {
 #météo0.night, #météo1.night, #météo2.night, #météo3.night, #météo4.night, #Graph.night {
     background-color: rgb(6, 15, 35);
     color: white;
+    transition: background-color 0.8s;
 }
 
 #météo0.sun, #météo1.sun, #météo2.sun, #météo3.sun, #météo4.sun {
@@ -336,27 +337,90 @@ body.night {
     height: 68%;
     padding: 4px 10px 10px 10px;
     position: absolute;
-    top: 14.5%;
+    top: 100%;
     left: 13.5%;
-    cursor: pointer;
     opacity: 1;
     transition: background-color 0.8s;
     transition: transform 0.2s;
     background-color: gainsboro;
 }
 
-#Graph:hover {
-    transform: scale(1.01);
-    transition: transform 0.2s;
-}
-
 #Graphtemp {
     position: relative;
-    left: 10%;
+    left: 15%;
     top: 3%;
 }
 
 canvas {
     width: 83% !important;
     height: 83% !important;
+}
+
+.Boutonmétéo {
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
+    border-radius: 10px;
+    text-align: center;
+    width: 10%;
+    height: 3%;
+    padding: 4px 10px 10px 10px;
+    position: absolute;
+    opacity: 1;
+    transition: background-color 0.8s;
+    transition: transform 0.2s;
+    background-color: gainsboro;
+}
+
+#HumiditéBouton {
+    left: 1%;
+    top: 87%;
+    cursor: pointer;
+}
+
+#VentBouton {
+    left: 1%;
+    top: 79%;
+    cursor: pointer;
+}
+
+#TempératureBouton {
+    left: 1%;
+    top: 71%;
+    cursor: pointer;
+}
+
+#TempératureBouton.night, #VentBouton.night, #HumiditéBouton.night, #RetourBouton.night {
+    background-color: rgb(12, 30, 68);
+    color: white;
+    transition: background-color 0.8s;
+}
+
+.Boutonmétéo:hover, #RetourBouton:hover {
+    transform: scale(1.15);
+}
+
+#RetourBouton {
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
+    border-radius: 7px;
+    text-align: center;
+    width: 2.5%;
+    height: 4%;
+    padding: 2px 2px 2px 2px;
+    position: absolute;
+    opacity: 1;
+    transition: background-color 0.8s;
+    transition: transform 0.2s;
+    background-color: gainsboro;
+    top: -3%;
+    cursor: pointer;
+}
+
+#MétéoTitle {
+    position: absolute;
+    left: 43%;
+    top: -5%;
+    opacity: 1;
+    font-size: 38px;
+    font-family: 'Ubuntu', sans-serif;
+    cursor: pointer;
+    opacity: 0;
 }
