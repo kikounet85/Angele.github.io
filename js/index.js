@@ -4,6 +4,7 @@ var meteo = "lol";
 var modemétéo = false;
 var trier = false;
 var modegraph = false;
+var proposmode = false;
 var weatherlist = [];
 var templist = [];
 var minmaxlist = [];
@@ -425,15 +426,21 @@ $.fn.nightmode = function () {
       }
     }
     $(
-      ".vérité, .calendrier, body, #mode, #météo1, #météo2, #météo3, #météo4, #Graph, #TempératureBouton, #VentBouton, #HumiditéBouton, #RetourBouton"
+      ".vérité, .calendrier, body, #mode, #météo1, #météo2, #météo3, #météo4, #Graph, #TempératureBouton, #VentBouton, #HumiditéBouton, #RetourBouton, #Outils, #Durée, #languages, #librairies"
     ).toggleClass("night");
     $("#mode").text("Jour");
     $("#météo0, #météo1, #météo2, #météo3, #météo4").css({ color: "black" });
     $("#TB").attr("src", "img/triangle bas " + weather + ".png");
     $("#TH").attr("src", "img/triangle haut " + weather + ".png");
     $("#carréhaut, #carrébas").attr("src", "img/carré " + weather + ".png");
+    $("#HTML").attr("src", "img/HTML day.png");
+    $("#CSS").attr("src", "img/CSS day.png");
+    $("#JS").attr("src", "img/JS day.png");
+    $("#JQUERY").attr("src", "img/logo-jquery day.png");
     $("#cityname").css({ color: "white" });
     chart.options.legend.labels.fontColor = "black";
+    pie.options.legend.labels.fontColor = "black";
+    pie.options.title.fontColor = "black";
     chart.options.scales.xAxes[0].ticks.fontColor = "black";
     chart.options.scales.xAxes[0].gridLines.color = "black";
     chart.options.scales.xAxes[0].scaleLabel.fontColor = "black";
@@ -441,10 +448,11 @@ $.fn.nightmode = function () {
     chart.options.scales.yAxes[0].gridLines.color = "black";
     chart.options.scales.yAxes[0].scaleLabel.fontColor = "black";
     chart.update();
+    pie.update();
     mode = false;
   } else {
     $(
-      ".vérité, .calendrier, body, #mode, #Graph, #TempératureBouton, #VentBouton, #HumiditéBouton, #RetourBouton"
+      ".vérité, .calendrier, body, #mode, #Graph, #TempératureBouton, #VentBouton, #HumiditéBouton, #RetourBouton, #Outils, #Durée, #languages, #librairies"
     ).toggleClass("night");
     $("#météo0, #météo1, #météo2, #météo3, #météo4").css({
       backgroundColor: "rgb(6, 15, 35)",
@@ -453,9 +461,15 @@ $.fn.nightmode = function () {
     $("#mode").text("Nuit");
     $("#TB").attr("src", "img/triangle bas night.png");
     $("#TH").attr("src", "img/triangle haut night.png");
+    $("#HTML").attr("src", "img/HTML night.png");
+    $("#CSS").attr("src", "img/CSS night.png");
+    $("#JS").attr("src", "img/JS night.png");
+    $("#JQUERY").attr("src", "img/logo-jquery night.png");
     $("#carréhaut, #carrébas").attr("src", "img/carré night.png");
     $("#cityname").css({ color: "white" });
     chart.options.legend.labels.fontColor = "white";
+    pie.options.legend.labels.fontColor = "white";
+    pie.options.title.fontColor = "white";
     chart.options.scales.xAxes[0].ticks.fontColor = "white";
     chart.options.scales.xAxes[0].gridLines.color = "white";
     chart.options.scales.xAxes[0].scaleLabel.fontColor = "white";
@@ -463,6 +477,7 @@ $.fn.nightmode = function () {
     chart.options.scales.yAxes[0].gridLines.color = "white";
     chart.options.scales.yAxes[0].scaleLabel.fontColor = "white";
     chart.update();
+    pie.update();
     mode = true;
   }
   if (mode == true && modemétéo == true) {
@@ -490,7 +505,7 @@ $(document).ready(function () {
 $(document).ready(function () {
   setTimeout(function () {
     $(".calendrier, .vérité").animate({ top: "-=7%", opacity: "1" }, 750);
-    $("#weather, h1, #cityname").animate({ opacity: "1" }, 750);
+    $("#weather, h1, #cityname, #Propos").animate({ opacity: "1" }, 750);
     $("#mode").animate({ opacity: "1", top: "-=5%" }, 750);
   }, 1200);
   $("#TB").animate(
@@ -576,7 +591,7 @@ $(".calendrier, .vérité, #météo0, #météo1, #météo2, #météo3, #météo4
 $("#hoverhaut, #weather").hover(function () {
   $("#TH").toggleClass("wow");
 });
-$("#hoverbas").hover(function () {
+$("#hoverbas, #Propos").hover(function () {
   $("#TB").toggleClass("wow");
 });
 //redirection boutons
@@ -593,7 +608,7 @@ $("#mode").on("click", function () {
 // bouton météo
 $("#hoverhaut, #weather").on("click", function () {
   $("#carréhaut, #carrébas").css({ opacity: "1" });
-  if (modegraph == false) {
+  if (modegraph == false && proposmode == false) {
     if (modemétéo == false) {
       $("h1").animate({ opacity: "0" }, 1000);
       $("#weather").animate({ top: "-=1%", left: "-=28%" }, 1300);
@@ -876,4 +891,80 @@ $("#HumiditéBouton").on("click", function () {
   updateWeatherChart(3, hum4);
   $("#graphTitle").text("Humidité");
   updateYaxis("Humidité (%)");
+});
+$("#hoverbas, #Propos").on("click", function () {
+  if (proposmode == false && modegraph == false && modemétéo == false) {
+    $("#Propos").animate({ top: "-3%", left: "43.5%" }, 750);
+    $("h1").animate({ opacity: "0" }, 750);
+    setTimeout(function () {
+      $("#librairies, #languages").animate({ opacity: "1", left: "2%" }, 950);
+      $("#Durée, #Outils").animate({ opacity: "1", left: "74%" }, 950);
+    }, 200);
+    $("#GraphLang").animate({ opacity: "1" }, 2300);
+    proposmode = true;
+  } else if (modemétéo == false && modegraph == false) {
+    $("#Propos").animate({ top: "84%", left: "6%" }, 750);
+    $("h1").animate({ opacity: "1" }, 750);
+    setTimeout(function () {
+      $("#librairies, #languages").animate({ opacity: "0", left: "-52%" }, 950);
+      $("#Durée, #Outils").animate({ opacity: "0", left: "124%" }, 950);
+    }, 200);
+    $("#GraphLang").animate({ opacity: "0" }, 1800);
+    proposmode = false;
+  }
+});
+var pie = new Chart(document.getElementById("GraphLang"), {
+  type: "pie",
+  data: {
+    labels: ["HTML", "CSS", "JavaScript"],
+    datasets: [
+      {
+        label: "Languages (%)",
+        backgroundColor: ["#e02e00", "#006eba", "#e4bd00"],
+        borderColor: ["#f34000", "#0098d9", "#ffd800"],
+        data: [7.3, 20.6, 72.2],
+      },
+    ],
+  },
+  options: {
+    title: {
+      display: true,
+      text: "Pourcentage de languages utilisés",
+      fontSize: 20,
+    },
+    legend: {
+      labels: {
+        fontColor: "black",
+        fontSize: 15,
+      },
+    },
+    responsive: true,
+  },
+});
+$("#Github").on("click", function () {
+  window.open("https://desktop.github.com");
+});
+$("#JQUERY").on("click", function () {
+  window.open("https://jquery.com");
+});
+$("#CSS").on("click", function () {
+  window.open("https://developer.mozilla.org/fr/docs/Web/CSS");
+});
+$("#HTML").on("click", function () {
+  window.open("https://developer.mozilla.org/fr/docs/Web/HTML");
+});
+$("#JS").on("click", function () {
+  window.open("https://developer.mozilla.org/fr/docs/Web/JavaScript");
+});
+$("#VSCODE").on("click", function () {
+  window.open("https://code.visualstudio.com");
+});
+$("#Photoshop").on("click", function () {
+  window.open("https://www.adobe.com/fr/products/photoshop.html");
+});
+"#CHART".on("click", function () {
+  window.open("https://www.chartjs.org");
+});
+"#MOMENT".on("click", function () {
+  window.open("https://momentjs.com");
 });

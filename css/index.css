@@ -272,7 +272,7 @@ body.night {
     filter: drop-shadow(0px 0px 15px rgb(0, 0, 0));
 }
 
-#météo0.night, #météo1.night, #météo2.night, #météo3.night, #météo4.night, #Graph.night {
+#météo0.night, #météo1.night, #météo2.night, #météo3.night, #météo4.night, #Graph.night, #Outils.night, #Durée.night, #librairies.night, #languages.night {
     background-color: rgb(6, 15, 35);
     color: white;
     transition: background-color 0.8s;
@@ -423,4 +423,144 @@ canvas {
     font-family: 'Ubuntu', sans-serif;
     cursor: pointer;
     opacity: 0;
+}
+
+#Propos {
+    position: absolute;
+    top: 84%;
+    left: 6%;
+    font-size: 270%;
+    opacity: 0;
+}
+
+#languages {
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 23%;
+    height: 23%;
+    padding: 4px 10px 10px 10px;
+    position: absolute;
+    top: 3%;
+    left: -52%;
+    opacity: 0;
+    transition: background-color 0.8s;
+    transition: transform 0.2s;
+    background-color: gainsboro;
+}
+
+#langimg {
+    position: relative;
+    width: 100%;
+    left: -3%;
+}
+
+#HTML, #CSS, #JS, #Github, #VSCODE, #Photoshop {
+    position: relative;
+    width: 25%;
+    padding-left: 10px;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+#HTML:hover, #CSS:hover, #JS:hover, #Github:hover, #VSCODE:hover, #Photoshop:hover {
+    transform: scale(1.2);
+}
+
+#librairies {
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 23%;
+    height: 40%;
+    padding: 4px 10px 10px 10px;
+    position: absolute;
+    top: 33%;
+    left: -52%;
+    opacity: 0;
+    transition: background-color 0.8s;
+    transition: transform 0.2s;
+    background-color: gainsboro;
+}
+
+#JQUERY {
+    position: relative;
+    width: 78%;
+    left: 0%;
+    top: 0%;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+#JQUERY:hover, #CHART:hover, #MOMENT:hover {
+    transform: scale(1.1);
+}
+
+#Durée {
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 23%;
+    height: 23%;
+    padding: 4px 10px 10px 10px;
+    position: absolute;
+    top: 23%;
+    left: 124%;
+    opacity: 0;
+    transition: background-color 0.8s;
+    transition: transform 0.2s;
+    background-color: gainsboro;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#Duréep {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: larger;
+}
+
+#Outils {
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 23%;
+    height: 23%;
+    padding: 4px 10px 10px 10px;
+    position: absolute;
+    top: 53%;
+    left: 124%;
+    opacity: 0;
+    transition: background-color 0.8s;
+    transition: transform 0.2s;
+    background-color: gainsboro;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#GraphLang {
+    position: relative;
+    left: 8%;
+    opacity: 0%;
+}
+
+#CHART {
+    position: absolute;
+    width: 45%;
+    padding-left: 10px;
+    transition: transform 0.2s;
+    cursor: pointer;
+    left: 50%;
+    top: 45%;
+}
+
+#MOMENT {
+    position: absolute;
+    width: 38%;
+    padding-left: 10px;
+    transition: transform 0.2s;
+    cursor: pointer;
+    top: 50%;
+    left: 3%;
 }
