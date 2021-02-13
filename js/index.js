@@ -922,7 +922,7 @@ var pie = new Chart(document.getElementById("GraphLang"), {
         label: "Languages (%)",
         backgroundColor: ["#e02e00", "#006eba", "#e4bd00"],
         borderColor: ["#f34000", "#0098d9", "#ffd800"],
-        data: [8.8, 23.3, 67.9],
+        data: [9.0, 23.3, 67.7],
       },
     ],
   },
