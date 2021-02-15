@@ -1,1 +1,1 @@
-data = '["T_est trop belle","T_est trop drole","T_est nul a Mario Kart dsl","TU EST LA MEILLEURE","Il est <"]';
+data = '["T\'\est trop belle","T\'\est trop drole","T\'\est nul a Mario Kart dsl","T\'\EST LA MEILLEURE","Il est <"]';
