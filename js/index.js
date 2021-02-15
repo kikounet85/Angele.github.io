@@ -962,9 +962,9 @@ $("#VSCODE").on("click", function () {
 $("#Photoshop").on("click", function () {
   window.open("https://www.adobe.com/fr/products/photoshop.html");
 });
-"#CHART".on("click", function () {
+$("#CHART").on("click", function () {
   window.open("https://www.chartjs.org");
 });
-"#MOMENT".on("click", function () {
+$("#MOMENT").on("click", function () {
   window.open("https://momentjs.com");
 });

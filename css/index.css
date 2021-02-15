@@ -217,7 +217,6 @@ p {
     cursor: pointer;
     opacity: 0;
     transition: background-color 0.8s;
-    display: none;
 }
 
 .vérité {
@@ -234,7 +233,6 @@ p {
     cursor: pointer;
     opacity: 0;
     transition: background-color 0.8s;
-    display: none;
 }
 
 .temp {
