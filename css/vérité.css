@@ -6,7 +6,7 @@ h2 {
 #bouton {
   position: absolute;
   left: 43%;
-  top: 30%;
+  top: 42%;
   transition: transform 0.2s;
 }
 
@@ -20,4 +20,31 @@ h2 {
 
 body {
   overflow: hidden;
+  background-color: rgb(145, 204, 255);
+}
+
+h1 {
+  position: absolute;
+  text-align: center;
+  left: 40%;
+}
+
+#buttonframe {
+  position: absolute;
+  width: 30%;
+  left: 33.4%;
+  top: 18%;
+}
+
+#title {
+  text-transform: uppercase;
+  position: absolute;
+  top: 13%;
+  left: 42.5%;
+  font-size: 45px;
+}
+
+#title1 {
+  left: 36%;
+  font-size: 50;
 }
