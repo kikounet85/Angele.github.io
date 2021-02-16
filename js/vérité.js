@@ -238,7 +238,6 @@ $("#mapBouton").on("click", function () {
   } else alert(LOL);
   countbutton++;
   result = (countbutton / length) * 100;
-  console.log(action5);
   if (result >= 100) {
     $("#probability").text(
       "Tu as 100% de chance de tomber sur une phrase déjà vu !"
