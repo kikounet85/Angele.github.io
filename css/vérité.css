@@ -6,8 +6,18 @@ h2 {
 #bouton {
   position: absolute;
   left: 43%;
+  top: 30%;
+  transition: transform 0.2s;
+}
+
+#mapBouton:hover {
+  transform: scale(1.15);
 }
 
 #probability, #countmax {
   display: none;
+}
+
+body {
+  overflow: hidden;
 }
