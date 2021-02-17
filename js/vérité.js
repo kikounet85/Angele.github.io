@@ -7,7 +7,8 @@ var day1 = new Date("10/02/2020");
 var day2 = new Date(moment().format("l"));
 var difference = Math.abs(day2 - day1);
 var random1, random2, random3;
-var begin = false;
+var randomlist = [random1, random2, random3];
+var storage = 1;
 var dateFR = [
   "lundi",
   "mardi",
@@ -219,23 +220,7 @@ loveday = difference / (1000 * 3600 * 24);
 loveday = Math.round(loveday);
 $("#countmax").text("Il y a " + length + " phrases pour toi :)");
 $("#mapBouton").on("click", function () {
-  var random = Math.floor(Math.random() * Math.floor(length));
-  LOL = mydata[random];
-  if (LOL.includes("%actualday")) {
-    LOL = mydata[random].replace("%actualday", dateact);
-  } else if (LOL.includes("%loveday")) {
-    LOL = mydata[random].replace("%loveday", loveday);
-  }
-  if (random == 5 && action5 == 0) {
-    $("#bouton").animate({ top: "75%", left: "75%" }, 500);
-    action5++;
-  } else if (action5 == 1) {
-    $("#bouton").animate({ left: "15%" }, 500);
-    action5++;
-  } else if (action5 == 2) {
-    $("#bouton").animate({ left: "43%", top: "42%" }, 500);
-    action5 = 0;
-  } else alert(LOL);
+  randomMessage();
   countbutton++;
   result = (countbutton / length) * 100;
   if (result >= 100) {
@@ -260,14 +245,15 @@ $("#mapBouton").hover(
 );
 
 function randomcolor() {
-  var crandom = Math.floor(Math.random() * Math.floor(color.length));
+  var c1random = Math.floor(Math.random() * Math.floor(257));
+  var c2random = Math.floor(Math.random() * Math.floor(257));
+  var c3random = Math.floor(Math.random() * Math.floor(257));
   var fsrandom = Math.floor(Math.random() * Math.floor(fontstyle.length));
   var ffrandom = Math.floor(Math.random() * Math.floor(fontfamily.length));
-  var choosencolor = color[crandom];
   var choosenfontS = fontstyle[fsrandom];
   var choosenfontF = fontfamily[ffrandom];
   $("#title").css({
-    color: choosencolor,
+    color: "rgb(" + c1random + "," + c2random + "," + c3random + ")",
     fontStyle: choosenfontS,
     fontFamily: choosenfontF,
   });
@@ -276,3 +262,43 @@ function randomcolor() {
 $(document).ready(function () {
   randomcolor();
 });
+function randomMessage() {
+  var random = Math.floor(Math.random() * Math.floor(length));
+  console.log(random);
+  if (
+    random != randomlist[0] &&
+    random != randomlist[1] &&
+    random != randomlist[2]
+  ) {
+    if (random == 5 || action5 == 1 || action5 == 2) {
+      eventMessage();
+    } else randomlist[storage] = random;
+    storage++;
+    if (storage > 2) {
+      storage = 0;
+    }
+    console.log(randomlist);
+    LOL = mydata[random];
+    if (LOL.includes("%actualday")) {
+      LOL = mydata[random].replace("%actualday", dateact);
+    } else if (LOL.includes("%loveday")) {
+      LOL = mydata[random].replace("%loveday", loveday);
+    }
+    alert(LOL);
+  } else {
+    console.log("rater");
+    return randomMessage();
+  }
+}
+function eventMessage() {
+  if (action5 == 0) {
+    $("#bouton").animate({ top: "75%", left: "75%" }, 500);
+    action5++;
+  } else if (action5 == 1) {
+    $("#bouton").animate({ left: "15%" }, 500);
+    action5++;
+  } else if (action5 == 2) {
+    $("#bouton").animate({ left: "43%", top: "42%" }, 500);
+    action5 = 0;
+  }
+}
