@@ -50,3 +50,13 @@ h1 {
   top: 93%;
   font-size: larger;
 }
+
+#proverbe0, #proverbe1 {
+  position: absolute;
+  top: 0%;
+  font-size: larger;
+  font-family: 'Dancing Script', cursive;
+  text-overflow: ellipsis;
+  max-width: 400px;
+  opacity: 0;
+}
