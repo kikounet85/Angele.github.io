@@ -901,6 +901,7 @@ $("#hoverbas, #Propos").on("click", function () {
       $("#Durée, #Outils").animate({ opacity: "1", left: "74%" }, 950);
     }, 200);
     $("#GraphLang").animate({ opacity: "1" }, 2300);
+    $(".vérité, .calendrier").animate({ top: "100%", opacity: "0" }, 1000);
     proposmode = true;
   } else if (modemétéo == false && modegraph == false) {
     $("#Propos").animate({ top: "84%", left: "6%" }, 750);
@@ -910,6 +911,7 @@ $("#hoverbas, #Propos").on("click", function () {
       $("#Durée, #Outils").animate({ opacity: "0", left: "124%" }, 950);
     }, 200);
     $("#GraphLang").animate({ opacity: "0" }, 1800);
+    $(".vérité, .calendrier").animate({ top: "23.8%", opacity: "1" }, 1000);
     proposmode = false;
   }
 });
