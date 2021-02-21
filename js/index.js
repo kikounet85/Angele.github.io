@@ -910,8 +910,8 @@ $("#hoverbas, #Propos").on("click", function () {
       $("#librairies, #languages").animate({ opacity: "0", left: "-52%" }, 950);
       $("#Durée, #Outils").animate({ opacity: "0", left: "124%" }, 950);
     }, 200);
-    $("#GraphLang").animate({ opacity: "0" }, 1800);
-    $(".vérité, .calendrier").animate({ top: "23.8%", opacity: "1" }, 1000);
+    $("#GraphLang").animate({ opacity: "0" }, 1000);
+    $(".vérité, .calendrier").animate({ top: "23.8%", opacity: "1" }, 1500);
     proposmode = false;
   }
 });
