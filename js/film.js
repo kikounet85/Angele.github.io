@@ -16,40 +16,46 @@ var Film = [
   Pokemon1b,
   TheOffice,
 ];
+var FilmNumber = 0;
 
 $(document).ready(function () {
-  for (let i = 0; i < Film.length; i++) {
+  $(Film).each(function () {
     $.getJSON(
       "https://api.themoviedb.org/3" +
-        Film[i] +
+        this +
         "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=fr",
       function (data) {
-        var ID = "Film" + i;
+        var ID = "Film" + FilmNumber;
         console.log(ID), $("body").append('<div id="' + ID + '"></div>');
         let Title = data["title"];
         if (Title === undefined) {
           $("#" + ID).append(
-            '<h2 id="Title' + i + '">' + data["name"] + "</h2>"
+            '<h2 id="Title' + FilmNumber + '">' + data["name"] + "</h2>"
           );
         } else {
           $("#" + ID).append(
-            '<h2 id="Title' + i + '">' + data["title"] + "</h2>"
+            '<h2 id="Title' + FilmNumber + '">' + data["title"] + "</h2>"
           );
         }
         $("#" + ID).append(
-          '<h4 id="Genre' + i + '">' + data["genres"][0]["name"] + "</h4>"
+          '<h4 id="Genre' +
+            FilmNumber +
+            '">' +
+            data["genres"][0]["name"] +
+            "</h4>"
         );
         $("#" + ID).append(
-          '<h4 id="Summary' + i + '">' + data["overview"] + "</h4>"
+          '<h4 id="Summary' + FilmNumber + '">' + data["overview"] + "</h4>"
         );
         $("#" + ID).append(
-          '<img id="Summary' +
-            i +
+          '<img id="Poster' +
+            FilmNumber +
             '" src="https://image.tmdb.org/t/p/w500' +
             data["poster_path"] +
             '"/>'
         );
+        FilmNumber++;
       }
     );
-  }
+  });
 });
