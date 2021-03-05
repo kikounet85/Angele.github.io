@@ -89,6 +89,7 @@ function ActualFilm(FilmNumber) {
       $("#text" + FilmNumber).append(
         '<p id="Summary' + FilmNumber + '">' + data["overview"] + "</p>"
       );
+      console.log(data);
     }
   );
 }
@@ -102,5 +103,5 @@ $(document).ready(function () {
     } else {
       clearInterval;
     }
-  }, 85);
+  }, 100);
 });
