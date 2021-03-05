@@ -20,7 +20,7 @@ function ActualFilm(FilmNumber) {
   $.getJSON(
     "https://api.themoviedb.org/3" +
       Film[FilmNumber] +
-      "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=fr",
+      "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=FR-fr",
     function (data) {
       var ID = "Film" + FilmNumber;
       console.log(ID), $("body").append('<div id="' + ID + '"></div>');
@@ -51,13 +51,18 @@ function ActualFilm(FilmNumber) {
           data["poster_path"] +
           '"/>'
       );
-      setTimeout(50);
     }
   );
 }
 
 $(document).ready(function () {
-  for (let i = 0; i < Film.length; i++) {
-    ActualFilm(i);
-  }
+  let i = 0;
+  setInterval(function () {
+    if (i < Film.length) {
+      ActualFilm(i);
+      i++;
+    } else {
+      clearInterval;
+    }
+  }, 20);
 });
