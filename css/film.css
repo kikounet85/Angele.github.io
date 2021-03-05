@@ -1,0 +1,57 @@
+.Precision {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border-style: solid;
+    width: 80%;
+    position: relative;
+    left: 12%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    background-color: aqua;
+    overflow: hidden;
+}
+
+.Precision>img {
+    width: 30%;
+    position: relative;
+    left: -70%;
+}
+
+.text {
+    position: relative;
+    left: 30%;
+    border-width: 20%;
+    padding: 5px;
+    margin: 5px;
+    top: -10.5em;
+    height: 100px;
+}
+
+body {
+    background-color: aquamarine;
+}
+
+.text>p {
+    text-align: justify;
+}
+
+#text11 {
+    position: relative;
+    top: -9.25em;
+}
+
+#text12 {
+    position: relative;
+    top: -10em;
+}
+
+#text13 {
+    position: relative;
+    top: -10em;
+}
+
+h1 {
+    text-align: center;
+}
