@@ -50,6 +50,10 @@ var Film = [
   Rohan,
   SNK,
 ];
+var Imagelist = [];
+var Filmlist = [];
+var PrecisionMode = false;
+var ActivePrecision;
 function ActualFilm(FilmNumber) {
   $.getJSON(
     "https://api.themoviedb.org/3" +
@@ -58,9 +62,22 @@ function ActualFilm(FilmNumber) {
     function (data) {
       var ID = "Film" + FilmNumber;
       console.log(ID),
-        $("body").append('<div id="' + ID + '" class="Precision"></div>');
+        $("#container").append('<div id="' + ID + '" class="Precision"></div>');
       $("#" + ID).append(
         '<div id="text' + FilmNumber + '" class ="text"></div>'
+      );
+      $("#container").append(
+        '<div id="Image' + FilmNumber + '" class="bouton"></div>'
+      );
+      $("#Image" + FilmNumber).append(
+        '<img id="Backdrop' +
+          FilmNumber +
+          '" src="https://image.tmdb.org/t/p/w500' +
+          data["backdrop_path"] +
+          '"/>'
+      );
+      $("#Image" + FilmNumber).append(
+        '<img class="Black" src="img/black.png"/>'
       );
       let Title = data["title"];
       $("#" + ID).append(
@@ -74,9 +91,15 @@ function ActualFilm(FilmNumber) {
         $("#text" + FilmNumber).append(
           '<h2 id="Title' + FilmNumber + '">' + data["name"] + "</h2>"
         );
+        $("#Image" + FilmNumber).append(
+          '<h2 id="BackTitle' + FilmNumber + '">' + data["name"] + "</h2>"
+        );
       } else {
         $("#text" + FilmNumber).append(
           '<h2 id="Title' + FilmNumber + '">' + data["title"] + "</h2>"
+        );
+        $("#Image" + FilmNumber).append(
+          '<h2 id="BackTitle' + FilmNumber + '">' + data["title"] + "</h2>"
         );
       }
       $("#text" + FilmNumber).append(
@@ -89,7 +112,15 @@ function ActualFilm(FilmNumber) {
       $("#text" + FilmNumber).append(
         '<p id="Summary' + FilmNumber + '">' + data["overview"] + "</p>"
       );
+      $("#text" + FilmNumber).append('<h3 id="Retour"> Retour </h3>');
+      $("#Image" + FilmNumber).append(
+        '<img class="map0" src="https://image.tmdb.org/t/p/w500' +
+          data["backdrop_path"] +
+          '"/>'
+      );
       console.log(data);
+      Imagelist.push("Image" + FilmNumber);
+      Filmlist.push("Film" + FilmNumber);
     }
   );
 }
@@ -104,4 +135,28 @@ $(document).ready(function () {
       clearInterval;
     }
   }, 100);
+});
+$(document).on("mouseover", ".bouton > img, .bouton > h2", function () {
+  if (PrecisionMode == false) {
+    $(this.parentNode).children("h2").animate({ opacity: "0.9" }, 100);
+    $(this.parentNode).children(".Black").animate({ opacity: "0.7" }, 100);
+  }
+});
+$(document).on("mouseout", ".bouton > img", function () {
+  $(this.parentNode).children("h2").animate({ opacity: "0" }, 100);
+  $(this.parentNode).children(".Black").animate({ opacity: "0" }, 100);
+});
+$(document).on("click", ".bouton > img", function () {
+  if (PrecisionMode == false) {
+    ActivePrecision =
+      "#" + Filmlist[Imagelist.indexOf($(this.parentNode).attr("id"))];
+    $(ActivePrecision).animate({ left: "6%" });
+    $(".bouton").css({ cursor: "default" });
+    PrecisionMode = true;
+  }
+});
+$(document).on("click", "#Retour", function () {
+  $(ActivePrecision).animate({ left: "600%" });
+  $(".bouton").css({ cursor: "pointer" });
+  PrecisionMode = false;
 });
