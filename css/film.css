@@ -11,8 +11,9 @@
     background-color: rgb(112, 112, 112);
     overflow: hidden;
     box-shadow: 0px 0px 10px rgb(0, 0, 0);
-    top: 4%;
+    top: 10%;
     z-index: 999;
+    opacity: 0
 }
 
 .Precision>img {
@@ -58,6 +59,7 @@ body {
 
 h1 {
     text-align: center;
+    font-family: 'Shippori Mincho B1', serif;
 }
 
 html {
@@ -95,7 +97,7 @@ body::-webkit-scrollbar-thumb {
     position: relative;
     float: left;
     display: flex;
-    width: 31.5%;
+    width: 23.85em;
     height: 13.5em;
     margin: 10px;
     cursor: pointer;
@@ -137,4 +139,66 @@ body::-webkit-scrollbar-thumb {
 
 #Retour:hover {
     text-decoration: underline;
+}
+
+#Affichage {
+    position: fixed;
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    text-align: justify;
+    top: 4%;
+    left: 1.4%;
+    z-index: 999;
+    border-radius: 0px 10px 10px 0px;
+    overflow: hidden;
+    box-shadow: 0px 0px 6px rgb(0, 0, 0);
+}
+
+#Affichage>h4 {
+    position: relative;
+    margin: auto;
+    padding: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-top: 0px;
+    border-bottom: 0px;
+    cursor: pointer;
+    background-color: rgb(87, 87, 87);
+    transition: background-color 0.2s, width 0.2s, height 0.2s;
+    border-color: black;
+}
+
+#Affichage>#Aff5 {
+    border-right: 0px;
+}
+
+#Affichage>#Aff1 {
+    border-left: 0px;
+}
+
+#Affichage>#Aff3 {
+    color: rgba(250, 235, 215, 0.575);
+    background-color: rgb(48, 48, 48);
+}
+
+h2 {
+    font-family: 'Raleway', sans-serif;
+}
+
+h3, h4, p {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.GenreText {
+    font-family: 'Source Sans Pro', sans-serif !important;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
 }

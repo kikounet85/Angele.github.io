@@ -22,6 +22,7 @@ var Pokemon12 = "/movie/39057";
 var Pokemon13 = "/movie/50087";
 var TheOffice = "/tv/2316";
 var Rohan = "/movie/798596";
+var RickMorty = "/tv/60625";
 var SNK = "/tv/1429";
 var Film = [
   TrentejoursMax,
@@ -48,12 +49,15 @@ var Film = [
   Pokemon13,
   TheOffice,
   Rohan,
+  RickMorty,
   SNK,
 ];
 var Imagelist = [];
 var Filmlist = [];
 var PrecisionMode = false;
 var ActivePrecision;
+var Afflist = ["Aff1", "Aff2", "Aff3", "Aff4", "Aff5"];
+var Affvar = 2;
 function ActualFilm(FilmNumber) {
   $.getJSON(
     "https://api.themoviedb.org/3" +
@@ -72,7 +76,7 @@ function ActualFilm(FilmNumber) {
       $("#Image" + FilmNumber).append(
         '<img id="Backdrop' +
           FilmNumber +
-          '" src="https://image.tmdb.org/t/p/w500' +
+          '" src="https://image.tmdb.org/t/p/original' +
           data["backdrop_path"] +
           '"/>'
       );
@@ -103,12 +107,25 @@ function ActualFilm(FilmNumber) {
         );
       }
       $("#text" + FilmNumber).append(
-        '<h4 id="Genre' +
-          FilmNumber +
-          '">' +
-          data["genres"][0]["name"] +
-          "</h4>"
+        '<div id="Genre' + FilmNumber + '"></div>'
       );
+
+      for (let j = 0; j < data["genres"].length; j++) {
+        $("#Genre" + FilmNumber).append(
+          '<h4 id="Genre' +
+            FilmNumber +
+            j +
+            j +
+            '" class="GenreText"> ' +
+            data["genres"][j]["name"] +
+            "</h4>"
+        );
+        console.log("#Genre" + FilmNumber + j + j + ".GenreText");
+        GenreColor(
+          data["genres"][j]["name"],
+          "#Genre" + FilmNumber + "> #Genre" + FilmNumber + j + j + ".GenreText"
+        );
+      }
       $("#text" + FilmNumber).append(
         '<p id="Summary' + FilmNumber + '">' + data["overview"] + "</p>"
       );
@@ -138,25 +155,111 @@ $(document).ready(function () {
 });
 $(document).on("mouseover", ".bouton > img, .bouton > h2", function () {
   if (PrecisionMode == false) {
-    $(this.parentNode).children("h2").animate({ opacity: "0.9" }, 100);
-    $(this.parentNode).children(".Black").animate({ opacity: "0.7" }, 100);
+    $(this.parentNode).children("h2").animate({ opacity: "0.9" }, 150);
+    $(this.parentNode).children(".Black").animate({ opacity: "0.7" }, 150);
   }
 });
 $(document).on("mouseout", ".bouton > img", function () {
-  $(this.parentNode).children("h2").animate({ opacity: "0" }, 100);
-  $(this.parentNode).children(".Black").animate({ opacity: "0" }, 100);
+  $(this.parentNode).children("h2").animate({ opacity: "0" }, 150);
+  $(this.parentNode).children(".Black").animate({ opacity: "0" }, 150);
 });
 $(document).on("click", ".bouton > img", function () {
   if (PrecisionMode == false) {
     ActivePrecision =
       "#" + Filmlist[Imagelist.indexOf($(this.parentNode).attr("id"))];
-    $(ActivePrecision).animate({ left: "6%" });
+    $(ActivePrecision).animate({ left: "6%", opacity: "1" });
     $(".bouton").css({ cursor: "default" });
     PrecisionMode = true;
   }
 });
 $(document).on("click", "#Retour", function () {
-  $(ActivePrecision).animate({ left: "600%" });
+  $(ActivePrecision).animate({ left: "600%", opacity: "0" });
   $(".bouton").css({ cursor: "pointer" });
   PrecisionMode = false;
 });
+$("#Aff1, #Aff2,#Aff3, #Aff4,#Aff5").hover(
+  function () {
+    if (Afflist.indexOf($(this).attr("id")) === Affvar) {
+      return;
+    } else {
+      $(this).css({ backgroundColor: "rgb(153, 150, 150)" });
+    }
+  },
+  function () {
+    if (Afflist.indexOf($(this).attr("id")) == Affvar) {
+    } else {
+      $(this).css({ backgroundColor: "rgb(87, 87, 87)" });
+    }
+  }
+);
+$("#Aff1, #Aff2,#Aff3, #Aff4,#Aff5").click(function () {
+  if (Afflist.indexOf($(this).attr("id")) === Affvar) {
+    return;
+  } else {
+    Affvar = Afflist.indexOf($(this).attr("id"));
+    if (Affvar == 0) {
+      $(".bouton").css({ width: "74em", height: "37em" });
+    } else if (Affvar == 1) {
+      $(".bouton").css({ width: "36.41em", height: "19em" });
+    } else if (Affvar == 2) {
+      $(".bouton").css({ width: "23.85em", height: "13.5em" });
+    } else if (Affvar == 3) {
+      $(".bouton").css({ width: "17.58em", height: "10.5em" });
+    } else if (Affvar == 4) {
+      $(".bouton").css({ width: "13.81em", height: "8em" });
+    }
+    $("#Aff1, #Aff2,#Aff3, #Aff4,#Aff5").css({
+      backgroundColor: "rgb(87, 87, 87)",
+      color: "black",
+    });
+    $(this).css({
+      backgroundColor: "rgb(48, 48, 48)",
+      color: "rgba(250, 235, 215, 0.575)",
+    });
+  }
+});
+function GenreColor(Genre, IDGenre) {
+  if (Genre == "Comédie") {
+    $(IDGenre).css({ color: "rgb( 255, 142, 0)" });
+    return;
+  } else if (Genre == "Animation") {
+    $(IDGenre).css({ color: "rgb(5, 176, 214)" });
+    return;
+  } else if (Genre == "Romance") {
+    $(IDGenre).css({ color: "rgb(179, 16, 83)" });
+    return;
+  } else if (Genre == "Aventure") {
+    $(IDGenre).css({ color: "rgb(255, 94, 0)" });
+    return;
+  } else if (Genre == "Drame") {
+    $(IDGenre).css({ color: "rgb(124, 7, 7)" });
+    return;
+  } else if (Genre == "Action") {
+    $(IDGenre).css({ color: "rgb(229, 60, 24)" });
+    return;
+  } else if (Genre == "Science-Fiction") {
+    $(IDGenre).css({ color: "rgb(37, 186, 4)" });
+    return;
+  } else if (Genre == "Fantastique") {
+    $(IDGenre).css({ color: "rgb(255, 79, 0)" });
+    return;
+  } else if (Genre == "Western") {
+    $(IDGenre).css({ color: "rgb(184, 108, 0)" });
+    return;
+  } else if (Genre == "Crime") {
+    $(IDGenre).css({ color: "rgb(82, 0, 0)" });
+    return;
+  } else if (Genre == "Thriller") {
+    $(IDGenre).css({ color: "rgb(59, 61, 85)" });
+    return;
+  } else if (Genre == "Familial") {
+    $(IDGenre).css({ color: "rgb(0, 203, 115)" });
+    return;
+  } else if (Genre == "Guerre") {
+    $(IDGenre).css({ color: "rgb(105, 192, 11)" });
+    return;
+  } else {
+    $(IDGenre).css({ color: "black" });
+    return;
+  }
+}
