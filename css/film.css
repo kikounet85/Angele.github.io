@@ -94,10 +94,10 @@ body::-webkit-scrollbar-thumb {
 }
 
 .bouton {
-    position: relative;
+    position: sticky;
     float: left;
     display: flex;
-    width: 23.85em;
+    width: 24.2em;
     height: 13.5em;
     margin: 10px;
     cursor: pointer;
@@ -118,6 +118,7 @@ body::-webkit-scrollbar-thumb {
     padding: 10px;
     text-align: justify;
     opacity: 0;
+    font-size: 1.7em;
 }
 
 .map0 {
@@ -167,7 +168,7 @@ body::-webkit-scrollbar-thumb {
     border-bottom: 0px;
     cursor: pointer;
     background-color: rgb(87, 87, 87);
-    transition: background-color 0.2s, width 0.2s, height 0.2s;
+    transition: background-color 0.2s, width 0.2s, height 0.2s, box-shadow 0.2s;
     border-color: black;
 }
 
@@ -201,4 +202,67 @@ h3, h4, p {
     margin-bottom: 5px;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.bouton:hover {
+    box-shadow: 0px 0px 1000px rgba(209, 209, 209, 0.5);
+}
+
+.listContainer {
+    border-style: solid;
+    height: 7em;
+    background-color: rgba(209, 209, 209, 0.5);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    opacity: 1;
+    position: relative;
+}
+
+#listContainer {
+    opacity: 1;
+    position: absolute;
+    left: -100em;
+    display: none;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.listContainer>h2, .listContainer>h4 {
+    margin: 10px;
+    display: block;
+}
+
+.listContainer>h4 {
+    position: relative;
+    display: block;
+}
+
+.Genrelist>h4 {
+    position: relative;
+    display: inline-block;
+    margin-right: 50px;
+}
+
+#BoutonContainer {
+    position: absolute;
+}
+
+.Genrelist {
+    position: relative;
+    margin: 10px;
+    left: 20em;
+    top: -1.5em;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    text-align: justify;
+}
+
+#ColoneList {
+    display: contents;
 }

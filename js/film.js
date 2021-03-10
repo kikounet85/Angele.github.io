@@ -58,6 +58,8 @@ var PrecisionMode = false;
 var ActivePrecision;
 var Afflist = ["Aff1", "Aff2", "Aff3", "Aff4", "Aff5"];
 var Affvar = 2;
+var ListMode = false;
+var listheight = 0;
 function ActualFilm(FilmNumber) {
   $.getJSON(
     "https://api.themoviedb.org/3" +
@@ -65,13 +67,15 @@ function ActualFilm(FilmNumber) {
       "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=fr",
     function (data) {
       var ID = "Film" + FilmNumber;
-      console.log(ID),
-        $("#container").append('<div id="' + ID + '" class="Precision"></div>');
+      $("#container").append('<div id="' + ID + '" class="Precision"></div>');
       $("#" + ID).append(
         '<div id="text' + FilmNumber + '" class ="text"></div>'
       );
-      $("#container").append(
+      $("#BoutonContainer").append(
         '<div id="Image' + FilmNumber + '" class="bouton"></div>'
+      );
+      $("#listContainer").append(
+        '<div id="list' + ID + '" class="listContainer"></div>'
       );
       $("#Image" + FilmNumber).append(
         '<img id="Backdrop' +
@@ -98,6 +102,7 @@ function ActualFilm(FilmNumber) {
         $("#Image" + FilmNumber).append(
           '<h2 id="BackTitle' + FilmNumber + '">' + data["name"] + "</h2>"
         );
+        $("#list" + ID).append("<h2>" + data["name"] + "</h2>");
       } else {
         $("#text" + FilmNumber).append(
           '<h2 id="Title' + FilmNumber + '">' + data["title"] + "</h2>"
@@ -105,10 +110,15 @@ function ActualFilm(FilmNumber) {
         $("#Image" + FilmNumber).append(
           '<h2 id="BackTitle' + FilmNumber + '">' + data["title"] + "</h2>"
         );
+        $("#list" + ID).append("<h2>" + data["title"] + "</h2>");
       }
       $("#text" + FilmNumber).append(
         '<div id="Genre' + FilmNumber + '"></div>'
       );
+      $ ^
+        $("#list" + ID).append(
+          '<div id="Genrelist' + ID + '" class="Genrelist"></div>'
+        );
 
       for (let j = 0; j < data["genres"].length; j++) {
         $("#Genre" + FilmNumber).append(
@@ -120,7 +130,15 @@ function ActualFilm(FilmNumber) {
             data["genres"][j]["name"] +
             "</h4>"
         );
-        console.log("#Genre" + FilmNumber + j + j + ".GenreText");
+        $("#Genrelist" + ID).append(
+          '<h4 id="Genre' +
+            FilmNumber +
+            j +
+            j +
+            '"> ' +
+            data["genres"][j]["name"] +
+            "</h4>"
+        );
         GenreColor(
           data["genres"][j]["name"],
           "#Genre" + FilmNumber + "> #Genre" + FilmNumber + j + j + ".GenreText"
@@ -128,6 +146,9 @@ function ActualFilm(FilmNumber) {
       }
       $("#text" + FilmNumber).append(
         '<p id="Summary' + FilmNumber + '">' + data["overview"] + "</p>"
+      );
+      $("#list" + ID).append(
+        '<h4 id="Summary' + FilmNumber + '">' + data["overview"] + "</h4>"
       );
       $("#text" + FilmNumber).append('<h3 id="Retour"> Retour </h3>');
       $("#Image" + FilmNumber).append(
@@ -198,15 +219,20 @@ $("#Aff1, #Aff2,#Aff3, #Aff4,#Aff5").click(function () {
   } else {
     Affvar = Afflist.indexOf($(this).attr("id"));
     if (Affvar == 0) {
-      $(".bouton").css({ width: "74em", height: "37em" });
+      $(".bouton").css({ width: "75em", height: "37em" });
+      $(".bouton>h2").css({ fontSize: "2.5em" });
     } else if (Affvar == 1) {
-      $(".bouton").css({ width: "36.41em", height: "19em" });
+      $(".bouton").css({ width: "36.9em", height: "19em" });
+      $(".bouton>h2").css({ fontSize: "1.9em" });
     } else if (Affvar == 2) {
-      $(".bouton").css({ width: "23.85em", height: "13.5em" });
+      $(".bouton").css({ width: "24.2em", height: "13.5em" });
+      $(".bouton>h2").css({ fontSize: "1.7em" });
     } else if (Affvar == 3) {
-      $(".bouton").css({ width: "17.58em", height: "10.5em" });
+      $(".bouton").css({ width: "17.8em", height: "10.4em" });
+      $(".bouton>h2").css({ fontSize: "1.4em" });
     } else if (Affvar == 4) {
-      $(".bouton").css({ width: "13.81em", height: "8em" });
+      $(".bouton").css({ width: "14em", height: "8em" });
+      $(".bouton>h2").css({ fontSize: "medium" });
     }
     $("#Aff1, #Aff2,#Aff3, #Aff4,#Aff5").css({
       backgroundColor: "rgb(87, 87, 87)",
@@ -229,7 +255,7 @@ function GenreColor(Genre, IDGenre) {
     $(IDGenre).css({ color: "rgb(179, 16, 83)" });
     return;
   } else if (Genre == "Aventure") {
-    $(IDGenre).css({ color: "rgb(255, 94, 0)" });
+    $(IDGenre).css({ color: "rgb(201, 109, 0)" });
     return;
   } else if (Genre == "Drame") {
     $(IDGenre).css({ color: "rgb(124, 7, 7)" });
@@ -241,7 +267,7 @@ function GenreColor(Genre, IDGenre) {
     $(IDGenre).css({ color: "rgb(37, 186, 4)" });
     return;
   } else if (Genre == "Fantastique") {
-    $(IDGenre).css({ color: "rgb(255, 79, 0)" });
+    $(IDGenre).css({ color: "rgb(81, 50, 173)" });
     return;
   } else if (Genre == "Western") {
     $(IDGenre).css({ color: "rgb(184, 108, 0)" });
@@ -263,3 +289,36 @@ function GenreColor(Genre, IDGenre) {
     return;
   }
 }
+$(".listContainer").click(function () {
+  $(this).animate({ height: $("#listContainer").get(0).scrollHeight }, 350);
+});
+$("#ColoneList").click(function () {
+  if (ListMode == false) {
+    $("#BoutonContainer").animate({ left: "200%" }, 350);
+    $("#Affichage").animate({ top: "-10%" }, 350);
+    setTimeout(function () {
+      $("#listContainer").animate({ left: "0em" }, 500);
+      $("#listContainer").show();
+      $("#BoutonContainer").hide();
+      listheight = $("#listFilm0").height();
+    }, 500);
+    ListMode = true;
+  } else {
+    $("#listContainer").animate({ left: "-200em" }, 500);
+    $("#BoutonContainer").show();
+    $("#Affichage").animate({ top: "4%" }, 350);
+    setTimeout(function () {
+      $("#BoutonContainer").animate({ left: "1%" }, 350);
+      $("#listContainer").hide();
+    }, 350);
+    ListMode = false;
+  }
+});
+$(document).on("click", ".listContainer", function () {
+  console.log($(this).height());
+  if ($(this).height() == listheight) {
+    $(this).animate({ height: $(this).get(0).scrollHeight }, 350);
+  } else {
+    $(this).animate({ height: "7em" }, 350);
+  }
+});
