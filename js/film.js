@@ -64,7 +64,7 @@ function ActualFilm(FilmNumber) {
   $.getJSON(
     "https://api.themoviedb.org/3" +
       Film[FilmNumber] +
-      "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=fr",
+      "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=FR-fr",
     function (data) {
       var ID = "Film" + FilmNumber;
       $("#container").append('<div id="' + ID + '" class="Precision"></div>');
