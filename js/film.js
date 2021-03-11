@@ -64,7 +64,7 @@ function ActualFilm(FilmNumber) {
   $.getJSON(
     "https://api.themoviedb.org/3" +
       Film[FilmNumber] +
-      "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=FR-fr",
+      "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=FR",
     function (data) {
       var ID = "Film" + FilmNumber;
       $("#container").append('<div id="' + ID + '" class="Precision"></div>');
@@ -119,7 +119,16 @@ function ActualFilm(FilmNumber) {
         $("#list" + ID).append(
           '<div id="Genrelist' + ID + '" class="Genrelist"></div>'
         );
-
+      $("#list" + ID).append(
+        '<div id="Backdropdiv' + FilmNumber + '" class="Backdropdiv"></div>'
+      );
+      $("#Backdropdiv" + FilmNumber).append(
+        '<img id="Backdroplist' +
+          FilmNumber +
+          '" src="https://image.tmdb.org/t/p/original' +
+          data["backdrop_path"] +
+          '"/>'
+      );
       for (let j = 0; j < data["genres"].length; j++) {
         $("#Genre" + FilmNumber).append(
           '<h4 id="Genre' +
@@ -142,6 +151,10 @@ function ActualFilm(FilmNumber) {
         GenreColor(
           data["genres"][j]["name"],
           "#Genre" + FilmNumber + "> #Genre" + FilmNumber + j + j + ".GenreText"
+        );
+        GenreColor(
+          data["genres"][j]["name"],
+          "#Genrelist" + ID + "> #Genre" + FilmNumber + j + j
         );
       }
       $("#text" + FilmNumber).append(
@@ -178,11 +191,17 @@ $(document).on("mouseover", ".bouton > img, .bouton > h2", function () {
   if (PrecisionMode == false) {
     $(this.parentNode).children("h2").animate({ opacity: "0.9" }, 150);
     $(this.parentNode).children(".Black").animate({ opacity: "0.7" }, 150);
+    $(this.parentNode).css({
+      boxShadow: "0px 0px 1000px rgba(209, 209, 209, 0.5)",
+    });
   }
 });
 $(document).on("mouseout", ".bouton > img", function () {
   $(this.parentNode).children("h2").animate({ opacity: "0" }, 150);
   $(this.parentNode).children(".Black").animate({ opacity: "0" }, 150);
+  $(this.parentNode).css({
+    boxShadow: "0px 0px 0px rgba(209, 209, 209, 0.5)",
+  });
 });
 $(document).on("click", ".bouton > img", function () {
   if (PrecisionMode == false) {
@@ -190,12 +209,16 @@ $(document).on("click", ".bouton > img", function () {
       "#" + Filmlist[Imagelist.indexOf($(this.parentNode).attr("id"))];
     $(ActivePrecision).animate({ left: "6%", opacity: "1" });
     $(".bouton").css({ cursor: "default" });
+    setTimeout(function () {
+      $("#BoutonContainer, h1, #ColoneList").toggleClass("Blur");
+    }, 200);
     PrecisionMode = true;
   }
 });
 $(document).on("click", "#Retour", function () {
   $(ActivePrecision).animate({ left: "600%", opacity: "0" });
   $(".bouton").css({ cursor: "pointer" });
+  $("#BoutonContainer, h1, #ColoneList").toggleClass("Blur");
   PrecisionMode = false;
 });
 $("#Aff1, #Aff2,#Aff3, #Aff4,#Aff5").hover(
@@ -219,19 +242,19 @@ $("#Aff1, #Aff2,#Aff3, #Aff4,#Aff5").click(function () {
   } else {
     Affvar = Afflist.indexOf($(this).attr("id"));
     if (Affvar == 0) {
-      $(".bouton").css({ width: "75em", height: "37em" });
+      $(".bouton").css({ width: "97.7%", height: "37em" });
       $(".bouton>h2").css({ fontSize: "2.5em" });
     } else if (Affvar == 1) {
-      $(".bouton").css({ width: "36.9em", height: "19em" });
+      $(".bouton").css({ width: "48.1%", height: "19em" });
       $(".bouton>h2").css({ fontSize: "1.9em" });
     } else if (Affvar == 2) {
-      $(".bouton").css({ width: "24.2em", height: "13.5em" });
+      $(".bouton").css({ width: "31.5%", height: "13.5em" });
       $(".bouton>h2").css({ fontSize: "1.7em" });
     } else if (Affvar == 3) {
-      $(".bouton").css({ width: "17.8em", height: "10.4em" });
+      $(".bouton").css({ width: "23.2%", height: "10.4em" });
       $(".bouton>h2").css({ fontSize: "1.4em" });
     } else if (Affvar == 4) {
-      $(".bouton").css({ width: "14em", height: "8em" });
+      $(".bouton").css({ width: "18.25%", height: "8em" });
       $(".bouton>h2").css({ fontSize: "medium" });
     }
     $("#Aff1, #Aff2,#Aff3, #Aff4,#Aff5").css({
@@ -292,26 +315,38 @@ function GenreColor(Genre, IDGenre) {
 $(".listContainer").click(function () {
   $(this).animate({ height: $("#listContainer").get(0).scrollHeight }, 350);
 });
-$("#ColoneList").click(function () {
-  if (ListMode == false) {
-    $("#BoutonContainer").animate({ left: "200%" }, 350);
-    $("#Affichage").animate({ top: "-10%" }, 350);
-    setTimeout(function () {
-      $("#listContainer").animate({ left: "0em" }, 500);
-      $("#listContainer").show();
-      $("#BoutonContainer").hide();
-      listheight = $("#listFilm0").height();
-    }, 500);
-    ListMode = true;
-  } else {
-    $("#listContainer").animate({ left: "-200em" }, 500);
-    $("#BoutonContainer").show();
-    $("#Affichage").animate({ top: "4%" }, 350);
-    setTimeout(function () {
-      $("#BoutonContainer").animate({ left: "1%" }, 350);
-      $("#listContainer").hide();
-    }, 350);
-    ListMode = false;
+$("#ListIMG").click(function () {
+  if (PrecisionMode == false) {
+    if (ListMode == false) {
+      $("#BoutonContainer").animate({ left: "200%" }, 350);
+      $("#Affichage").animate({ top: "-10%" }, 350);
+      setTimeout(function () {
+        $("#listContainer").animate({ left: "0em" }, 500);
+        $("#listContainer").show();
+        $("#BoutonContainer").hide();
+        listheight = $("#listFilm0").height();
+        $("#ListIMG").css({ borderColor: "rgba(255, 255, 255, 0.829)" });
+        $("#TVIMG").css({ borderColor: "black" });
+      }, 500);
+      ListMode = true;
+    }
+  }
+});
+$("#TVIMG").click(function () {
+  if (PrecisionMode == false) {
+    if (ListMode == true) {
+      $("#listContainer").animate({ left: "-200em" }, 500);
+      $("#BoutonContainer").show();
+      $("#Affichage").animate({ top: "4%" }, 350);
+      $(".listContainer").css({ height: "7em" });
+      setTimeout(function () {
+        $("#BoutonContainer").animate({ left: "0%" }, 350);
+        $("#listContainer").hide();
+        $("#TVIMG").css({ borderColor: "rgba(255, 255, 255, 0.829)" });
+        $("#ListIMG").css({ borderColor: "black" });
+      }, 350);
+      ListMode = false;
+    }
   }
 });
 $(document).on("click", ".listContainer", function () {
