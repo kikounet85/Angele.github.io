@@ -52,6 +52,44 @@ var Film = [
   RickMorty,
   SNK,
 ];
+var PrisonBreak = "/tv/2288";
+var BreakingBad = "/tv/1396";
+var PulpFiction = "/movie/680";
+var IngloriousB = "/movie/16869";
+var FightClub = "/movie/550";
+var LesEvadé = "/movie/202695";
+var ReservoirDogs = "/movie/500";
+var Inception = "/movie/27205";
+var Arretemoi = "/movie/640";
+var VeryBadTrip1 = "/movie/18785";
+var Whiplash = "/movie/244786";
+var DoctorWho = "/tv/57243";
+var BatmanVSSuperman = "/movie/209112";
+var OnePiece = "/tv/37854";
+var FullMetalAlch = "/tv/31911";
+var LEJoker = "/movie/475557";
+var Brooklyn99 = "/tv/48891";
+var ParcAndRec = "/tv/8592";
+var FilmPasvu = [
+  PrisonBreak,
+  BreakingBad,
+  PulpFiction,
+  IngloriousB,
+  FightClub,
+  LesEvadé,
+  ReservoirDogs,
+  Inception,
+  Arretemoi,
+  VeryBadTrip1,
+  Whiplash,
+  DoctorWho,
+  BatmanVSSuperman,
+  OnePiece,
+  FullMetalAlch,
+  LEJoker,
+  Brooklyn99,
+  ParcAndRec,
+];
 var Imagelist = [];
 var Filmlist = [];
 var PrecisionMode = false;
@@ -59,128 +97,271 @@ var ActivePrecision;
 var Afflist = ["Aff1", "Aff2", "Aff3", "Aff4", "Aff5"];
 var Affvar = 2;
 var ListMode = false;
+var fullscreenMode = false;
 var listheight = 0;
-function ActualFilm(FilmNumber) {
-  $.getJSON(
-    "https://api.themoviedb.org/3" +
-      Film[FilmNumber] +
-      "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=FR",
-    function (data) {
-      var ID = "Film" + FilmNumber;
-      $("#container").append('<div id="' + ID + '" class="Precision"></div>');
-      $("#" + ID).append(
-        '<div id="text' + FilmNumber + '" class ="text"></div>'
-      );
-      $("#BoutonContainer").append(
-        '<div id="Image' + FilmNumber + '" class="bouton"></div>'
-      );
-      $("#listContainer").append(
-        '<div id="list' + ID + '" class="listContainer"></div>'
-      );
-      $("#Image" + FilmNumber).append(
-        '<img id="Backdrop' +
-          FilmNumber +
-          '" src="https://image.tmdb.org/t/p/original' +
-          data["backdrop_path"] +
-          '"/>'
-      );
-      $("#Image" + FilmNumber).append(
-        '<img class="Black" src="img/black.png"/>'
-      );
-      let Title = data["title"];
-      $("#" + ID).append(
-        '<img id="Poster' +
-          FilmNumber +
-          '" src="https://image.tmdb.org/t/p/w500' +
-          data["poster_path"] +
-          '"/>'
-      );
-      if (Title === undefined) {
-        $("#text" + FilmNumber).append(
-          '<h2 id="Title' + FilmNumber + '">' + data["name"] + "</h2>"
+function ActualFilm(array, FilmNumber) {
+  if (array == Film) {
+    $.getJSON(
+      "https://api.themoviedb.org/3" +
+        array[FilmNumber] +
+        "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=FR",
+      function (data) {
+        var ID = "Film" + FilmNumber;
+        $("#container").append('<div id="' + ID + '" class="Precision"></div>');
+        $("#" + ID).append(
+          '<div id="text' + FilmNumber + '" class ="text"></div>'
+        );
+        $("#BoutonContainer").append(
+          '<div id="Image' + FilmNumber + '" class="bouton"></div>'
+        );
+        $("#Image" + FilmNumber).addClass("vu");
+        $("#listContainer").append(
+          '<div id="list' + ID + '" class="listContainer"></div>'
         );
         $("#Image" + FilmNumber).append(
-          '<h2 id="BackTitle' + FilmNumber + '">' + data["name"] + "</h2>"
-        );
-        $("#list" + ID).append("<h2>" + data["name"] + "</h2>");
-      } else {
-        $("#text" + FilmNumber).append(
-          '<h2 id="Title' + FilmNumber + '">' + data["title"] + "</h2>"
+          '<img id="Backdrop' +
+            FilmNumber +
+            '" src="https://image.tmdb.org/t/p/original' +
+            data["backdrop_path"] +
+            '"/>'
         );
         $("#Image" + FilmNumber).append(
-          '<h2 id="BackTitle' + FilmNumber + '">' + data["title"] + "</h2>"
+          '<img class="Black" src="img/black.png"/>'
         );
-        $("#list" + ID).append("<h2>" + data["title"] + "</h2>");
-      }
-      $("#text" + FilmNumber).append(
-        '<div id="Genre' + FilmNumber + '"></div>'
-      );
-      $ ^
+        let Title = data["title"];
+        $("#" + ID).append(
+          '<img id="Poster' +
+            FilmNumber +
+            '" src="https://image.tmdb.org/t/p/w500' +
+            data["poster_path"] +
+            '"/>'
+        );
+        if (Title === undefined) {
+          $("#text" + FilmNumber).append(
+            '<h2 id="Title' + FilmNumber + '">' + data["name"] + "</h2>"
+          );
+          $("#Image" + FilmNumber).append(
+            '<h2 id="BackTitle' + FilmNumber + '">' + data["name"] + "</h2>"
+          );
+          $("#list" + ID).append("<h2>" + data["name"] + "</h2>");
+        } else {
+          $("#text" + FilmNumber).append(
+            '<h2 id="Title' + FilmNumber + '">' + data["title"] + "</h2>"
+          );
+          $("#Image" + FilmNumber).append(
+            '<h2 id="BackTitle' + FilmNumber + '">' + data["title"] + "</h2>"
+          );
+          $("#list" + ID).append("<h2>" + data["title"] + "</h2>");
+        }
+        $("#text" + FilmNumber).append(
+          '<div id="Genre' + FilmNumber + '"></div>'
+        );
+        $ ^
+          $("#list" + ID).append(
+            '<div id="Genrelist' + ID + '" class="Genrelist"></div>'
+          );
         $("#list" + ID).append(
-          '<div id="Genrelist' + ID + '" class="Genrelist"></div>'
+          '<div id="Backdropdiv' + FilmNumber + '" class="Backdropdiv"></div>'
         );
-      $("#list" + ID).append(
-        '<div id="Backdropdiv' + FilmNumber + '" class="Backdropdiv"></div>'
-      );
-      $("#Backdropdiv" + FilmNumber).append(
-        '<img id="Backdroplist' +
-          FilmNumber +
-          '" src="https://image.tmdb.org/t/p/original' +
-          data["backdrop_path"] +
-          '"/>'
-      );
-      for (let j = 0; j < data["genres"].length; j++) {
-        $("#Genre" + FilmNumber).append(
-          '<h4 id="Genre' +
+        $("#list" + ID).addClass("vu");
+        $("#Backdropdiv" + FilmNumber).append(
+          '<img id="Backdroplist' +
             FilmNumber +
-            j +
-            j +
-            '" class="GenreText"> ' +
-            data["genres"][j]["name"] +
-            "</h4>"
+            '" src="https://image.tmdb.org/t/p/original' +
+            data["backdrop_path"] +
+            '"/>'
         );
-        $("#Genrelist" + ID).append(
-          '<h4 id="Genre' +
-            FilmNumber +
-            j +
-            j +
-            '"> ' +
-            data["genres"][j]["name"] +
-            "</h4>"
+        for (let j = 0; j < data["genres"].length; j++) {
+          $("#Genre" + FilmNumber).append(
+            '<h4 id="Genre' +
+              FilmNumber +
+              j +
+              j +
+              '" class="GenreText"> ' +
+              data["genres"][j]["name"] +
+              "</h4>"
+          );
+          $("#Genrelist" + ID).append(
+            '<h4 id="Genre' +
+              FilmNumber +
+              j +
+              j +
+              '"> ' +
+              data["genres"][j]["name"] +
+              "</h4>"
+          );
+          GenreColor(
+            data["genres"][j]["name"],
+            "#Genre" +
+              FilmNumber +
+              "> #Genre" +
+              FilmNumber +
+              j +
+              j +
+              ".GenreText"
+          );
+          GenreColor(
+            data["genres"][j]["name"],
+            "#Genrelist" + ID + "> #Genre" + FilmNumber + j + j
+          );
+        }
+        $("#text" + FilmNumber).append(
+          '<p id="Summary' + FilmNumber + '">' + data["overview"] + "</p>"
         );
-        GenreColor(
-          data["genres"][j]["name"],
-          "#Genre" + FilmNumber + "> #Genre" + FilmNumber + j + j + ".GenreText"
+        $("#list" + ID).append(
+          '<h4 id="Summary' + FilmNumber + '">' + data["overview"] + "</h4>"
         );
-        GenreColor(
-          data["genres"][j]["name"],
-          "#Genrelist" + ID + "> #Genre" + FilmNumber + j + j
+        $("#text" + FilmNumber).append('<h3 id="Retour"> Retour </h3>');
+        $("#Image" + FilmNumber).append(
+          '<img class="map0" src="https://image.tmdb.org/t/p/w500' +
+            data["backdrop_path"] +
+            '"/>'
         );
+        console.log(data);
+        Imagelist.push("Image" + FilmNumber);
+        Filmlist.push("Film" + FilmNumber);
       }
-      $("#text" + FilmNumber).append(
-        '<p id="Summary' + FilmNumber + '">' + data["overview"] + "</p>"
-      );
-      $("#list" + ID).append(
-        '<h4 id="Summary' + FilmNumber + '">' + data["overview"] + "</h4>"
-      );
-      $("#text" + FilmNumber).append('<h3 id="Retour"> Retour </h3>');
-      $("#Image" + FilmNumber).append(
-        '<img class="map0" src="https://image.tmdb.org/t/p/w500' +
-          data["backdrop_path"] +
-          '"/>'
-      );
-      console.log(data);
-      Imagelist.push("Image" + FilmNumber);
-      Filmlist.push("Film" + FilmNumber);
-    }
-  );
+    );
+  } else {
+    $.getJSON(
+      "https://api.themoviedb.org/3" +
+        array[FilmNumber] +
+        "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=FR",
+      function (data) {
+        var ID = "Filmp" + FilmNumber;
+        $("#container").append('<div id="' + ID + '" class="Precision"></div>');
+        $("#" + ID).append(
+          '<div id="textp' + FilmNumber + '" class ="text"></div>'
+        );
+        $("#BoutonContainerp").append(
+          '<div id="Imagep' + FilmNumber + '" class="bouton"></div>'
+        );
+        $("#Imagep" + FilmNumber).addClass("pasvu");
+        $("#listContainer").append(
+          '<div id="list' + ID + '" class="listContainer"></div>'
+        );
+        $("#Imagep" + FilmNumber).append(
+          '<img id="Backdropp' +
+            FilmNumber +
+            '" src="https://image.tmdb.org/t/p/original' +
+            data["backdrop_path"] +
+            '"/>'
+        );
+        $("#Imagep" + FilmNumber).append(
+          '<img class="Black" src="img/black.png"/>'
+        );
+        let Title = data["title"];
+        $("#" + ID).append(
+          '<img id="Posterp' +
+            FilmNumber +
+            '" src="https://image.tmdb.org/t/p/w500' +
+            data["poster_path"] +
+            '"/>'
+        );
+        if (Title === undefined) {
+          $("#textp" + FilmNumber).append(
+            '<h2 id="Titlep' + FilmNumber + '">' + data["name"] + "</h2>"
+          );
+          $("#Imagep" + FilmNumber).append(
+            '<h2 id="BackTitlep' + FilmNumber + '">' + data["name"] + "</h2>"
+          );
+          $("#list" + ID).append("<h2>" + data["name"] + "</h2>");
+        } else {
+          $("#textp" + FilmNumber).append(
+            '<h2 id="Titlep' + FilmNumber + '">' + data["title"] + "</h2>"
+          );
+          $("#Imagep" + FilmNumber).append(
+            '<h2 id="BackTitlep' + FilmNumber + '">' + data["title"] + "</h2>"
+          );
+          $("#list" + ID).append("<h2>" + data["title"] + "</h2>");
+        }
+        $("#textp" + FilmNumber).append(
+          '<div id="Genrep' + FilmNumber + '"></div>'
+        );
+        $ ^
+          $("#list" + ID).append(
+            '<div id="Genrelist' + ID + '" class="Genrelist"></div>'
+          );
+        $("#list" + ID).append(
+          '<div id="Backdropdivp' + FilmNumber + '" class="Backdropdiv"></div>'
+        );
+        $("#list" + ID).addClass("pasvu");
+        $("#Backdropdivp" + FilmNumber).append(
+          '<img id="Backdroplistp' +
+            FilmNumber +
+            '" src="https://image.tmdb.org/t/p/original' +
+            data["backdrop_path"] +
+            '"/>'
+        );
+        for (let j = 0; j < data["genres"].length; j++) {
+          $("#Genrep" + FilmNumber).append(
+            '<h4 id="Genrep' +
+              FilmNumber +
+              j +
+              j +
+              '" class="GenreText"> ' +
+              data["genres"][j]["name"] +
+              "</h4>"
+          );
+          $("#Genrelist" + ID).append(
+            '<h4 id="Genrep' +
+              FilmNumber +
+              j +
+              j +
+              '"> ' +
+              data["genres"][j]["name"] +
+              "</h4>"
+          );
+          GenreColor(
+            data["genres"][j]["name"],
+            "#Genrep" +
+              FilmNumber +
+              "> #Genrep" +
+              FilmNumber +
+              j +
+              j +
+              ".GenreText"
+          );
+          GenreColor(
+            data["genres"][j]["name"],
+            "#Genrelist" + ID + "> #Genrep" + FilmNumber + j + j
+          );
+        }
+        $("#textp" + FilmNumber).append(
+          '<p id="Summaryp' + FilmNumber + '">' + data["overview"] + "</p>"
+        );
+        $("#list" + ID).append(
+          '<h4 id="Summaryp' + FilmNumber + '">' + data["overview"] + "</h4>"
+        );
+        $("#textp" + FilmNumber).append('<h3 id="Retour"> Retour </h3>');
+        $("#Imagep" + FilmNumber).append(
+          '<img class="map0" src="https://image.tmdb.org/t/p/w500' +
+            data["backdrop_path"] +
+            '"/>'
+        );
+        console.log(data);
+        Imagelist.push("Imagep" + FilmNumber);
+        Filmlist.push("Filmp" + FilmNumber);
+      }
+    );
+  }
 }
-
 $(document).ready(function () {
   let i = 0;
   setInterval(function () {
     if (i < Film.length) {
-      ActualFilm(i);
+      ActualFilm(Film, i, "vu");
+      i++;
+    } else {
+      clearInterval;
+    }
+  }, 100);
+});
+$(document).ready(function () {
+  let i = 0;
+  setInterval(function () {
+    if (i < FilmPasvu.length) {
+      ActualFilm(FilmPasvu, i, "pasvu");
       i++;
     } else {
       clearInterval;
@@ -210,7 +391,8 @@ $(document).on("click", ".bouton > img", function () {
     $(ActivePrecision).animate({ left: "6%", opacity: "1" });
     $(".bouton").css({ cursor: "default" });
     setTimeout(function () {
-      $("#BoutonContainer, h1, #ColoneList").toggleClass("Blur");
+      $("#BoutonContainer, h1, #ColoneList, #VupasVu").toggleClass("Blur");
+      $("#Vu, #pasVu, #ListIMG, #TVIMG").css({ cursor: "default" });
     }, 200);
     PrecisionMode = true;
   }
@@ -218,7 +400,8 @@ $(document).on("click", ".bouton > img", function () {
 $(document).on("click", "#Retour", function () {
   $(ActivePrecision).animate({ left: "600%", opacity: "0" });
   $(".bouton").css({ cursor: "pointer" });
-  $("#BoutonContainer, h1, #ColoneList").toggleClass("Blur");
+  $("#BoutonContainer, h1, #ColoneList, #VupasVu").toggleClass("Blur");
+  $("#Vu, #pasVu, #ListIMG, #TVIMG").css({ cursor: "pointer" });
   PrecisionMode = false;
 });
 $("#Aff1, #Aff2,#Aff3, #Aff4,#Aff5").hover(
@@ -318,12 +501,12 @@ $(".listContainer").click(function () {
 $("#ListIMG").click(function () {
   if (PrecisionMode == false) {
     if (ListMode == false) {
-      $("#BoutonContainer").animate({ left: "200%" }, 350);
+      $("#BoutonContainer, #BoutonContainerp").animate({ left: "200%" }, 350);
       $("#Affichage").animate({ top: "-10%" }, 350);
       setTimeout(function () {
         $("#listContainer").animate({ left: "0em" }, 500);
         $("#listContainer").show();
-        $("#BoutonContainer").hide();
+        $("#BoutonContainer, #BoutonContainerp").hide();
         listheight = $("#listFilm0").height();
         $("#ListIMG").css({ borderColor: "rgba(255, 255, 255, 0.829)" });
         $("#TVIMG").css({ borderColor: "black" });
@@ -336,11 +519,11 @@ $("#TVIMG").click(function () {
   if (PrecisionMode == false) {
     if (ListMode == true) {
       $("#listContainer").animate({ left: "-200em" }, 500);
-      $("#BoutonContainer").show();
+      $("#BoutonContainer, #BoutonContainerp").show();
       $("#Affichage").animate({ top: "4%" }, 350);
       $(".listContainer").css({ height: "7em" });
       setTimeout(function () {
-        $("#BoutonContainer").animate({ left: "0%" }, 350);
+        $("#BoutonContainer, #BoutonContainerp").animate({ left: "0%" }, 350);
         $("#listContainer").hide();
         $("#TVIMG").css({ borderColor: "rgba(255, 255, 255, 0.829)" });
         $("#ListIMG").css({ borderColor: "black" });
@@ -355,5 +538,64 @@ $(document).on("click", ".listContainer", function () {
     $(this).animate({ height: $(this).get(0).scrollHeight }, 350);
   } else {
     $(this).animate({ height: "7em" }, 350);
+  }
+});
+$("#pasVu").click(function () {
+  if (PrecisionMode == false) {
+    $(".vu").hide();
+    $("#BoutonContainer").hide();
+    $("#BoutonContainerp").show();
+    $(".pasvu").show();
+    $("#pasVu").css({ borderColor: "aliceblue" });
+    $("#Vu").css({ borderColor: "black" });
+    $("h1").text("Films à voir avec la Salopette");
+  }
+});
+$("#Vu").click(function () {
+  if (PrecisionMode == false) {
+    $(".pasvu").hide();
+    $("#BoutonContainerp").hide();
+    $("#BoutonContainer").show();
+    $(".vu").show();
+    $("#Vu").css({ borderColor: "aliceblue" });
+    $("#pasVu").css({ borderColor: "black" });
+    $("h1").text("Recap des films vu avec la Salopette");
+  }
+});
+$("#ListIMG, #TVIMG").hover(
+  function () {
+    if (PrecisionMode == false) {
+      $(this).css({ transform: "scale(1.2)" });
+    }
+  },
+  function () {
+    if (PrecisionMode == false) {
+      $(this).css({ transform: "scale(1)" });
+    }
+  }
+);
+$("#Vu, #pasVu").hover(
+  function () {
+    if (PrecisionMode == false) {
+      $(this).css({ transform: "scale(1.1)" });
+    }
+  },
+  function () {
+    if (PrecisionMode == false) {
+      $(this).css({ transform: "scale(1)" });
+    }
+  }
+);
+$("#fullscreen").click(function () {
+  if (fullscreenMode == false) {
+    $("#VupasVu, #ColoneList, #Affichage").animate({ opacity: "0" }, 200);
+    setTimeout(function () {
+      $("#VupasVu, #ColoneList, #Affichage").hide();
+      fullscreenMode = true;
+    }, 210);
+  } else {
+    $("#VupasVu, #ColoneList, #Affichage").show();
+    $("#VupasVu, #ColoneList, #Affichage").animate({ opacity: "1" }, 200);
+    fullscreenMode = false;
   }
 });
