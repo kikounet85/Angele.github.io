@@ -518,7 +518,7 @@ function NoteColor(Note, IDNote) {
   if (Note < 4.5) {
     $(IDNote).css({ color: "rgb(148, 22, 22)" });
     return;
-  } else if (Note > 7.5) {
+  } else if (Note > 7) {
     $(IDNote).css({ color: "rgb(2, 150, 6)" });
     return;
   } else {
