@@ -190,7 +190,7 @@ h2 {
     font-family: 'Raleway', sans-serif;
 }
 
-h3, h4, p {
+h3, h4, p, h5 {
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -384,4 +384,139 @@ h1 {
     top: -4%;
     left: 0%;
     cursor: pointer;
+}
+
+#Posterp17 {
+    position: relative;
+    left: -51.2%;
+}
+
+.Info {
+    position: absolute;
+    opacity: 0;
+    height: 31em;
+    width: 30.02%;
+    left: 0%;
+    overflow: hidden;
+    z-index: 999;
+    cursor: default;
+    transition: opacity 0.2s;
+}
+
+.Info>img {
+    width: 1000%;
+    z-index: 998;
+}
+
+.Info>.VoteAverage {
+    position: absolute;
+    top: 26.5%;
+    left: 5%;
+    z-index: 999;
+    font-size: larger;
+    opacity: 1;
+}
+
+.Info>.VoteCount {
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    z-index: 999;
+    font-size: larger;
+    opacity: 1;
+    color: rgb(209, 209, 209);
+}
+
+.Info>.Runtime {
+    position: absolute;
+    top: 38.5%;
+    left: 5%;
+    z-index: 999;
+    font-size: larger;
+    opacity: 1;
+    color: rgb(209, 209, 209);
+}
+
+.Info>.Saison {
+    position: absolute;
+    top: 46.5%;
+    left: 5%;
+    z-index: 999;
+    font-size: larger;
+    opacity: 1;
+    color: rgb(209, 209, 209);
+}
+
+.Info:hover {
+    opacity: 0.8;
+}
+
+.Info>.NoteTitle {
+    position: absolute;
+    top: 21%;
+    left: 5%;
+    z-index: 999;
+    font-size: 1.75em;
+    opacity: 1;
+    color: rgb(255, 255, 255);
+}
+
+.Info>.DuréeTitle {
+    position: absolute;
+    top: 33%;
+    left: 5%;
+    z-index: 999;
+    font-size: 1.75em;
+    opacity: 1;
+    color: rgb(255, 255, 255);
+}
+
+.Info>.TypeTitle {
+    position: absolute;
+    top: 0%;
+    left: 5%;
+    z-index: 999;
+    font-size: 1.75em;
+    opacity: 1;
+    color: rgb(255, 255, 255);
+}
+
+.Info>.Type {
+    position: absolute;
+    top: 7.5%;
+    left: 5%;
+    z-index: 999;
+    font-size: larger;
+    opacity: 1;
+    color: rgb(209, 209, 209);
+}
+
+.Info>.OriginalTitleT {
+    position: absolute;
+    top: 11%;
+    left: 5%;
+    z-index: 999;
+    font-size: 1.75em;
+    opacity: 1;
+    color: rgb(255, 255, 255);
+}
+
+.Info>.OriginalTitle {
+    position: absolute;
+    top: 19%;
+    left: 5%;
+    z-index: 999;
+    font-size: 0.75em;
+    opacity: 1;
+    color: rgb(209, 209, 209);
+}
+
+.Info>.Episodes {
+    position: absolute;
+    top: 42.5%;
+    left: 5%;
+    z-index: 999;
+    font-size: larger;
+    opacity: 1;
+    color: rgb(209, 209, 209);
 }
