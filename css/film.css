@@ -520,3 +520,9 @@ h1 {
     opacity: 1;
     color: rgb(209, 209, 209);
 }
+
+.More {
+    position: absolute;
+    top: 88%;
+    left: 31%;
+}

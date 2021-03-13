@@ -138,6 +138,9 @@ function ActualFilm(array, FilmNumber) {
             data["poster_path"] +
             '"/>'
         );
+        $("#" + ID).append(
+          '<h3 id="More' + FilmNumber + '" class ="More"><< En savoir plus</h3>'
+        );
         $("#" + ID).append('<div id="Info' + ID + '" class="Info"></div>');
         $("#Info" + ID).append('<img class="Blackinfo" src="img/black.png"/>');
         $("#Info" + ID).append(
@@ -330,6 +333,9 @@ function ActualFilm(array, FilmNumber) {
             '" src="https://image.tmdb.org/t/p/original' +
             data["backdrop_path"] +
             '"/>'
+        );
+        $("#" + ID).append(
+          '<h3 id="More' + FilmNumber + '" class ="More"><< En savoir plus</h3>'
         );
         $("#" + ID).append('<div id="Info' + ID + '" class="Info"></div>');
         $("#Info" + ID).append('<img class="Blackinfo" src="img/black.png"/>');
