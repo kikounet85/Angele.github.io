@@ -783,3 +783,13 @@ $("#fullscreen").click(function () {
     fullscreenMode = false;
   }
 });
+function aniMore() {
+  $(".More").animate({ left: "+=2%" }, 750);
+  setTimeout(function () {
+    $(".More").animate({ left: "-=2%" }, 750);
+  }, 750);
+  setTimeout(aniMore, 1500);
+}
+$(document).ready(function () {
+  aniMore();
+});
