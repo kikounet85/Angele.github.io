@@ -2,7 +2,8 @@
     display: flex;
     align-items: center;
     text-align: center;
-    width: 88%;
+    width: 68.3em;
+    height: 82.9%;
     position: fixed;
     left: 600%;
     margin-top: 20px;
@@ -17,7 +18,8 @@
 }
 
 .Precision>img {
-    width: 30%;
+    width: 20.5em;
+    height: 100%;
     position: relative;
     left: -70%;
 }
@@ -394,9 +396,10 @@ h1 {
 .Info {
     position: absolute;
     opacity: 0;
-    height: 31em;
-    width: 30.02%;
+    width: 20.5em;
+    height: 100%;
     left: 0%;
+    top: 0%;
     overflow: hidden;
     z-index: 999;
     cursor: default;
@@ -404,7 +407,8 @@ h1 {
 }
 
 .Info>img {
-    width: 1000%;
+    width: 20.5em;
+    height: 100%;
     z-index: 998;
 }
 
