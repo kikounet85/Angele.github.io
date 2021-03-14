@@ -193,7 +193,7 @@ h2 {
 }
 
 h3, h4, p, h5 {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .GenreText {
@@ -407,24 +407,27 @@ h1 {
 }
 
 .Info>img {
+    position: absolute;
+    left: 0%;
+    top: 0%;
     width: 20.5em;
     height: 100%;
     z-index: 998;
 }
 
 .Info>.VoteAverage {
-    position: absolute;
-    top: 26.5%;
-    left: 5%;
+    position: relative;
+    top: 0%;
+    left: 0%;
     z-index: 999;
     font-size: larger;
     opacity: 1;
 }
 
 .Info>.VoteCount {
-    position: absolute;
-    top: 30%;
-    left: 5%;
+    position: relative;
+    top: 0%;
+    left: 0%;
     z-index: 999;
     font-size: larger;
     opacity: 1;
@@ -432,9 +435,9 @@ h1 {
 }
 
 .Info>.Runtime {
-    position: absolute;
-    top: 38.5%;
-    left: 5%;
+    position: relative;
+    top: 0%;
+    left: 0%;
     z-index: 999;
     font-size: larger;
     opacity: 1;
@@ -442,9 +445,9 @@ h1 {
 }
 
 .Info>.Saison {
-    position: absolute;
-    top: 46.5%;
-    left: 5%;
+    position: relative;
+    top: 0%;
+    left: 0%;
     z-index: 999;
     font-size: larger;
     opacity: 1;
@@ -456,9 +459,9 @@ h1 {
 }
 
 .Info>.NoteTitle {
-    position: absolute;
-    top: 21%;
-    left: 5%;
+    position: relative;
+    top: 0%;
+    left: 0%;
     z-index: 999;
     font-size: 1.75em;
     opacity: 1;
@@ -466,9 +469,9 @@ h1 {
 }
 
 .Info>.DuréeTitle {
-    position: absolute;
-    top: 33%;
-    left: 5%;
+    position: relative;
+    top: 0%;
+    left: 0%;
     z-index: 999;
     font-size: 1.75em;
     opacity: 1;
@@ -476,19 +479,20 @@ h1 {
 }
 
 .Info>.TypeTitle {
-    position: absolute;
+    position: relative;
     top: 0%;
-    left: 5%;
+    left: 0%;
     z-index: 999;
     font-size: 1.75em;
     opacity: 1;
     color: rgb(255, 255, 255);
+    margin-top: 20px !important;
 }
 
 .Info>.Type {
-    position: absolute;
-    top: 7.5%;
-    left: 5%;
+    position: relative;
+    top: 0%;
+    left: 0%;
     z-index: 999;
     font-size: larger;
     opacity: 1;
@@ -496,9 +500,9 @@ h1 {
 }
 
 .Info>.OriginalTitleT {
-    position: absolute;
-    top: 11%;
-    left: 5%;
+    position: relative;
+    top: 0%;
+    left: 0%;
     z-index: 999;
     font-size: 1.75em;
     opacity: 1;
@@ -506,19 +510,19 @@ h1 {
 }
 
 .Info>.OriginalTitle {
-    position: absolute;
-    top: 19%;
-    left: 5%;
+    position: relative;
+    top: 0%;
+    left: 0%;
     z-index: 999;
-    font-size: 0.75em;
+    font-size: 1em;
     opacity: 1;
     color: rgb(209, 209, 209);
 }
 
 .Info>.Episodes {
-    position: absolute;
-    top: 42.5%;
-    left: 5%;
+    position: relative;
+    top: 0%;
+    left: 0%;
     z-index: 999;
     font-size: larger;
     opacity: 1;
@@ -529,4 +533,11 @@ h1 {
     position: absolute;
     top: 88%;
     left: 33%;
+}
+
+.Info>h2, .Info>h3 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 9px;
+    margin-right: 9px;
 }
