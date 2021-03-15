@@ -479,7 +479,7 @@ h1 {
     color: rgb(209, 209, 209);
 }
 
-.Info>.OriginalTitleT {
+.Info>.OriginalTitleT, .Info>.ReleaseDateTitle {
     position: relative;
     top: 0%;
     left: 0%;
@@ -494,12 +494,12 @@ h1 {
     top: 0%;
     left: 0%;
     z-index: 999;
-    font-size: 1em;
+    font-size: larger;
     opacity: 1;
     color: rgb(209, 209, 209);
 }
 
-.Info>.Episodes {
+.Info>.Episodes, .Info>.ReleaseDate {
     position: relative;
     top: 0%;
     left: 0%;
@@ -513,6 +513,7 @@ h1 {
     position: absolute;
     top: 88%;
     left: 33%;
+    cursor: default;
 }
 
 .Info>h2, .Info>h3 {

@@ -24,6 +24,7 @@ var TheOffice = "/tv/2316";
 var Rohan = "/movie/798596";
 var RickMorty = "/tv/60625";
 var SNK = "/tv/1429";
+var IWantPancrea = "/movie/504253";
 var Film = [
   TrentejoursMax,
   LeVoyageDeChihiro,
@@ -51,13 +52,14 @@ var Film = [
   Rohan,
   RickMorty,
   SNK,
+  IWantPancrea,
 ];
 var PrisonBreak = "/tv/2288";
 var BreakingBad = "/tv/1396";
 var PulpFiction = "/movie/680";
 var IngloriousB = "/movie/16869";
 var FightClub = "/movie/550";
-var LesEvadé = "/movie/202695";
+var LesEvadé = "/movie/278";
 var ReservoirDogs = "/movie/500";
 var Inception = "/movie/27205";
 var Arretemoi = "/movie/640";
@@ -71,6 +73,8 @@ var LEJoker = "/movie/475557";
 var Brooklyn99 = "/tv/48891";
 var ParcAndRec = "/tv/8592";
 var Bleach = "/tv/30984";
+var LesAffranchis = "/movie/769";
+var BlackMirror = "/tv/42009";
 var FilmPasvu = [
   PrisonBreak,
   BreakingBad,
@@ -91,6 +95,8 @@ var FilmPasvu = [
   Brooklyn99,
   ParcAndRec,
   Bleach,
+  LesAffranchis,
+  BlackMirror,
 ];
 var Imagelist = [];
 var Filmlist = [];
@@ -154,6 +160,14 @@ function ActualFilm(array, FilmNumber) {
         $("#Info" + ID).append(
           '<h3 id="OriginalTitle' + ID + '" class="OriginalTitle"></h3>'
         );
+        $("#Info" + ID).append(
+          '<h2 id="ReleaseDateTitle' +
+            ID +
+            '" class="ReleaseDateTitle">Date de sortie</h2>'
+        );
+        $("#Info" + ID).append(
+          '<h3 id="ReleaseDate' + ID + '" class="ReleaseDate"></h3>'
+        );
         $("#Info" + ID).append('<img class="Blackinfo" src="img/black.png"/>');
         $("#Info" + ID).append(
           '<h2 id="NoteTitle' + ID + '" class="NoteTitle">Notes</h2>'
@@ -210,6 +224,9 @@ function ActualFilm(array, FilmNumber) {
               " épisodes</h3>"
           );
           $("#OriginalTitle" + ID).text(data["original_name"]);
+          $("#ReleaseDate" + ID).text(
+            moment(data["first_air_date"]).format("DD-MM-YYYY")
+          );
         } else {
           $("#text" + FilmNumber).append(
             '<h2 id="Title' + FilmNumber + '">' + data["title"] + "</h2>"
@@ -227,7 +244,14 @@ function ActualFilm(array, FilmNumber) {
           );
           $("#Type" + ID).text("Film");
           $("#OriginalTitle" + ID).text(data["original_title"]);
+          $("#ReleaseDate" + ID).text(
+            moment(data["release_date"]).format("DD-MM-YYYY")
+          );
         }
+        Titlesize(
+          $("#Info" + ID + ">.OriginalTitle").text(),
+          "#Info" + ID + ">.OriginalTitle"
+        );
         $("#text" + FilmNumber).append(
           '<div id="Genre' + FilmNumber + '"></div>'
         );
@@ -338,6 +362,14 @@ function ActualFilm(array, FilmNumber) {
         $("#Info" + ID).append(
           '<h3 id="OriginalTitle' + ID + '" class="OriginalTitle"></h3>'
         );
+        $("#Info" + ID).append(
+          '<h2 id="ReleaseDateTitle' +
+            ID +
+            '" class="ReleaseDateTitle">Date de sortie</h2>'
+        );
+        $("#Info" + ID).append(
+          '<h3 id="ReleaseDate' + ID + '" class="ReleaseDate"></h3>'
+        );
         $("#Info" + ID).append('<img class="Blackinfo" src="img/black.png"/>');
         $("#Info" + ID).append(
           '<h2 id="NoteTitle' + ID + '" class="NoteTitle">Notes</h2>'
@@ -402,6 +434,9 @@ function ActualFilm(array, FilmNumber) {
               " épisodes</h3>"
           );
           $("#OriginalTitle" + ID).text(data["original_name"]);
+          $("#ReleaseDate" + ID).text(
+            moment(data["first_air_date"]).format("DD-MM-YYYY")
+          );
         } else {
           $("#textp" + FilmNumber).append(
             '<h2 id="Titlep' + FilmNumber + '">' + data["title"] + "</h2>"
@@ -419,6 +454,9 @@ function ActualFilm(array, FilmNumber) {
           );
           $("#Type" + ID).text("Film");
           $("#OriginalTitle" + ID).text(data["original_title"]);
+          $("#ReleaseDate" + ID).text(
+            moment(data["release_date"]).format("DD-MM-YYYY")
+          );
         }
         $("#textp" + FilmNumber).append(
           '<div id="Genrep' + FilmNumber + '"></div>'
@@ -471,6 +509,10 @@ function ActualFilm(array, FilmNumber) {
             "#Genrelist" + ID + "> #Genrep" + FilmNumber + j + j
           );
         }
+        Titlesize(
+          $("#Info" + ID + ">.OriginalTitle").text(),
+          "#Info" + ID + ">.OriginalTitle"
+        );
         $("#textp" + FilmNumber).append(
           '<p id="Summaryp' + FilmNumber + '">' + data["overview"] + "</p>"
         );
@@ -769,3 +811,16 @@ function aniMore() {
 $(document).ready(function () {
   aniMore();
 });
+function Titlesize(Title, PATH) {
+  if (Title.length <= 20) {
+    $(PATH).css({ fontSize: "larger" });
+    return;
+  } else if (Title.length >= 30) {
+    $(PATH).css({ fontSize: "0.8em" });
+    return;
+  } else if (Title.length >= 25) {
+    $(PATH).css({ fontSize: "1em" });
+    return;
+  }
+}
+function DuréeH(heure, PATH) {}
