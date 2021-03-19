@@ -25,6 +25,7 @@ var Rohan = "/movie/798596";
 var RickMorty = "/tv/60625";
 var SNK = "/tv/1429";
 var IWantPancrea = "/movie/504253";
+var YourLieInApril = "/tv/61663";
 var Film = [
   TrentejoursMax,
   LeVoyageDeChihiro,
@@ -53,6 +54,7 @@ var Film = [
   RickMorty,
   SNK,
   IWantPancrea,
+  YourLieInApril,
 ];
 var PrisonBreak = "/tv/2288";
 var BreakingBad = "/tv/1396";
@@ -236,12 +238,9 @@ function ActualFilm(array, FilmNumber) {
           );
           $("#list" + ID).append("<h2>" + data["title"] + "</h2>");
           $("#Info" + ID).append(
-            '<h3 id="Runtime' +
-              ID +
-              '" class="Runtime">' +
-              data["runtime"] +
-              " minutes</h3>"
+            '<h3 id="Runtime' + ID + '" class="Runtime"></h3>'
           );
+          DuréeH(data["runtime"], "#Info" + ID + ">.Runtime");
           $("#Type" + ID).text("Film");
           $("#OriginalTitle" + ID).text(data["original_title"]);
           $("#ReleaseDate" + ID).text(
@@ -269,6 +268,13 @@ function ActualFilm(array, FilmNumber) {
             '" src="https://image.tmdb.org/t/p/original' +
             data["backdrop_path"] +
             '"/>'
+        );
+        $("#list" + ID).append(
+          '<h3 id="Note' +
+            ID +
+            '" class="AverageNote">' +
+            data["vote_average"] +
+            "/10</h3>"
         );
         for (let j = 0; j < data["genres"].length; j++) {
           $("#Genre" + FilmNumber).append(
@@ -325,7 +331,7 @@ function ActualFilm(array, FilmNumber) {
     $.getJSON(
       "https://api.themoviedb.org/3" +
         array[FilmNumber] +
-        "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=FR",
+        "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=fr-FR",
       function (data) {
         var ID = "Filmp" + FilmNumber;
         $("#container").append('<div id="' + ID + '" class="Precision"></div>');
@@ -446,12 +452,9 @@ function ActualFilm(array, FilmNumber) {
           );
           $("#list" + ID).append("<h2>" + data["title"] + "</h2>");
           $("#Info" + ID).append(
-            '<h3 id="Runtime' +
-              ID +
-              '" class="Runtime">' +
-              data["runtime"] +
-              " minutes</h3>"
+            '<h3 id="Runtime' + ID + '" class="Runtime"></h3>'
           );
+          DuréeH(data["runtime"], "#Info" + ID + ">.Runtime");
           $("#Type" + ID).text("Film");
           $("#OriginalTitle" + ID).text(data["original_title"]);
           $("#ReleaseDate" + ID).text(
@@ -533,7 +536,7 @@ function ActualFilm(array, FilmNumber) {
   }
 }
 function NoteColor(Note, IDNote) {
-  if (Note < 4.5) {
+  if (Note <= 4) {
     $(IDNote).css({ color: "rgb(148, 22, 22)" });
     return;
   } else if (Note > 7) {
@@ -627,19 +630,19 @@ $("#Aff1, #Aff2,#Aff3, #Aff4,#Aff5").click(function () {
   } else {
     Affvar = Afflist.indexOf($(this).attr("id"));
     if (Affvar == 0) {
-      $(".bouton").css({ width: "97.7%", height: "37em" });
+      $(".bouton").css({ width: "97.7%", height: "50vw" });
       $(".bouton>h2").css({ fontSize: "2.5em" });
     } else if (Affvar == 1) {
-      $(".bouton").css({ width: "48.1%", height: "19em" });
+      $(".bouton").css({ width: "48.1%", height: "26vw" });
       $(".bouton>h2").css({ fontSize: "1.9em" });
     } else if (Affvar == 2) {
-      $(".bouton").css({ width: "31.5%", height: "13.5em" });
+      $(".bouton").css({ width: "31.5%", height: "17vw" });
       $(".bouton>h2").css({ fontSize: "1.7em" });
     } else if (Affvar == 3) {
-      $(".bouton").css({ width: "23.2%", height: "10.4em" });
+      $(".bouton").css({ width: "23.2%", height: "12.5vw" });
       $(".bouton>h2").css({ fontSize: "1.4em" });
     } else if (Affvar == 4) {
-      $(".bouton").css({ width: "18.25%", height: "8em" });
+      $(".bouton").css({ width: "18.25%", height: "9vw" });
       $(".bouton>h2").css({ fontSize: "medium" });
     }
     $("#Aff1, #Aff2,#Aff3, #Aff4,#Aff5").css({
@@ -823,4 +826,10 @@ function Titlesize(Title, PATH) {
     return;
   }
 }
-function DuréeH(heure, PATH) {}
+function DuréeH(heure, PATH) {
+  let h, m;
+  m = 0;
+  h = Math.floor(heure / 60);
+  m = heure - h * 60;
+  $(PATH).text(h + " h " + m + " min");
+}
