@@ -77,6 +77,7 @@ var ParcAndRec = "/tv/8592";
 var Bleach = "/tv/30984";
 var LesAffranchis = "/movie/769";
 var BlackMirror = "/tv/42009";
+var MrRobot = "/tv/62560";
 var FilmPasvu = [
   PrisonBreak,
   BreakingBad,
@@ -99,6 +100,7 @@ var FilmPasvu = [
   Bleach,
   LesAffranchis,
   BlackMirror,
+  MrRobot,
 ];
 var Imagelist = [];
 var Filmlist = [];
@@ -109,6 +111,7 @@ var Affvar = 2;
 var ListMode = false;
 var fullscreenMode = false;
 var listheight = 0;
+var ArrayGenre = [];
 function ActualFilm(array, FilmNumber) {
   if (array == Film) {
     $.getJSON(
@@ -195,6 +198,9 @@ function ActualFilm(array, FilmNumber) {
         $("#Imagep" + FilmNumber).append(
           '<img class="Black" src="img/black.png"/>'
         );
+        $("#list" + ID).append(
+          '<h3 id="RuntimeList' + ID + '" class="RuntimeList"></h3>'
+        );
         if (Title === undefined) {
           $("#text" + FilmNumber).append(
             '<h2 id="Title' + FilmNumber + '">' + data["name"] + "</h2>"
@@ -229,6 +235,33 @@ function ActualFilm(array, FilmNumber) {
           $("#ReleaseDate" + ID).text(
             moment(data["first_air_date"]).format("DD-MM-YYYY")
           );
+          $("#list" + ID).append(
+            '<h3 id="ReleasedateList' +
+              ID +
+              '" class="ReleasedateList">' +
+              moment(data["first_air_date"]).format("DD-MM-YYYY") +
+              "</h3>"
+          );
+          $("#list" + ID).append(
+            '<h3 id="TypeList' + ID + '" class="TypeList">Série</h3>'
+          );
+          $("#list" + ID + ">.RuntimeList").text(
+            data["episode_run_time"][0] + " minutes"
+          );
+          $("#list" + ID).append(
+            '<h3 id="NumberEpisodeList' +
+              ID +
+              '" class="EpisodeList">' +
+              data["number_of_episodes"] +
+              " épisodes</h3>"
+          );
+          $("#list" + ID).append(
+            '<h3 id="NumberSeasonList' +
+              ID +
+              '" class="SeasonList">' +
+              data["number_of_seasons"] +
+              " saisons</h3>"
+          );
         } else {
           $("#text" + FilmNumber).append(
             '<h2 id="Title' + FilmNumber + '">' + data["title"] + "</h2>"
@@ -241,10 +274,21 @@ function ActualFilm(array, FilmNumber) {
             '<h3 id="Runtime' + ID + '" class="Runtime"></h3>'
           );
           DuréeH(data["runtime"], "#Info" + ID + ">.Runtime");
+          DuréeH(data["runtime"], "#list" + ID + ">.RuntimeList");
           $("#Type" + ID).text("Film");
           $("#OriginalTitle" + ID).text(data["original_title"]);
           $("#ReleaseDate" + ID).text(
             moment(data["release_date"]).format("DD-MM-YYYY")
+          );
+          $("#list" + ID).append(
+            '<h3 id="TypeList' + ID + '" class="TypeList">Film</h3>'
+          );
+          $("#list" + ID).append(
+            '<h3 id="ReleasedateList' +
+              ID +
+              '" class="ReleasedateList">' +
+              moment(data["release_date"]).format("DD-MM-YYYY") +
+              "</h3>"
           );
         }
         Titlesize(
@@ -276,14 +320,22 @@ function ActualFilm(array, FilmNumber) {
             data["vote_average"] +
             "/10</h3>"
         );
-        for (let j = 0; j < data["genres"].length; j++) {
+        for (let g = 0; g < data["genres"].length; g++) {
+          let Checkup = data["genres"][g]["name"].includes("&");
+          if (Checkup == true) {
+            Splitand(data["genres"][g]["name"]);
+          } else {
+            ArrayGenre.push(data["genres"][g]["name"]);
+          }
+        }
+        for (let j = 0; j < ArrayGenre.length; j++) {
           $("#Genre" + FilmNumber).append(
             '<h4 id="Genre' +
               FilmNumber +
               j +
               j +
               '" class="GenreText"> ' +
-              data["genres"][j]["name"] +
+              ArrayGenre[j] +
               "</h4>"
           );
           $("#Genrelist" + ID).append(
@@ -292,11 +344,11 @@ function ActualFilm(array, FilmNumber) {
               j +
               j +
               '"> ' +
-              data["genres"][j]["name"] +
+              ArrayGenre[j] +
               "</h4>"
           );
           GenreColor(
-            data["genres"][j]["name"],
+            ArrayGenre[j],
             "#Genre" +
               FilmNumber +
               "> #Genre" +
@@ -306,10 +358,11 @@ function ActualFilm(array, FilmNumber) {
               ".GenreText"
           );
           GenreColor(
-            data["genres"][j]["name"],
+            ArrayGenre[j],
             "#Genrelist" + ID + "> #Genre" + FilmNumber + j + j
           );
         }
+        ArrayGenre = [];
         $("#text" + FilmNumber).append(
           '<p id="Summary' + FilmNumber + '">' + data["overview"] + "</p>"
         );
@@ -409,6 +462,9 @@ function ActualFilm(array, FilmNumber) {
             data["poster_path"] +
             '"/>'
         );
+        $("#list" + ID).append(
+          '<h3 id="RuntimeList' + ID + '" class="RuntimeList"></h3>'
+        );
         if (Title === undefined) {
           $("#textp" + FilmNumber).append(
             '<h2 id="Titlep' + FilmNumber + '">' + data["name"] + "</h2>"
@@ -443,6 +499,33 @@ function ActualFilm(array, FilmNumber) {
           $("#ReleaseDate" + ID).text(
             moment(data["first_air_date"]).format("DD-MM-YYYY")
           );
+          $("#list" + ID).append(
+            '<h3 id="ReleasedateList' +
+              ID +
+              '" class="ReleasedateList">' +
+              moment(data["first_air_date"]).format("DD-MM-YYYY") +
+              "</h3>"
+          );
+          $("#list" + ID).append(
+            '<h3 id="TypeList' + ID + '" class="TypeList">Série</h3>'
+          );
+          $("#list" + ID + ">.RuntimeList").text(
+            data["episode_run_time"][0] + " minutes"
+          );
+          $("#list" + ID).append(
+            '<h3 id="NumberEpisodeList' +
+              ID +
+              '" class="EpisodeList">' +
+              data["number_of_episodes"] +
+              " épisodes</h3>"
+          );
+          $("#list" + ID).append(
+            '<h3 id="NumberSeasonList' +
+              ID +
+              '" class="SeasonList">' +
+              data["number_of_seasons"] +
+              " saisons</h3>"
+          );
         } else {
           $("#textp" + FilmNumber).append(
             '<h2 id="Titlep' + FilmNumber + '">' + data["title"] + "</h2>"
@@ -460,6 +543,17 @@ function ActualFilm(array, FilmNumber) {
           $("#ReleaseDate" + ID).text(
             moment(data["release_date"]).format("DD-MM-YYYY")
           );
+          $("#list" + ID).append(
+            '<h3 id="TypeList' + ID + '" class="TypeList">Film</h3>'
+          );
+          $("#list" + ID).append(
+            '<h3 id="ReleasedateList' +
+              ID +
+              '" class="ReleasedateList">' +
+              moment(data["release_date"]).format("DD-MM-YYYY") +
+              "</h3>"
+          );
+          DuréeH(data["runtime"], "#list" + ID + ">.RuntimeList");
         }
         $("#textp" + FilmNumber).append(
           '<div id="Genrep' + FilmNumber + '"></div>'
@@ -478,6 +572,21 @@ function ActualFilm(array, FilmNumber) {
             data["backdrop_path"] +
             '"/>'
         );
+        $("#list" + ID).append(
+          '<h3 id="Note' +
+            ID +
+            '" class="AverageNote">' +
+            data["vote_average"] +
+            "/10</h3>"
+        );
+        for (let g = 0; g < data["genres"].length; g++) {
+          let Checkup = data["genres"][g]["name"].includes("&");
+          if (Checkup == true) {
+            Splitand(data["genres"][g]["name"]);
+          } else {
+            ArrayGenre.push(data["genres"][g]["name"]);
+          }
+        }
         for (let j = 0; j < data["genres"].length; j++) {
           $("#Genrep" + FilmNumber).append(
             '<h4 id="Genrep' +
@@ -485,7 +594,7 @@ function ActualFilm(array, FilmNumber) {
               j +
               j +
               '" class="GenreText"> ' +
-              data["genres"][j]["name"] +
+              ArrayGenre[j] +
               "</h4>"
           );
           $("#Genrelist" + ID).append(
@@ -494,11 +603,11 @@ function ActualFilm(array, FilmNumber) {
               j +
               j +
               '"> ' +
-              data["genres"][j]["name"] +
+              ArrayGenre[j] +
               "</h4>"
           );
           GenreColor(
-            data["genres"][j]["name"],
+            ArrayGenre[j],
             "#Genrep" +
               FilmNumber +
               "> #Genrep" +
@@ -508,10 +617,11 @@ function ActualFilm(array, FilmNumber) {
               ".GenreText"
           );
           GenreColor(
-            data["genres"][j]["name"],
+            ArrayGenre[j],
             "#Genrelist" + ID + "> #Genrep" + FilmNumber + j + j
           );
         }
+        ArrayGenre = [];
         Titlesize(
           $("#Info" + ID + ">.OriginalTitle").text(),
           "#Info" + ID + ">.OriginalTitle"
@@ -738,7 +848,6 @@ $("#TVIMG").click(function () {
   }
 });
 $(document).on("click", ".listContainer", function () {
-  console.log($(this).height());
   if ($(this).height() == listheight) {
     $(this).animate({ height: $(this).get(0).scrollHeight }, 350);
   } else {
@@ -832,4 +941,17 @@ function DuréeH(heure, PATH) {
   h = Math.floor(heure / 60);
   m = heure - h * 60;
   $(PATH).text(h + " h " + m + " min");
+}
+function Splitand(Genre) {
+  let GenreArray = Genre.split("&");
+  if (GenreArray[0] == " Adventure") {
+    ArrayGenre.push("Aventure");
+  } else {
+    ArrayGenre.push(GenreArray[0].trim());
+  }
+  if (GenreArray[1] == " Adventure") {
+    ArrayGenre.push("Aventure");
+  } else {
+    ArrayGenre.push(GenreArray[1].trim());
+  }
 }
