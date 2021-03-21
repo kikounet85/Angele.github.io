@@ -26,6 +26,7 @@ var RickMorty = "/tv/60625";
 var SNK = "/tv/1429";
 var IWantPancrea = "/movie/504253";
 var YourLieInApril = "/tv/61663";
+var IngloriousB = "/movie/16869";
 var Film = [
   TrentejoursMax,
   LeVoyageDeChihiro,
@@ -55,11 +56,11 @@ var Film = [
   SNK,
   IWantPancrea,
   YourLieInApril,
+  IngloriousB,
 ];
 var PrisonBreak = "/tv/2288";
 var BreakingBad = "/tv/1396";
 var PulpFiction = "/movie/680";
-var IngloriousB = "/movie/16869";
 var FightClub = "/movie/550";
 var LesEvadé = "/movie/278";
 var ReservoirDogs = "/movie/500";
@@ -82,7 +83,6 @@ var FilmPasvu = [
   PrisonBreak,
   BreakingBad,
   PulpFiction,
-  IngloriousB,
   FightClub,
   LesEvadé,
   ReservoirDogs,
@@ -805,6 +805,8 @@ function GenreColor(Genre, IDGenre) {
   } else if (Genre == "Guerre") {
     $(IDGenre).css({ color: "rgb(105, 192, 11)" });
     return;
+  } else if (Genre == "Musique") {
+    $(IDGenre).css({ backgroundColor: "white", borderRadius: "2px" });
   } else {
     $(IDGenre).css({ color: "black" });
     return;
@@ -955,3 +957,82 @@ function Splitand(Genre) {
     ArrayGenre.push(GenreArray[1].trim());
   }
 }
+var FilterOn = [];
+$(".Filter").click(function () {
+  let TextClick = $(this).text().trim();
+  $(this).css({ color: "white" });
+  let CheckupArray = FilterOn.includes(TextClick);
+  if (CheckupArray == false) {
+    FilterOn.push($(this).text().trim());
+    for (let i = 0; i < Film.length; i++) {
+      let Checkup = $("#Genre" + i)
+        .text()
+        .includes(TextClick);
+      if (Checkup == false) {
+        $("#Image" + i).addClass("Caché");
+        $("#listFilm" + i).addClass("Caché");
+      }
+    }
+    for (let i = 0; i < Film.length; i++) {
+      let Checkup = $("#Genrep" + i)
+        .text()
+        .includes(TextClick);
+      if (Checkup == false) {
+        $("#Imagep" + i).addClass("Caché");
+        $("#listFilmp" + i).addClass("Caché");
+      }
+    }
+  } else {
+    $(this).css({ color: "black" });
+    FilterOn.splice(FilterOn.indexOf(TextClick), 1);
+    for (let i = 0; i < Film.length; i++) {
+      if (FilterOn.length == 0) {
+        $("#Image" + i).removeClass("Caché");
+        $("#Imagep" + i).removeClass("Caché");
+        $("#listFilm" + i).removeClass("Caché");
+        $("#listFilmp" + i).removeClass("Caché");
+      } else {
+        let ArrayVerif = [];
+        let Amount = FilterOn.length;
+        Amount -= 1;
+        for (let k = 0; k < FilterOn.length; k++) {
+          let CheckArray = $("#Genre" + i)
+            .text()
+            .includes(TextClick);
+          ArrayVerif.push(
+            $("#Genre" + i)
+              .text()
+              .includes(FilterOn[k])
+          );
+          if (
+            CheckArray == false &&
+            Amount == k &&
+            ArrayVerif.includes(false) == false
+          ) {
+            $("#Image" + i).removeClass("Caché");
+            $("#listFilm" + i).removeClass("Caché");
+          }
+        }
+        let ArrayVerifp = [];
+        for (let k = 0; k < FilterOn.length; k++) {
+          let CheckArray = $("#Genrep" + i)
+            .text()
+            .includes(TextClick);
+          ArrayVerifp.push(
+            $("#Genrep" + i)
+              .text()
+              .includes(FilterOn[k])
+          );
+          if (
+            CheckArray == false &&
+            Amount == k &&
+            ArrayVerifp.includes(false) == false
+          ) {
+            $("#Imagep" + i).removeClass("Caché");
+            $("#listFilmp" + i).removeClass("Caché");
+          }
+        }
+      }
+    }
+  }
+});

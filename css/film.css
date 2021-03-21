@@ -572,3 +572,30 @@ h1 {
 .listContainer>h3 {
     font-family: "Roboto", sans-serif;
 }
+
+.Caché {
+    display: none !important;
+}
+
+.Sélectionné {
+    color: white;
+}
+
+#Filter {
+    position: relative;
+    color: black;
+    margin-left: 20%;
+    margin-top: 0%;
+    cursor: default;
+    width: 23%;
+    height: 15vw;
+}
+
+.Filter {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.Filter:hover {
+    background-color: rgb(136, 136, 136);
+}
