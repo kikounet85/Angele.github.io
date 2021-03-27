@@ -323,7 +323,7 @@ body::-webkit-scrollbar {
     align-items: center;
     justify-content: center;
     left: 39.5%;
-    top: -3%;
+    top: -18px;
     display: flex;
     z-index: 999;
 }
@@ -331,7 +331,6 @@ body::-webkit-scrollbar {
 #VupasVu>h3 {
     margin: 10px;
     border-style: solid;
-    padding-top: 1em i !important;
     padding: 0.3em;
     background-color: rgb(87, 87, 87);
     border-radius: 0px 0px 20px 20px;

@@ -27,6 +27,10 @@ var SNK = "/tv/1429";
 var IWantPancrea = "/movie/504253";
 var YourLieInApril = "/tv/61663";
 var IngloriousB = "/movie/16869";
+var PrisonBreak = "/tv/2288";
+var Whiplash = "/movie/244786";
+var Inception = "/movie/27205";
+var LEJoker = "/movie/475557";
 var Film = [
   TrentejoursMax,
   LeVoyageDeChihiro,
@@ -57,8 +61,11 @@ var Film = [
   IWantPancrea,
   YourLieInApril,
   IngloriousB,
+  PrisonBreak,
+  Whiplash,
+  Inception,
+  LEJoker,
 ];
-var PrisonBreak = "/tv/2288";
 var BreakingBad = "/tv/1396";
 var PulpFiction = "/movie/680";
 var FightClub = "/movie/550";
@@ -80,21 +87,17 @@ var LesAffranchis = "/movie/769";
 var BlackMirror = "/tv/42009";
 var MrRobot = "/tv/62560";
 var FilmPasvu = [
-  PrisonBreak,
   BreakingBad,
   PulpFiction,
   FightClub,
   LesEvadé,
   ReservoirDogs,
-  Inception,
   Arretemoi,
   VeryBadTrip1,
-  Whiplash,
   DoctorWho,
   BatmanVSSuperman,
   OnePiece,
   FullMetalAlch,
-  LEJoker,
   Brooklyn99,
   ParcAndRec,
   Bleach,
