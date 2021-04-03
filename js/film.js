@@ -31,6 +31,9 @@ var PrisonBreak = "/tv/2288";
 var Whiplash = "/movie/244786";
 var Inception = "/movie/27205";
 var LEJoker = "/movie/475557";
+var LesEvadé = "/movie/278";
+var UsualSuspect = "/movie/629";
+var TheGentlemen = "/movie/522627";
 var Film = [
   TrentejoursMax,
   LeVoyageDeChihiro,
@@ -65,21 +68,20 @@ var Film = [
   Whiplash,
   Inception,
   LEJoker,
+  LesEvadé,
+  UsualSuspect,
+  TheGentlemen,
 ];
 var BreakingBad = "/tv/1396";
 var PulpFiction = "/movie/680";
 var FightClub = "/movie/550";
-var LesEvadé = "/movie/278";
 var ReservoirDogs = "/movie/500";
-var Inception = "/movie/27205";
 var Arretemoi = "/movie/640";
 var VeryBadTrip1 = "/movie/18785";
-var Whiplash = "/movie/244786";
 var DoctorWho = "/tv/57243";
 var BatmanVSSuperman = "/movie/209112";
 var OnePiece = "/tv/37854";
 var FullMetalAlch = "/tv/31911";
-var LEJoker = "/movie/475557";
 var Brooklyn99 = "/tv/48891";
 var ParcAndRec = "/tv/8592";
 var Bleach = "/tv/30984";
@@ -90,7 +92,6 @@ var FilmPasvu = [
   BreakingBad,
   PulpFiction,
   FightClub,
-  LesEvadé,
   ReservoirDogs,
   Arretemoi,
   VeryBadTrip1,
@@ -115,6 +116,8 @@ var ListMode = false;
 var fullscreenMode = false;
 var listheight = 0;
 var ArrayGenre = [];
+var FilterMode = false;
+var SearchMode = false;
 function ActualFilm(array, FilmNumber) {
   if (array == Film) {
     $.getJSON(
@@ -706,9 +709,11 @@ $(document).on("click", ".bouton > img", function () {
     $(".bouton").css({ cursor: "default" });
     setTimeout(function () {
       $(
-        "#BoutonContainer, h1, #ColoneList, #VupasVu, #BoutonContainerp"
+        "#BoutonContainer, h1, #ColoneList, #VupasVu, #BoutonContainerp, #FilterIMG, #Filter"
       ).toggleClass("Blur");
-      $("#Vu, #pasVu, #ListIMG, #TVIMG").css({ cursor: "default" });
+      $("#Vu, #pasVu, #ListIMG, #TVIMG, #FilterIMG, #Filter").css({
+        cursor: "default",
+      });
     }, 200);
     PrecisionMode = true;
   }
@@ -717,9 +722,11 @@ $(document).on("click", "#Retour", function () {
   $(ActivePrecision).animate({ left: "600%", opacity: "0" });
   $(".bouton").css({ cursor: "pointer" });
   $(
-    "#BoutonContainer, h1, #ColoneList, #VupasVu, #BoutonContainerp"
+    "#BoutonContainer, h1, #ColoneList, #VupasVu, #BoutonContainerp, #FilterIMG, #Filter"
   ).toggleClass("Blur");
-  $("#Vu, #pasVu, #ListIMG, #TVIMG").css({ cursor: "pointer" });
+  $("#Vu, #pasVu, #ListIMG, #TVIMG, #FilterIMG, #Filter").css({
+    cursor: "pointer",
+  });
   PrecisionMode = false;
 });
 $("#Aff1, #Aff2,#Aff3, #Aff4,#Aff5").hover(
@@ -962,80 +969,159 @@ function Splitand(Genre) {
 }
 var FilterOn = [];
 $(".Filter").click(function () {
-  let TextClick = $(this).text().trim();
-  $(this).css({ color: "white" });
-  let CheckupArray = FilterOn.includes(TextClick);
-  if (CheckupArray == false) {
-    FilterOn.push($(this).text().trim());
-    for (let i = 0; i < Film.length; i++) {
-      let Checkup = $("#Genre" + i)
-        .text()
-        .includes(TextClick);
-      if (Checkup == false) {
-        $("#Image" + i).addClass("Caché");
-        $("#listFilm" + i).addClass("Caché");
+  if (PrecisionMode == false) {
+    let TextClick = $(this).text().trim();
+    $(this).css({ color: "white" });
+    let CheckupArray = FilterOn.includes(TextClick);
+    if (CheckupArray == false) {
+      FilterOn.push($(this).text().trim());
+      for (let i = 0; i < Film.length; i++) {
+        let Checkup = $("#Genre" + i)
+          .text()
+          .includes(TextClick);
+        if (Checkup == false) {
+          $("#Image" + i).addClass("Caché");
+          $("#listFilm" + i).addClass("Caché");
+        }
+      }
+      for (let i = 0; i < Film.length; i++) {
+        let Checkup = $("#Genrep" + i)
+          .text()
+          .includes(TextClick);
+        if (Checkup == false) {
+          $("#Imagep" + i).addClass("Caché");
+          $("#listFilmp" + i).addClass("Caché");
+        }
+      }
+    } else {
+      $(this).css({ color: "black" });
+      FilterOn.splice(FilterOn.indexOf(TextClick), 1);
+      for (let i = 0; i < Film.length; i++) {
+        if (FilterOn.length == 0) {
+          $("#Image" + i).removeClass("Caché");
+          $("#Imagep" + i).removeClass("Caché");
+          $("#listFilm" + i).removeClass("Caché");
+          $("#listFilmp" + i).removeClass("Caché");
+        } else {
+          let ArrayVerif = [];
+          let Amount = FilterOn.length;
+          Amount -= 1;
+          for (let k = 0; k < FilterOn.length; k++) {
+            let CheckArray = $("#Genre" + i)
+              .text()
+              .includes(TextClick);
+            ArrayVerif.push(
+              $("#Genre" + i)
+                .text()
+                .includes(FilterOn[k])
+            );
+            if (
+              CheckArray == false &&
+              Amount == k &&
+              ArrayVerif.includes(false) == false
+            ) {
+              $("#Image" + i).removeClass("Caché");
+              $("#listFilm" + i).removeClass("Caché");
+            }
+          }
+          let ArrayVerifp = [];
+          for (let k = 0; k < FilterOn.length; k++) {
+            let CheckArray = $("#Genrep" + i)
+              .text()
+              .includes(TextClick);
+            ArrayVerifp.push(
+              $("#Genrep" + i)
+                .text()
+                .includes(FilterOn[k])
+            );
+            if (
+              CheckArray == false &&
+              Amount == k &&
+              ArrayVerifp.includes(false) == false
+            ) {
+              $("#Imagep" + i).removeClass("Caché");
+              $("#listFilmp" + i).removeClass("Caché");
+            }
+          }
+        }
       }
     }
-    for (let i = 0; i < Film.length; i++) {
-      let Checkup = $("#Genrep" + i)
-        .text()
-        .includes(TextClick);
-      if (Checkup == false) {
-        $("#Imagep" + i).addClass("Caché");
-        $("#listFilmp" + i).addClass("Caché");
-      }
-    }
+    FilterGreen();
+  }
+});
+function FilterGreen() {
+  if (FilterOn[0] === undefined) {
+    $("#FilterIMG").css({ borderColor: "black" });
   } else {
-    $(this).css({ color: "black" });
-    FilterOn.splice(FilterOn.indexOf(TextClick), 1);
-    for (let i = 0; i < Film.length; i++) {
-      if (FilterOn.length == 0) {
-        $("#Image" + i).removeClass("Caché");
-        $("#Imagep" + i).removeClass("Caché");
-        $("#listFilm" + i).removeClass("Caché");
-        $("#listFilmp" + i).removeClass("Caché");
-      } else {
-        let ArrayVerif = [];
-        let Amount = FilterOn.length;
-        Amount -= 1;
-        for (let k = 0; k < FilterOn.length; k++) {
-          let CheckArray = $("#Genre" + i)
-            .text()
-            .includes(TextClick);
-          ArrayVerif.push(
-            $("#Genre" + i)
-              .text()
-              .includes(FilterOn[k])
-          );
-          if (
-            CheckArray == false &&
-            Amount == k &&
-            ArrayVerif.includes(false) == false
-          ) {
-            $("#Image" + i).removeClass("Caché");
-            $("#listFilm" + i).removeClass("Caché");
-          }
-        }
-        let ArrayVerifp = [];
-        for (let k = 0; k < FilterOn.length; k++) {
-          let CheckArray = $("#Genrep" + i)
-            .text()
-            .includes(TextClick);
-          ArrayVerifp.push(
-            $("#Genrep" + i)
-              .text()
-              .includes(FilterOn[k])
-          );
-          if (
-            CheckArray == false &&
-            Amount == k &&
-            ArrayVerifp.includes(false) == false
-          ) {
-            $("#Imagep" + i).removeClass("Caché");
-            $("#listFilmp" + i).removeClass("Caché");
-          }
-        }
-      }
+    $("#FilterIMG").css({ borderColor: "green" });
+  }
+}
+$("#FilterIMG").click(function () {
+  if (PrecisionMode == false) {
+    if (FilterMode == false) {
+      $(this).animate({ top: "49.8%" }, 300);
+      $("#Filter").animate({ top: "0%" }, 300);
+      FilterMode = true;
+    } else {
+      $(this).animate({ top: "-1.5%" }, 300);
+      $("#Filter").animate({ top: "-51.4%" }, 300);
+      FilterMode = false;
+    }
+  }
+});
+function Recherche() {
+  let normal = $("#SearchBar").val().toLowerCase();
+  for (let i = 0; i < Film.length; i++) {
+    if (
+      $("#BackTitle" + i)
+        .text()
+        .toLowerCase()
+        .indexOf(normal) == -1
+    ) {
+      $("#Image" + i).addClass("PasRecherché");
+      $("#listFilm" + i).addClass("PasRecherché");
+    } else if (
+      $("#Image" + i).hasClass("Caché") == false &&
+      $("#BackTitle" + i)
+        .text()
+        .toLowerCase()
+        .indexOf(normal) > -1
+    ) {
+      $("#Image" + i).removeClass("PasRecherché");
+      $("#listFilm" + i).removeClass("PasRecherché");
+    }
+  }
+  for (let i = 0; i < FilmPasvu.length; i++) {
+    if (
+      $("#BackTitlep" + i)
+        .text()
+        .toLowerCase()
+        .indexOf(normal) == -1
+    ) {
+      $("#Imagep" + i).addClass("PasRecherché");
+      $("#listFilmp" + i).addClass("PasRecherché");
+    } else if (
+      $("#Imagep" + i).hasClass("Caché") == false &&
+      $("#BackTitlep" + i)
+        .text()
+        .toLowerCase()
+        .indexOf(normal) > -1
+    ) {
+      $("#Imagep" + i).removeClass("PasRecherché");
+      $("#listFilmp" + i).removeClass("PasRecherché");
+    }
+  }
+}
+$("#SearchIMG").click(function () {
+  if (PrecisionMode == false) {
+    if (SearchMode == false) {
+      $(this).animate({ top: "5.3%" }, 300);
+      $("#SearchDiv").animate({ top: "0%" }, 300);
+      SearchMode = true;
+    } else {
+      $(this).animate({ top: "-1.5%" }, 300);
+      $("#SearchDiv").animate({ top: "-7%" }, 300);
+      SearchMode = false;
     }
   }
 });

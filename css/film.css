@@ -576,25 +576,94 @@ h1 {
     display: none !important;
 }
 
+.PasRecherché {
+    display: none !important;
+}
+
 .Sélectionné {
     color: white;
 }
 
 #Filter {
-    position: relative;
+    position: fixed;
+    z-index: 998;
     color: black;
-    margin-left: 20%;
-    margin-top: 0%;
+    left: 60%;
+    top: -51.4%;
     cursor: default;
     width: 23%;
-    height: 15vw;
+    height: 21.1em;
+    background-color: rgba(206, 206, 206, 0.4);
+    backdrop-filter: blur(2px);
+    padding: 5px 10px;
+    text-align: center;
+    border-radius: 12px;
+    border: solid;
 }
 
 .Filter {
     display: inline-block;
     cursor: pointer;
+    padding: 4px;
+    border-left: solid;
+    border-right: solid;
 }
 
 .Filter:hover {
     background-color: rgb(136, 136, 136);
+}
+
+#FilterIMG {
+    width: 2.5%;
+    border: solid;
+    padding: 7px;
+    cursor: pointer;
+    box-shadow: 6px rgb(0, 0, 0);
+    background-color: rgb(87, 87, 87);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 10px;
+    z-index: 997;
+    box-shadow: 0px 0px 6px rgb(0, 0, 0);
+    position: fixed;
+    left: 70%;
+    top: -1.5%;
+}
+
+#SearchBar {
+    background-color: rgba(206, 206, 206, 0.4);
+    backdrop-filter: blur(2px);
+    border: solid rgb(0, 0, 0);
+    font-size: 1em;
+    border-radius: 5px;
+    height: 5.8vh;
+    width: 100%;
+    padding: 2px 23px 2px 30px;
+    outline: 0;
+}
+
+#SearchDiv {
+    position: fixed;
+    left: 14%;
+    top: -7%;
+    width: 20%;
+    border-radius: 12px;
+    z-index: 999;
+}
+
+#SearchIMG {
+    width: 2.5%;
+    border: solid;
+    padding: 7px;
+    cursor: pointer;
+    box-shadow: 6px rgb(0, 0, 0);
+    background-color: rgb(87, 87, 87);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 10px;
+    z-index: 997;
+    box-shadow: 0px 0px 6px rgb(0, 0, 0);
+    position: fixed;
+    left: 23%;
+    top: -1.5%;
 }
