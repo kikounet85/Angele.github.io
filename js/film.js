@@ -21,7 +21,7 @@ var Pokemon11 = "/movie/47292";
 var Pokemon12 = "/movie/39057";
 var Pokemon13 = "/movie/50087";
 var TheOffice = "/tv/2316";
-var Rohan = "/movie/798596";
+var Rohan = "/tv/118443";
 var RickMorty = "/tv/60625";
 var SNK = "/tv/1429";
 var IWantPancrea = "/movie/504253";
@@ -88,6 +88,8 @@ var Bleach = "/tv/30984";
 var LesAffranchis = "/movie/769";
 var BlackMirror = "/tv/42009";
 var MrRobot = "/tv/62560";
+var Bojack = "/tv/61222";
+var LigneVerte = "/movie/497";
 var FilmPasvu = [
   BreakingBad,
   PulpFiction,
@@ -105,6 +107,8 @@ var FilmPasvu = [
   LesAffranchis,
   BlackMirror,
   MrRobot,
+  Bojack,
+  LigneVerte,
 ];
 var Imagelist = [];
 var Filmlist = [];
@@ -709,9 +713,11 @@ $(document).on("click", ".bouton > img", function () {
     $(".bouton").css({ cursor: "default" });
     setTimeout(function () {
       $(
-        "#BoutonContainer, h1, #ColoneList, #VupasVu, #BoutonContainerp, #FilterIMG, #Filter"
+        "#BoutonContainer, h1, #ColoneList, #VupasVu, #BoutonContainerp, #FilterIMG, #Filter, #SearchdDiv, #SearchIMG, #SearchBar"
       ).toggleClass("Blur");
-      $("#Vu, #pasVu, #ListIMG, #TVIMG, #FilterIMG, #Filter").css({
+      $(
+        "#Vu, #pasVu, #ListIMG, #TVIMG, #FilterIMG, #Filter, #SearchdDiv, #SearchIMG, #SearchBar"
+      ).css({
         cursor: "default",
       });
     }, 200);
@@ -722,9 +728,11 @@ $(document).on("click", "#Retour", function () {
   $(ActivePrecision).animate({ left: "600%", opacity: "0" });
   $(".bouton").css({ cursor: "pointer" });
   $(
-    "#BoutonContainer, h1, #ColoneList, #VupasVu, #BoutonContainerp, #FilterIMG, #Filter"
+    "#BoutonContainer, h1, #ColoneList, #VupasVu, #BoutonContainerp, #FilterIMG, #Filter, #SearchdDiv, #SearchIMG, #SearchBar"
   ).toggleClass("Blur");
-  $("#Vu, #pasVu, #ListIMG, #TVIMG, #FilterIMG, #Filter").css({
+  $(
+    "#Vu, #pasVu, #ListIMG, #TVIMG, #FilterIMG, #Filter, #SearchdDiv, #SearchIMG, #SearchBar"
+  ).css({
     cursor: "pointer",
   });
   PrecisionMode = false;
@@ -817,6 +825,8 @@ function GenreColor(Genre, IDGenre) {
     return;
   } else if (Genre == "Musique") {
     $(IDGenre).css({ backgroundColor: "white", borderRadius: "2px" });
+  } else if (Genre == "Mystère") {
+    $(IDGenre).css({ color: "rgb(22, 181, 115)" });
   } else {
     $(IDGenre).css({ color: "black" });
     return;
@@ -1059,18 +1069,25 @@ function FilterGreen() {
 $("#FilterIMG").click(function () {
   if (PrecisionMode == false) {
     if (FilterMode == false) {
-      $(this).animate({ top: "49.8%" }, 300);
+      $(this).animate({ top: "21.3em" }, 300);
       $("#Filter").animate({ top: "0%" }, 300);
       FilterMode = true;
     } else {
       $(this).animate({ top: "-1.5%" }, 300);
-      $("#Filter").animate({ top: "-51.4%" }, 300);
+      $("#Filter").animate({ top: "-22em" }, 300);
       FilterMode = false;
     }
   }
 });
 function Recherche() {
   let normal = $("#SearchBar").val().toLowerCase();
+  if (normal.length > 0) {
+    $("#SearchIMG").css({ borderColor: "green" });
+    $("#CroixIMG").show();
+  } else {
+    $("#SearchIMG").css({ borderColor: "black" });
+    $("#CroixIMG").hide();
+  }
   for (let i = 0; i < Film.length; i++) {
     if (
       $("#BackTitle" + i)
@@ -1115,13 +1132,17 @@ function Recherche() {
 $("#SearchIMG").click(function () {
   if (PrecisionMode == false) {
     if (SearchMode == false) {
-      $(this).animate({ top: "5.3%" }, 300);
+      $(this).animate({ top: "2.4em" }, 300);
       $("#SearchDiv").animate({ top: "0%" }, 300);
       SearchMode = true;
     } else {
       $(this).animate({ top: "-1.5%" }, 300);
-      $("#SearchDiv").animate({ top: "-7%" }, 300);
+      $("#SearchDiv").animate({ top: "-3em" }, 300);
       SearchMode = false;
     }
   }
+});
+$("#CroixIMG").click(function () {
+  $("#SearchBar").val("");
+  Recherche();
 });
