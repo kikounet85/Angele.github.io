@@ -84,9 +84,7 @@ body::-webkit-scrollbar-thumb {
 
 .bouton {
     position: sticky;
-    float: left;
     display: flex;
-    width: 31.5%;
     height: 17vw;
     margin: 10px;
     cursor: pointer;
@@ -240,7 +238,9 @@ body::-webkit-scrollbar {
     margin-right: 50px;
 }
 
-#BoutonContainer {
+#BoutonContainer, #BoutonContainerp {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     position: absolute;
     transition: filter 0.1s;
     z-index: 99;

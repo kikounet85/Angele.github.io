@@ -1,40 +1,40 @@
-var TrentejoursMax = "/movie/613377";
-var LeVoyageDeChihiro = "/movie/129";
-var LeTombeauDesLucioles = "/movie/12477";
-var YourName = "/movie/372058";
-var Jojo = "/tv/45790";
-var Nausicaa = "/movie/81";
-var Django = "/movie/68718";
-var KillBill1 = "/movie/24";
-var KillBill2 = "/movie/393";
-var Pokemon1b = "/movie/571891";
-var Pokemon2 = "/movie/12599";
-var Pokemon3 = "/movie/10991";
-var Pokemon4 = "/movie/12600";
-var Pokemon5 = "/movie/33875";
-var Pokemon6 = "/movie/36218";
-var Pokemon7 = "/movie/34065";
-var Pokemon8 = "/movie/34067";
-var Pokemon9 = "/movie/16808";
-var Pokemon10 = "/movie/25961";
-var Pokemon11 = "/movie/47292";
-var Pokemon12 = "/movie/39057";
-var Pokemon13 = "/movie/50087";
-var TheOffice = "/tv/2316";
-var Rohan = "/tv/118443";
-var RickMorty = "/tv/60625";
-var SNK = "/tv/1429";
-var IWantPancrea = "/movie/504253";
-var YourLieInApril = "/tv/61663";
-var IngloriousB = "/movie/16869";
-var PrisonBreak = "/tv/2288";
-var Whiplash = "/movie/244786";
-var Inception = "/movie/27205";
-var LEJoker = "/movie/475557";
-var LesEvadé = "/movie/278";
-var UsualSuspect = "/movie/629";
-var TheGentlemen = "/movie/522627";
-var Film = [
+const TrentejoursMax = "/movie/613377";
+const LeVoyageDeChihiro = "/movie/129";
+const LeTombeauDesLucioles = "/movie/12477";
+const YourName = "/movie/372058";
+const Jojo = "/tv/45790";
+const Nausicaa = "/movie/81";
+const Django = "/movie/68718";
+const KillBill1 = "/movie/24";
+const KillBill2 = "/movie/393";
+const Pokemon1b = "/movie/571891";
+const Pokemon2 = "/movie/12599";
+const Pokemon3 = "/movie/10991";
+const Pokemon4 = "/movie/12600";
+const Pokemon5 = "/movie/33875";
+const Pokemon6 = "/movie/36218";
+const Pokemon7 = "/movie/34065";
+const Pokemon8 = "/movie/34067";
+const Pokemon9 = "/movie/16808";
+const Pokemon10 = "/movie/25961";
+const Pokemon11 = "/movie/47292";
+const Pokemon12 = "/movie/39057";
+const Pokemon13 = "/movie/50087";
+const TheOffice = "/tv/2316";
+const Rohan = "/tv/118443";
+const RickMorty = "/tv/60625";
+const SNK = "/tv/1429";
+const IWantPancrea = "/movie/504253";
+const YourLieInApril = "/tv/61663";
+const IngloriousB = "/movie/16869";
+const PrisonBreak = "/tv/2288";
+const Whiplash = "/movie/244786";
+const Inception = "/movie/27205";
+const LEJoker = "/movie/475557";
+const LesEvadé = "/movie/278";
+const UsualSuspect = "/movie/629";
+const TheGentlemen = "/movie/522627";
+let Film = [
   TrentejoursMax,
   LeVoyageDeChihiro,
   LeTombeauDesLucioles,
@@ -72,25 +72,25 @@ var Film = [
   UsualSuspect,
   TheGentlemen,
 ];
-var BreakingBad = "/tv/1396";
-var PulpFiction = "/movie/680";
-var FightClub = "/movie/550";
-var ReservoirDogs = "/movie/500";
-var Arretemoi = "/movie/640";
-var VeryBadTrip1 = "/movie/18785";
-var DoctorWho = "/tv/57243";
-var BatmanVSSuperman = "/movie/209112";
-var OnePiece = "/tv/37854";
-var FullMetalAlch = "/tv/31911";
-var Brooklyn99 = "/tv/48891";
-var ParcAndRec = "/tv/8592";
-var Bleach = "/tv/30984";
-var LesAffranchis = "/movie/769";
-var BlackMirror = "/tv/42009";
-var MrRobot = "/tv/62560";
-var Bojack = "/tv/61222";
-var LigneVerte = "/movie/497";
-var FilmPasvu = [
+const BreakingBad = "/tv/1396";
+const PulpFiction = "/movie/680";
+const FightClub = "/movie/550";
+const ReservoirDogs = "/movie/500";
+const Arretemoi = "/movie/640";
+const VeryBadTrip1 = "/movie/18785";
+const DoctorWho = "/tv/57243";
+const BatmanVSSuperman = "/movie/209112";
+const OnePiece = "/tv/37854";
+const FullMetalAlch = "/tv/31911";
+const Brooklyn99 = "/tv/48891";
+const ParcAndRec = "/tv/8592";
+const Bleach = "/tv/30984";
+const LesAffranchis = "/movie/769";
+const BlackMirror = "/tv/42009";
+const MrRobot = "/tv/62560";
+const Bojack = "/tv/61222";
+const LigneVerte = "/movie/497";
+let FilmPasvu = [
   BreakingBad,
   PulpFiction,
   FightClub,
@@ -110,550 +110,277 @@ var FilmPasvu = [
   Bojack,
   LigneVerte,
 ];
-var Imagelist = [];
-var Filmlist = [];
-var PrecisionMode = false;
-var ActivePrecision;
-var Afflist = ["Aff1", "Aff2", "Aff3", "Aff4", "Aff5"];
-var Affvar = 2;
-var ListMode = false;
-var fullscreenMode = false;
-var listheight = 0;
-var ArrayGenre = [];
-var FilterMode = false;
-var SearchMode = false;
-function ActualFilm(array, FilmNumber) {
-  if (array == Film) {
-    $.getJSON(
-      "https://api.themoviedb.org/3" +
-        array[FilmNumber] +
-        "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=fr-FR",
-      function (data) {
-        var ID = "Film" + FilmNumber;
-        $("#container").append('<div id="' + ID + '" class="Precision"></div>');
-        $("#" + ID).append(
-          '<div id="text' + FilmNumber + '" class ="text"></div>'
-        );
-        $("#BoutonContainer").append(
-          '<div id="Image' + FilmNumber + '" class="bouton"></div>'
-        );
-        $("#Image" + FilmNumber).addClass("vu");
-        $("#listContainer").append(
-          '<div id="list' + ID + '" class="listContainer"></div>'
-        );
-        $("#Image" + FilmNumber).append(
-          '<img id="Backdrop' +
-            FilmNumber +
-            '" src="https://image.tmdb.org/t/p/original' +
-            data["backdrop_path"] +
-            '"/>'
-        );
-        $("#Image" + FilmNumber).append(
-          '<img class="Black" src="img/black.png"/>'
-        );
-        let Title = data["title"];
-        $("#" + ID).append(
-          '<img id="Poster' +
-            FilmNumber +
-            '" src="https://image.tmdb.org/t/p/w500' +
-            data["poster_path"] +
-            '"/>'
-        );
-        $("#" + ID).append(
-          '<h3 id="More' + FilmNumber + '" class ="More"><< En savoir plus</h3>'
-        );
-        $("#" + ID).append('<div id="Info' + ID + '" class="Info"></div>');
-        $("#Info" + ID).append(
-          '<h2 id="TypeTitle' + ID + '" class="TypeTitle">Type</h2>'
-        );
-        $("#Info" + ID).append('<h3 id="Type' + ID + '" class="Type"></h3>');
-        $("#Info" + ID).append(
-          '<h2 id="OriginalTitleT' +
-            ID +
-            '" class="OriginalTitleT">Titre d\'origine</h2>'
-        );
-        $("#Info" + ID).append(
-          '<h3 id="OriginalTitle' + ID + '" class="OriginalTitle"></h3>'
-        );
-        $("#Info" + ID).append(
-          '<h2 id="ReleaseDateTitle' +
-            ID +
-            '" class="ReleaseDateTitle">Date de sortie</h2>'
-        );
-        $("#Info" + ID).append(
-          '<h3 id="ReleaseDate' + ID + '" class="ReleaseDate"></h3>'
-        );
-        $("#Info" + ID).append('<img class="Blackinfo" src="img/black.png"/>');
-        $("#Info" + ID).append(
-          '<h2 id="NoteTitle' + ID + '" class="NoteTitle">Notes</h2>'
-        );
-        $("#Info" + ID).append(
-          '<h3 id="Averagevote' +
-            ID +
-            '" class="VoteAverage">' +
-            data["vote_average"] +
-            "/10</h3>"
-        );
-        $("#Info" + ID).append(
-          '<h3 id="Averagecount' +
-            ID +
-            '" class="VoteCount">Noté par ' +
-            data["vote_count"] +
-            " personnes</h3>"
-        );
-        $("#Info" + ID).append(
-          '<h2 id="DuréeTitle' + ID + '" class="DuréeTitle">Durée</h2>'
-        );
-        NoteColor(data["vote_average"], "#Averagevote" + ID);
-        $("#Imagep" + FilmNumber).append(
-          '<img class="Black" src="img/black.png"/>'
-        );
-        $("#list" + ID).append(
-          '<h3 id="RuntimeList' + ID + '" class="RuntimeList"></h3>'
-        );
-        if (Title === undefined) {
-          $("#text" + FilmNumber).append(
-            '<h2 id="Title' + FilmNumber + '">' + data["name"] + "</h2>"
-          );
-          $("#Image" + FilmNumber).append(
-            '<h2 id="BackTitle' + FilmNumber + '">' + data["name"] + "</h2>"
-          );
-          $("#list" + ID).append("<h2>" + data["name"] + "</h2>");
-          $("#Info" + ID).append(
-            '<h3 id="Runtime' +
-              ID +
-              '" class="Runtime">' +
-              data["episode_run_time"][0] +
-              " minutes en moyenne</h3>"
-          );
-          $("#Type" + ID).text("Série");
-          $("#Info" + ID).append(
-            '<h3 id="Saisons' +
-              ID +
-              '" class="Saison">' +
-              data["number_of_seasons"] +
-              " saisons</h3>"
-          );
-          $("#Info" + ID).append(
-            '<h3 id="Episodes' +
-              ID +
-              '" class="Episodes">' +
-              data["number_of_episodes"] +
-              " épisodes</h3>"
-          );
-          $("#OriginalTitle" + ID).text(data["original_name"]);
-          $("#ReleaseDate" + ID).text(
-            moment(data["first_air_date"]).format("DD-MM-YYYY")
-          );
-          $("#list" + ID).append(
-            '<h3 id="ReleasedateList' +
-              ID +
-              '" class="ReleasedateList">' +
-              moment(data["first_air_date"]).format("DD-MM-YYYY") +
-              "</h3>"
-          );
-          $("#list" + ID).append(
-            '<h3 id="TypeList' + ID + '" class="TypeList">Série</h3>'
-          );
-          $("#list" + ID + ">.RuntimeList").text(
-            data["episode_run_time"][0] + " minutes"
-          );
-          $("#list" + ID).append(
-            '<h3 id="NumberEpisodeList' +
-              ID +
-              '" class="EpisodeList">' +
-              data["number_of_episodes"] +
-              " épisodes</h3>"
-          );
-          $("#list" + ID).append(
-            '<h3 id="NumberSeasonList' +
-              ID +
-              '" class="SeasonList">' +
-              data["number_of_seasons"] +
-              " saisons</h3>"
-          );
-        } else {
-          $("#text" + FilmNumber).append(
-            '<h2 id="Title' + FilmNumber + '">' + data["title"] + "</h2>"
-          );
-          $("#Image" + FilmNumber).append(
-            '<h2 id="BackTitle' + FilmNumber + '">' + data["title"] + "</h2>"
-          );
-          $("#list" + ID).append("<h2>" + data["title"] + "</h2>");
-          $("#Info" + ID).append(
-            '<h3 id="Runtime' + ID + '" class="Runtime"></h3>'
-          );
-          DuréeH(data["runtime"], "#Info" + ID + ">.Runtime");
-          DuréeH(data["runtime"], "#list" + ID + ">.RuntimeList");
-          $("#Type" + ID).text("Film");
-          $("#OriginalTitle" + ID).text(data["original_title"]);
-          $("#ReleaseDate" + ID).text(
-            moment(data["release_date"]).format("DD-MM-YYYY")
-          );
-          $("#list" + ID).append(
-            '<h3 id="TypeList' + ID + '" class="TypeList">Film</h3>'
-          );
-          $("#list" + ID).append(
-            '<h3 id="ReleasedateList' +
-              ID +
-              '" class="ReleasedateList">' +
-              moment(data["release_date"]).format("DD-MM-YYYY") +
-              "</h3>"
-          );
-        }
-        Titlesize(
-          $("#Info" + ID + ">.OriginalTitle").text(),
-          "#Info" + ID + ">.OriginalTitle"
-        );
+let Imagelist = [];
+let Filmlist = [];
+let PrecisionMode = false;
+let ActivePrecision;
+let Afflist = ["Aff1", "Aff2", "Aff3", "Aff4", "Aff5"];
+let Affvar = 2;
+let ListMode = false;
+let fullscreenMode = false;
+let listheight = 0;
+let ArrayGenre = [];
+let FilterMode = false;
+let SearchMode = false;
+async function ActualFilm(Film, FilmNumber, i) {
+  let classFilm = "pasvu";
+  let BoutonContainer = "#BoutonContainerp";
+  if (i === undefined) {
+    i = FilmNumber;
+    classFilm = "vu";
+    BoutonContainer = "#BoutonContainer";
+  }
+  $.getJSON(
+    "https://api.themoviedb.org/3" +
+      Film +
+      "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=fr-FR",
+    function (data) {
+      let ID = "Film" + FilmNumber;
+      $("#container").append('<div id="' + ID + '" class="Precision"></div>');
+      $("#" + ID).append(
+        '<div id="text' + FilmNumber + '" class ="text"></div>'
+      );
+      $(BoutonContainer).append(
+        '<div id="Image' + FilmNumber + '" class="bouton"></div>'
+      );
+      $("#Image" + FilmNumber).addClass(classFilm);
+      $("#listContainer").append(
+        '<div id="list' + ID + '" class="listContainer"></div>'
+      );
+      $("#Image" + FilmNumber).append(
+        '<img id="Backdrop' +
+          FilmNumber +
+          '" src="https://image.tmdb.org/t/p/original' +
+          data["backdrop_path"] +
+          '"/>'
+      );
+      $("#Image" + FilmNumber).append(
+        '<img class="Black" src="img/black.png"/>'
+      );
+      let Title = data["title"];
+      $("#" + ID).append(
+        '<img id="Poster' +
+          FilmNumber +
+          '" src="https://image.tmdb.org/t/p/w500' +
+          data["poster_path"] +
+          '"/>'
+      );
+      $("#" + ID).append(
+        '<h3 id="More' + i + '" class ="More"><< En savoir plus</h3>'
+      );
+      $("#" + ID).append('<div id="Info' + ID + '" class="Info"></div>');
+      $("#Info" + ID).append(
+        '<h2 id="TypeTitle' + ID + '" class="TypeTitle">Type</h2>'
+      );
+      $("#Info" + ID).append('<h3 id="Type' + ID + '" class="Type"></h3>');
+      $("#Info" + ID).append(
+        '<h2 id="OriginalTitleT' +
+          ID +
+          '" class="OriginalTitleT">Titre d\'origine</h2>'
+      );
+      $("#Info" + ID).append(
+        '<h3 id="OriginalTitle' + ID + '" class="OriginalTitle"></h3>'
+      );
+      $("#Info" + ID).append(
+        '<h2 id="ReleaseDateTitle' +
+          ID +
+          '" class="ReleaseDateTitle">Date de sortie</h2>'
+      );
+      $("#Info" + ID).append(
+        '<h3 id="ReleaseDate' + ID + '" class="ReleaseDate"></h3>'
+      );
+      $("#Info" + ID).append('<img class="Blackinfo" src="img/black.png"/>');
+      $("#Info" + ID).append(
+        '<h2 id="NoteTitle' + ID + '" class="NoteTitle">Notes</h2>'
+      );
+      $("#Info" + ID).append(
+        '<h3 id="Averagevote' +
+          ID +
+          '" class="VoteAverage">' +
+          data["vote_average"] +
+          "/10</h3>"
+      );
+      $("#Info" + ID).append(
+        '<h3 id="Averagecount' +
+          ID +
+          '" class="VoteCount">Noté par ' +
+          data["vote_count"] +
+          " personnes</h3>"
+      );
+      $("#Info" + ID).append(
+        '<h2 id="DuréeTitle' + ID + '" class="DuréeTitle">Durée</h2>'
+      );
+      NoteColor(data["vote_average"], "#Averagevote" + ID);
+      $("#list" + ID).append(
+        '<h3 id="RuntimeList' + ID + '" class="RuntimeList"></h3>'
+      );
+      if (Title === undefined) {
         $("#text" + FilmNumber).append(
-          '<div id="Genre' + FilmNumber + '"></div>'
+          '<h2 id="Title' + FilmNumber + '">' + data["name"] + "</h2>"
         );
-        $ ^
-          $("#list" + ID).append(
-            '<div id="Genrelist' + ID + '" class="Genrelist"></div>'
-          );
-        $("#list" + ID).append(
-          '<div id="Backdropdiv' + FilmNumber + '" class="Backdropdiv"></div>'
-        );
-        $("#list" + ID).addClass("vu");
-        $("#Backdropdiv" + FilmNumber).append(
-          '<img id="Backdroplist' +
-            FilmNumber +
-            '" src="https://image.tmdb.org/t/p/original' +
-            data["backdrop_path"] +
-            '"/>'
-        );
-        $("#list" + ID).append(
-          '<h3 id="Note' +
-            ID +
-            '" class="AverageNote">' +
-            data["vote_average"] +
-            "/10</h3>"
-        );
-        for (let g = 0; g < data["genres"].length; g++) {
-          let Checkup = data["genres"][g]["name"].includes("&");
-          if (Checkup == true) {
-            Splitand(data["genres"][g]["name"]);
-          } else {
-            ArrayGenre.push(data["genres"][g]["name"]);
-          }
-        }
-        for (let j = 0; j < ArrayGenre.length; j++) {
-          $("#Genre" + FilmNumber).append(
-            '<h4 id="Genre' +
-              FilmNumber +
-              j +
-              j +
-              '" class="GenreText"> ' +
-              ArrayGenre[j] +
-              "</h4>"
-          );
-          $("#Genrelist" + ID).append(
-            '<h4 id="Genre' +
-              FilmNumber +
-              j +
-              j +
-              '"> ' +
-              ArrayGenre[j] +
-              "</h4>"
-          );
-          GenreColor(
-            ArrayGenre[j],
-            "#Genre" +
-              FilmNumber +
-              "> #Genre" +
-              FilmNumber +
-              j +
-              j +
-              ".GenreText"
-          );
-          GenreColor(
-            ArrayGenre[j],
-            "#Genrelist" + ID + "> #Genre" + FilmNumber + j + j
-          );
-        }
-        ArrayGenre = [];
-        $("#text" + FilmNumber).append(
-          '<p id="Summary' + FilmNumber + '">' + data["overview"] + "</p>"
-        );
-        $("#list" + ID).append(
-          '<h4 id="Summary' + FilmNumber + '">' + data["overview"] + "</h4>"
-        );
-        $("#text" + FilmNumber).append('<h3 id="Retour"> Retour </h3>');
         $("#Image" + FilmNumber).append(
-          '<img class="map0" src="https://image.tmdb.org/t/p/w500' +
-            data["backdrop_path"] +
-            '"/>'
+          '<h2 id="BackTitle' + FilmNumber + '">' + data["name"] + "</h2>"
         );
-        console.log(data);
-        Imagelist.push("Image" + FilmNumber);
-        Filmlist.push("Film" + FilmNumber);
+        $("#list" + ID).append("<h2>" + data["name"] + "</h2>");
+        $("#Info" + ID).append(
+          '<h3 id="Runtime' +
+            ID +
+            '" class="Runtime">' +
+            data["episode_run_time"][0] +
+            " minutes en moyenne</h3>"
+        );
+        $("#Type" + ID).text("Série");
+        $("#Info" + ID).append(
+          '<h3 id="Saisons' +
+            ID +
+            '" class="Saison">' +
+            data["number_of_seasons"] +
+            " saisons</h3>"
+        );
+        $("#Info" + ID).append(
+          '<h3 id="Episodes' +
+            ID +
+            '" class="Episodes">' +
+            data["number_of_episodes"] +
+            " épisodes</h3>"
+        );
+        $("#OriginalTitle" + ID).text(data["original_name"]);
+        $("#ReleaseDate" + ID).text(
+          moment(data["first_air_date"]).format("DD-MM-YYYY")
+        );
+        $("#list" + ID).append(
+          '<h3 id="ReleasedateList' +
+            ID +
+            '" class="ReleasedateList">' +
+            moment(data["first_air_date"]).format("DD-MM-YYYY") +
+            "</h3>"
+        );
+        $("#list" + ID).append(
+          '<h3 id="TypeList' + ID + '" class="TypeList">Série</h3>'
+        );
+        $("#list" + ID + ">.RuntimeList").text(
+          data["episode_run_time"][0] + " minutes"
+        );
+        $("#list" + ID).append(
+          '<h3 id="NumberEpisodeList' +
+            ID +
+            '" class="EpisodeList">' +
+            data["number_of_episodes"] +
+            " épisodes</h3>"
+        );
+        $("#list" + ID).append(
+          '<h3 id="NumberSeasonList' +
+            ID +
+            '" class="SeasonList">' +
+            data["number_of_seasons"] +
+            " saisons</h3>"
+        );
+      } else {
+        $("#text" + FilmNumber).append(
+          '<h2 id="Title' + FilmNumber + '">' + data["title"] + "</h2>"
+        );
+        $("#Image" + FilmNumber).append(
+          '<h2 id="BackTitle' + FilmNumber + '">' + data["title"] + "</h2>"
+        );
+        $("#list" + ID).append("<h2>" + data["title"] + "</h2>");
+        $("#Info" + ID).append(
+          '<h3 id="Runtime' + ID + '" class="Runtime"></h3>'
+        );
+        DuréeH(data["runtime"], "#Info" + ID + ">.Runtime");
+        DuréeH(data["runtime"], "#list" + ID + ">.RuntimeList");
+        $("#Type" + ID).text("Film");
+        $("#OriginalTitle" + ID).text(data["original_title"]);
+        $("#ReleaseDate" + ID).text(
+          moment(data["release_date"]).format("DD-MM-YYYY")
+        );
+        $("#list" + ID).append(
+          '<h3 id="TypeList' + ID + '" class="TypeList">Film</h3>'
+        );
+        $("#list" + ID).append(
+          '<h3 id="ReleasedateList' +
+            ID +
+            '" class="ReleasedateList">' +
+            moment(data["release_date"]).format("DD-MM-YYYY") +
+            "</h3>"
+        );
       }
-    );
-  } else {
-    $.getJSON(
-      "https://api.themoviedb.org/3" +
-        array[FilmNumber] +
-        "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=fr-FR",
-      function (data) {
-        var ID = "Filmp" + FilmNumber;
-        $("#container").append('<div id="' + ID + '" class="Precision"></div>');
-        $("#" + ID).append(
-          '<div id="textp' + FilmNumber + '" class ="text"></div>'
-        );
-        $("#BoutonContainerp").append(
-          '<div id="Imagep' + FilmNumber + '" class="bouton"></div>'
-        );
-        $("#Imagep" + FilmNumber).addClass("pasvu");
-        $("#listContainer").append(
-          '<div id="list' + ID + '" class="listContainer"></div>'
-        );
-        $("#Imagep" + FilmNumber).append(
-          '<img id="Backdropp' +
-            FilmNumber +
-            '" src="https://image.tmdb.org/t/p/original' +
-            data["backdrop_path"] +
-            '"/>'
-        );
-        $("#" + ID).append(
-          '<h3 id="More' + FilmNumber + '" class ="More"><< En savoir plus</h3>'
-        );
-        $("#" + ID).append('<div id="Info' + ID + '" class="Info"></div>');
-        $("#Info" + ID).append(
-          '<h2 id="TypeTitle' + ID + '" class="TypeTitle">Type</h2>'
-        );
-        $("#Info" + ID).append('<h3 id="Type' + ID + '" class="Type"></h3>');
-        $("#Info" + ID).append(
-          '<h2 id="OriginalTitleT' +
-            ID +
-            '" class="OriginalTitleT">Titre d\'origine</h2>'
-        );
-        $("#Info" + ID).append(
-          '<h3 id="OriginalTitle' + ID + '" class="OriginalTitle"></h3>'
-        );
-        $("#Info" + ID).append(
-          '<h2 id="ReleaseDateTitle' +
-            ID +
-            '" class="ReleaseDateTitle">Date de sortie</h2>'
-        );
-        $("#Info" + ID).append(
-          '<h3 id="ReleaseDate' + ID + '" class="ReleaseDate"></h3>'
-        );
-        $("#Info" + ID).append('<img class="Blackinfo" src="img/black.png"/>');
-        $("#Info" + ID).append(
-          '<h2 id="NoteTitle' + ID + '" class="NoteTitle">Notes</h2>'
-        );
-        $("#Info" + ID).append(
-          '<h3 id="Averagevote' +
-            ID +
-            '" class="VoteAverage">' +
-            data["vote_average"] +
-            "/10</h3>"
-        );
-        $("#Info" + ID).append(
-          '<h3 id="Averagecount' +
-            ID +
-            '" class="VoteCount">Noté par ' +
-            data["vote_count"] +
-            " personnes</h3>"
-        );
-        $("#Info" + ID).append(
-          '<h2 id="DuréeTitle' + ID + '" class="DuréeTitle">Durée</h2>'
-        );
-        NoteColor(data["vote_average"], "#Averagevote" + ID);
-        $("#Imagep" + FilmNumber).append(
-          '<img class="Black" src="img/black.png"/>'
-        );
-        let Title = data["title"];
-        $("#" + ID).append(
-          '<img id="Posterp' +
-            FilmNumber +
-            '" src="https://image.tmdb.org/t/p/w500' +
-            data["poster_path"] +
-            '"/>'
-        );
-        $("#list" + ID).append(
-          '<h3 id="RuntimeList' + ID + '" class="RuntimeList"></h3>'
-        );
-        if (Title === undefined) {
-          $("#textp" + FilmNumber).append(
-            '<h2 id="Titlep' + FilmNumber + '">' + data["name"] + "</h2>"
-          );
-          $("#Imagep" + FilmNumber).append(
-            '<h2 id="BackTitlep' + FilmNumber + '">' + data["name"] + "</h2>"
-          );
-          $("#list" + ID).append("<h2>" + data["name"] + "</h2>");
-          $("#Info" + ID).append(
-            '<h3 id="Runtime' +
-              ID +
-              '" class="Runtime">' +
-              data["episode_run_time"][0] +
-              " minutes en moyenne</h3>"
-          );
-          $("#Type" + ID).text("Série");
-          $("#Info" + ID).append(
-            '<h3 id="Saisons' +
-              ID +
-              '" class="Saison">' +
-              data["number_of_seasons"] +
-              " saisons</h3>"
-          );
-          $("#Info" + ID).append(
-            '<h3 id="Episodes' +
-              ID +
-              '" class="Episodes">' +
-              data["number_of_episodes"] +
-              " épisodes</h3>"
-          );
-          $("#OriginalTitle" + ID).text(data["original_name"]);
-          $("#ReleaseDate" + ID).text(
-            moment(data["first_air_date"]).format("DD-MM-YYYY")
-          );
-          $("#list" + ID).append(
-            '<h3 id="ReleasedateList' +
-              ID +
-              '" class="ReleasedateList">' +
-              moment(data["first_air_date"]).format("DD-MM-YYYY") +
-              "</h3>"
-          );
-          $("#list" + ID).append(
-            '<h3 id="TypeList' + ID + '" class="TypeList">Série</h3>'
-          );
-          $("#list" + ID + ">.RuntimeList").text(
-            data["episode_run_time"][0] + " minutes"
-          );
-          $("#list" + ID).append(
-            '<h3 id="NumberEpisodeList' +
-              ID +
-              '" class="EpisodeList">' +
-              data["number_of_episodes"] +
-              " épisodes</h3>"
-          );
-          $("#list" + ID).append(
-            '<h3 id="NumberSeasonList' +
-              ID +
-              '" class="SeasonList">' +
-              data["number_of_seasons"] +
-              " saisons</h3>"
-          );
-        } else {
-          $("#textp" + FilmNumber).append(
-            '<h2 id="Titlep' + FilmNumber + '">' + data["title"] + "</h2>"
-          );
-          $("#Imagep" + FilmNumber).append(
-            '<h2 id="BackTitlep' + FilmNumber + '">' + data["title"] + "</h2>"
-          );
-          $("#list" + ID).append("<h2>" + data["title"] + "</h2>");
-          $("#Info" + ID).append(
-            '<h3 id="Runtime' + ID + '" class="Runtime"></h3>'
-          );
-          DuréeH(data["runtime"], "#Info" + ID + ">.Runtime");
-          $("#Type" + ID).text("Film");
-          $("#OriginalTitle" + ID).text(data["original_title"]);
-          $("#ReleaseDate" + ID).text(
-            moment(data["release_date"]).format("DD-MM-YYYY")
-          );
-          $("#list" + ID).append(
-            '<h3 id="TypeList' + ID + '" class="TypeList">Film</h3>'
-          );
-          $("#list" + ID).append(
-            '<h3 id="ReleasedateList' +
-              ID +
-              '" class="ReleasedateList">' +
-              moment(data["release_date"]).format("DD-MM-YYYY") +
-              "</h3>"
-          );
-          DuréeH(data["runtime"], "#list" + ID + ">.RuntimeList");
-        }
-        $("#textp" + FilmNumber).append(
-          '<div id="Genrep' + FilmNumber + '"></div>'
-        );
+      Titlesize(
+        $("#Info" + ID + ">.OriginalTitle").text(),
+        "#Info" + ID + ">.OriginalTitle"
+      );
+      $("#text" + FilmNumber).append(
+        '<div id="Genre' + FilmNumber + '"></div>'
+      );
+      $ ^
         $("#list" + ID).append(
           '<div id="Genrelist' + ID + '" class="Genrelist"></div>'
         );
-        $("#list" + ID).append(
-          '<div id="Backdropdivp' + FilmNumber + '" class="Backdropdiv"></div>'
-        );
-        $("#list" + ID).addClass("pasvu");
-        $("#Backdropdivp" + FilmNumber).append(
-          '<img id="Backdroplistp' +
-            FilmNumber +
-            '" src="https://image.tmdb.org/t/p/original' +
-            data["backdrop_path"] +
-            '"/>'
-        );
-        $("#list" + ID).append(
-          '<h3 id="Note' +
-            ID +
-            '" class="AverageNote">' +
-            data["vote_average"] +
-            "/10</h3>"
-        );
-        for (let g = 0; g < data["genres"].length; g++) {
-          let Checkup = data["genres"][g]["name"].includes("&");
-          if (Checkup == true) {
-            Splitand(data["genres"][g]["name"]);
-          } else {
-            ArrayGenre.push(data["genres"][g]["name"]);
-          }
+      $("#list" + ID).append(
+        '<div id="Backdropdiv' + FilmNumber + '" class="Backdropdiv"></div>'
+      );
+      $("#list" + ID).addClass(classFilm);
+      $("#Backdropdiv" + FilmNumber).append(
+        '<img id="Backdroplist' +
+          FilmNumber +
+          '" src="https://image.tmdb.org/t/p/original' +
+          data["backdrop_path"] +
+          '"/>'
+      );
+      $("#list" + ID).append(
+        '<h3 id="Note' +
+          ID +
+          '" class="AverageNote">' +
+          data["vote_average"] +
+          "/10</h3>"
+      );
+      for (let g = 0; g < data["genres"].length; g++) {
+        let Checkup = data["genres"][g]["name"].includes("&");
+        if (Checkup == true) {
+          Splitand(data["genres"][g]["name"]);
+        } else {
+          ArrayGenre.push(data["genres"][g]["name"]);
         }
-        for (let j = 0; j < data["genres"].length; j++) {
-          $("#Genrep" + FilmNumber).append(
-            '<h4 id="Genrep' +
-              FilmNumber +
-              j +
-              j +
-              '" class="GenreText"> ' +
-              ArrayGenre[j] +
-              "</h4>"
-          );
-          $("#Genrelist" + ID).append(
-            '<h4 id="Genrep' +
-              FilmNumber +
-              j +
-              j +
-              '"> ' +
-              ArrayGenre[j] +
-              "</h4>"
-          );
-          GenreColor(
-            ArrayGenre[j],
-            "#Genrep" +
-              FilmNumber +
-              "> #Genrep" +
-              FilmNumber +
-              j +
-              j +
-              ".GenreText"
-          );
-          GenreColor(
-            ArrayGenre[j],
-            "#Genrelist" + ID + "> #Genrep" + FilmNumber + j + j
-          );
-        }
-        ArrayGenre = [];
-        Titlesize(
-          $("#Info" + ID + ">.OriginalTitle").text(),
-          "#Info" + ID + ">.OriginalTitle"
-        );
-        $("#textp" + FilmNumber).append(
-          '<p id="Summaryp' + FilmNumber + '">' + data["overview"] + "</p>"
-        );
-        $("#list" + ID).append(
-          '<h4 id="Summaryp' + FilmNumber + '">' + data["overview"] + "</h4>"
-        );
-        $("#textp" + FilmNumber).append('<h3 id="Retour"> Retour </h3>');
-        $("#Imagep" + FilmNumber).append(
-          '<img class="map0" src="https://image.tmdb.org/t/p/w500' +
-            data["backdrop_path"] +
-            '"/>'
-        );
-        console.log(data);
-        Imagelist.push("Imagep" + FilmNumber);
-        Filmlist.push("Filmp" + FilmNumber);
       }
-    );
-  }
+      for (let j = 0; j < ArrayGenre.length; j++) {
+        $("#Genre" + FilmNumber).append(
+          '<h4 id="Genre' +
+            FilmNumber +
+            j +
+            j +
+            '" class="GenreText"> ' +
+            ArrayGenre[j] +
+            "</h4>"
+        );
+        $("#Genrelist" + ID).append(
+          '<h4 id="Genre' + FilmNumber + j + j + '"> ' + ArrayGenre[j] + "</h4>"
+        );
+        GenreColor(
+          ArrayGenre[j],
+          "#Genre" + FilmNumber + "> #Genre" + FilmNumber + j + j + ".GenreText"
+        );
+        GenreColor(
+          ArrayGenre[j],
+          "#Genrelist" + ID + "> #Genre" + FilmNumber + j + j
+        );
+      }
+      ArrayGenre = [];
+      $("#text" + FilmNumber).append(
+        '<p id="Summary' + FilmNumber + '">' + data["overview"] + "</p>"
+      );
+      $("#list" + ID).append(
+        '<h4 id="Summary' + FilmNumber + '">' + data["overview"] + "</h4>"
+      );
+      $("#text" + FilmNumber).append('<h3 id="Retour"> Retour </h3>');
+      $("#Image" + FilmNumber).append(
+        '<img class="map0" src="https://image.tmdb.org/t/p/w500' +
+          data["backdrop_path"] +
+          '"/>'
+      );
+      Imagelist.push("Image" + FilmNumber);
+      Filmlist.push("Film" + FilmNumber);
+    }
+  );
+  return i;
 }
 function NoteColor(Note, IDNote) {
   if (Note <= 4) {
@@ -667,27 +394,15 @@ function NoteColor(Note, IDNote) {
     return;
   }
 }
-$(document).ready(function () {
-  let i = 0;
-  setInterval(function () {
-    if (i < Film.length) {
-      ActualFilm(Film, i, "vu");
-      i++;
-    } else {
-      clearInterval;
-    }
-  }, 100);
+$(document).ready(async function () {
+  for (let i = 0; i < Film.length; i++) {
+    const lol = await console.log(ActualFilm(Film[i], i));
+  }
 });
-$(document).ready(function () {
-  let i = 0;
-  setInterval(function () {
-    if (i < FilmPasvu.length) {
-      ActualFilm(FilmPasvu, i, "pasvu");
-      i++;
-    } else {
-      clearInterval;
-    }
-  }, 100);
+$(document).ready(async function () {
+  for (let i = 0; i < FilmPasvu.length; i++) {
+    const lol = await console.log(ActualFilm(FilmPasvu[i], "p" + i, i));
+  }
 });
 $(document).on("mouseover", ".bouton > img, .bouton > h2", function () {
   if (PrecisionMode == false) {
@@ -758,19 +473,34 @@ $("#Aff1, #Aff2,#Aff3, #Aff4,#Aff5").click(function () {
   } else {
     Affvar = Afflist.indexOf($(this).attr("id"));
     if (Affvar == 0) {
-      $(".bouton").css({ width: "97.7%", height: "50vw" });
+      $(".bouton").css({ height: "50vw" });
+      $("#BoutonContainer, #BoutonContainerp").css({
+        gridTemplateColumns: "repeat(1, 1fr)",
+      });
       $(".bouton>h2").css({ fontSize: "2.5em" });
     } else if (Affvar == 1) {
-      $(".bouton").css({ width: "48.1%", height: "26vw" });
+      $(".bouton").css({ height: "26vw" });
+      $("#BoutonContainer, #BoutonContainerp").css({
+        gridTemplateColumns: "repeat(2, 1fr)",
+      });
       $(".bouton>h2").css({ fontSize: "1.9em" });
     } else if (Affvar == 2) {
-      $(".bouton").css({ width: "31.5%", height: "17vw" });
+      $(".bouton").css({ height: "17vw" });
+      $("#BoutonContainer, #BoutonContainerp").css({
+        gridTemplateColumns: "repeat(3, 1fr)",
+      });
       $(".bouton>h2").css({ fontSize: "1.7em" });
     } else if (Affvar == 3) {
-      $(".bouton").css({ width: "23.2%", height: "12.5vw" });
+      $(".bouton").css({ height: "12.5vw" });
+      $("#BoutonContainer, #BoutonContainerp").css({
+        gridTemplateColumns: "repeat(4, 1fr)",
+      });
       $(".bouton>h2").css({ fontSize: "1.4em" });
     } else if (Affvar == 4) {
-      $(".bouton").css({ width: "18.25%", height: "9vw" });
+      $(".bouton").css({ height: "9vw" });
+      $("#BoutonContainer, #BoutonContainerp").css({
+        gridTemplateColumns: "repeat(5, 1fr)",
+      });
       $(".bouton>h2").css({ fontSize: "medium" });
     }
     $("#Aff1, #Aff2,#Aff3, #Aff4,#Aff5").css({
@@ -784,52 +514,52 @@ $("#Aff1, #Aff2,#Aff3, #Aff4,#Aff5").click(function () {
   }
 });
 function GenreColor(Genre, IDGenre) {
-  if (Genre == "Comédie") {
-    $(IDGenre).css({ color: "rgb( 255, 142, 0)" });
-    return;
-  } else if (Genre == "Animation") {
-    $(IDGenre).css({ color: "rgb(5, 176, 214)" });
-    return;
-  } else if (Genre == "Romance") {
-    $(IDGenre).css({ color: "rgb(179, 16, 83)" });
-    return;
-  } else if (Genre == "Aventure") {
-    $(IDGenre).css({ color: "rgb(201, 109, 0)" });
-    return;
-  } else if (Genre == "Drame") {
-    $(IDGenre).css({ color: "rgb(124, 7, 7)" });
-    return;
-  } else if (Genre == "Action") {
-    $(IDGenre).css({ color: "rgb(229, 60, 24)" });
-    return;
-  } else if (Genre == "Science-Fiction") {
-    $(IDGenre).css({ color: "rgb(37, 186, 4)" });
-    return;
-  } else if (Genre == "Fantastique") {
-    $(IDGenre).css({ color: "rgb(81, 50, 173)" });
-    return;
-  } else if (Genre == "Western") {
-    $(IDGenre).css({ color: "rgb(184, 108, 0)" });
-    return;
-  } else if (Genre == "Crime") {
-    $(IDGenre).css({ color: "rgb(82, 0, 0)" });
-    return;
-  } else if (Genre == "Thriller") {
-    $(IDGenre).css({ color: "rgb(59, 61, 85)" });
-    return;
-  } else if (Genre == "Familial") {
-    $(IDGenre).css({ color: "rgb(0, 203, 115)" });
-    return;
-  } else if (Genre == "Guerre") {
-    $(IDGenre).css({ color: "rgb(105, 192, 11)" });
-    return;
-  } else if (Genre == "Musique") {
-    $(IDGenre).css({ backgroundColor: "white", borderRadius: "2px" });
-  } else if (Genre == "Mystère") {
-    $(IDGenre).css({ color: "rgb(22, 181, 115)" });
-  } else {
-    $(IDGenre).css({ color: "black" });
-    return;
+  switch (Genre) {
+    case "Comédie":
+      $(IDGenre).css({ color: "rgb( 255, 142, 0)" });
+      break;
+    case "Animation":
+      $(IDGenre).css({ color: "rgb(5, 176, 214)" });
+      break;
+    case "Romance":
+      $(IDGenre).css({ color: "rgb(179, 16, 83)" });
+      break;
+    case "Aventure":
+      $(IDGenre).css({ color: "rgb(201, 109, 0)" });
+      break;
+    case "Drame":
+      $(IDGenre).css({ color: "rgb(124, 7, 7)" });
+      break;
+    case "Action":
+      $(IDGenre).css({ color: "rgb(229, 60, 24)" });
+      break;
+    case "Science-Fiction":
+      $(IDGenre).css({ color: "rgb(37, 186, 4)" });
+      break;
+    case "Fantastique":
+      $(IDGenre).css({ color: "rgb(81, 50, 173)" });
+      break;
+    case "Western":
+      $(IDGenre).css({ color: "rgb(184, 108, 0)" });
+      break;
+    case "Crime":
+      $(IDGenre).css({ color: "rgb(82, 0, 0)" });
+      break;
+    case "Thriller":
+      $(IDGenre).css({ color: "rgb(59, 61, 85)" });
+      break;
+    case "Familial":
+      $(IDGenre).css({ color: "rgb(0, 203, 115)" });
+      break;
+    case "Guerre":
+      $(IDGenre).css({ color: "rgb(105, 192, 11)" });
+      break;
+    case "Musique":
+      $(IDGenre).css({ backgroundColor: "white", borderRadius: "2px" });
+      break;
+    case "Mystère":
+      $(IDGenre).css({ color: "rgb(22, 181, 115)" });
+      break;
   }
 }
 $(".listContainer").click(function () {
@@ -935,16 +665,6 @@ $("#fullscreen").click(function () {
     fullscreenMode = false;
   }
 });
-function aniMore() {
-  $(".More").animate({ left: "+=2%" }, 750);
-  setTimeout(function () {
-    $(".More").animate({ left: "-=2%" }, 750);
-  }, 750);
-  setTimeout(aniMore, 1500);
-}
-$(document).ready(function () {
-  aniMore();
-});
 function Titlesize(Title, PATH) {
   if (Title.length <= 20) {
     $(PATH).css({ fontSize: "larger" });
@@ -977,7 +697,7 @@ function Splitand(Genre) {
     ArrayGenre.push(GenreArray[1].trim());
   }
 }
-var FilterOn = [];
+let FilterOn = [];
 $(".Filter").click(function () {
   if (PrecisionMode == false) {
     let TextClick = $(this).text().trim();
