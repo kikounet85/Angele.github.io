@@ -5,16 +5,17 @@
     width: 80%;
     height: 82.9%;
     position: fixed;
-    left: 600%;
+    left: 10%;
     margin-top: 20px;
     margin-bottom: 20px;
     border-radius: 12px;
-    background-color: rgba(134, 134, 134, 0.8);
+    background-color: rgba(134, 134, 134);
     overflow: hidden;
     box-shadow: 0px 0px 10px rgb(0, 0, 0);
     top: 10%;
     z-index: 999;
-    opacity: 0
+    transform: scale(0);
+    transition: all 0.4s;
 }
 
 .Precision>img {
@@ -675,4 +676,12 @@ h1 {
     z-index: 996;
     cursor: pointer;
     display: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.show {
+    transform: scale(1);
 }

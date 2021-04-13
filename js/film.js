@@ -122,6 +122,7 @@ let listheight = 0;
 let ArrayGenre = [];
 let FilterMode = false;
 let SearchMode = false;
+let position, left, topp, width, height;
 async function ActualFilm(Film, FilmNumber, i) {
   let classFilm = "pasvu";
   let BoutonContainer = "#BoutonContainerp";
@@ -130,13 +131,15 @@ async function ActualFilm(Film, FilmNumber, i) {
     classFilm = "vu";
     BoutonContainer = "#BoutonContainer";
   }
-  $.getJSON(
+  const waitinglol = await $.getJSON(
     "https://api.themoviedb.org/3" +
       Film +
       "?api_key=c8ba3cbfd981404e3c6a588adfbce2d5&language=fr-FR",
     function (data) {
       let ID = "Film" + FilmNumber;
-      $("#container").append('<div id="' + ID + '" class="Precision"></div>');
+      $("#container").append(
+        '<div id="' + ID + '" class="Precision hidden" ></div>'
+      );
       $("#" + ID).append(
         '<div id="text' + FilmNumber + '" class ="text"></div>'
       );
@@ -380,7 +383,7 @@ async function ActualFilm(Film, FilmNumber, i) {
       Filmlist.push("Film" + FilmNumber);
     }
   );
-  return i;
+  return waitinglol;
 }
 function NoteColor(Note, IDNote) {
   if (Note <= 4) {
@@ -396,12 +399,12 @@ function NoteColor(Note, IDNote) {
 }
 $(document).ready(async function () {
   for (let i = 0; i < Film.length; i++) {
-    const lol = await console.log(ActualFilm(Film[i], i));
+    const lol = await ActualFilm(Film[i], i);
   }
 });
 $(document).ready(async function () {
   for (let i = 0; i < FilmPasvu.length; i++) {
-    const lol = await console.log(ActualFilm(FilmPasvu[i], "p" + i, i));
+    const lol = await ActualFilm(FilmPasvu[i], "p" + i, i);
   }
 });
 $(document).on("mouseover", ".bouton > img, .bouton > h2", function () {
@@ -415,32 +418,54 @@ $(document).on("mouseout", ".bouton > img", function () {
   $(this.parentNode).children(".Black").animate({ opacity: "0" }, 150);
 });
 $(document).on("click", ".bouton > img", function () {
+  position = $(this).parent().offset();
+  left = position.left;
+  topp = position.top;
+  height = $(this).parent().height();
+  width = $(this).parent().width();
+  left = left + width / 2;
+  topp = topp + height / 2;
+  left = left - ($(window).width() * 0.8) / 2;
+  topp = topp - ($(window).height() * 0.829) / 2;
   if (PrecisionMode == false) {
     ActivePrecision =
       "#" + Filmlist[Imagelist.indexOf($(this.parentNode).attr("id"))];
-    $(ActivePrecision).animate({ left: "6%", opacity: "1" });
-    $(".bouton").css({ cursor: "default" });
+    $(ActivePrecision).removeClass("hidden");
+    $(ActivePrecision).css({ top: topp, left: left });
+    $(ActivePrecision).animate({ top: "10%", left: "10%" }, 200);
     setTimeout(function () {
-      $(
-        "#BoutonContainer, h1, #ColoneList, #VupasVu, #BoutonContainerp, #FilterIMG, #Filter, #SearchdDiv, #SearchIMG, #SearchBar"
-      ).toggleClass("Blur");
-      $(
-        "#Vu, #pasVu, #ListIMG, #TVIMG, #FilterIMG, #Filter, #SearchdDiv, #SearchIMG, #SearchBar"
-      ).css({
-        cursor: "default",
-      });
+      $(ActivePrecision).toggleClass("show");
+    }, 1);
+    setTimeout(function () {
+      $("#BoutonContainer , #BoutonContainerp, h1").toggleClass("Blur");
     }, 200);
+    $(".bouton").css({ cursor: "default" });
+    $("#nav").animate({ opacity: "0" }, 400);
+    setTimeout(function () {
+      $("#nav").hide();
+    }, 200);
+    $(
+      "#Vu, #pasVu, #ListIMG, #TVIMG, #FilterIMG, #Filter, #SearchdDiv, #SearchIMG, #SearchBar, #Affichage"
+    ).css({
+      cursor: "default",
+    });
     PrecisionMode = true;
   }
 });
 $(document).on("click", "#Retour", function () {
-  $(ActivePrecision).animate({ left: "600%", opacity: "0" });
+  $(ActivePrecision).toggleClass("show");
+  $(ActivePrecision).animate({ top: topp, left: left }, 200);
+  setTimeout(function () {
+    $(ActivePrecision).addClass("hidden");
+  }, 400);
+  setTimeout(function () {
+    $("#BoutonContainer , #BoutonContainerp, h1").toggleClass("Blur");
+  }, 200);
   $(".bouton").css({ cursor: "pointer" });
+  $("#nav").show();
+  $("#nav").animate({ opacity: "1" }, 400);
   $(
-    "#BoutonContainer, h1, #ColoneList, #VupasVu, #BoutonContainerp, #FilterIMG, #Filter, #SearchdDiv, #SearchIMG, #SearchBar"
-  ).toggleClass("Blur");
-  $(
-    "#Vu, #pasVu, #ListIMG, #TVIMG, #FilterIMG, #Filter, #SearchdDiv, #SearchIMG, #SearchBar"
+    "#Vu, #pasVu, #ListIMG, #TVIMG, #FilterIMG, #Filter, #SearchdDiv, #SearchIMG, #SearchBar, #Affichage"
   ).css({
     cursor: "pointer",
   });
