@@ -34,6 +34,7 @@ const LEJoker = "/movie/475557";
 const LesEvadé = "/movie/278";
 const UsualSuspect = "/movie/629";
 const TheGentlemen = "/movie/522627";
+const NeonEvangelion = "/tv/890";
 let Film = [
   TrentejoursMax,
   LeVoyageDeChihiro,
@@ -71,6 +72,7 @@ let Film = [
   LesEvadé,
   UsualSuspect,
   TheGentlemen,
+  NeonEvangelion,
 ];
 const BreakingBad = "/tv/1396";
 const PulpFiction = "/movie/680";
