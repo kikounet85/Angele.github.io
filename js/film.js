@@ -35,7 +35,11 @@ const LesEvadé = "/movie/278";
 const UsualSuspect = "/movie/629";
 const TheGentlemen = "/movie/522627";
 const NeonEvangelion = "/tv/890";
-const EvangelionFILM = "/movie/18491";
+const TokyoGhoul = "/tv/61374";
+const EvangelionFILMFIN = "/movie/18491";
+const EvangelionRebuild1 = "/movie/15137";
+const EvangelionRebuild2 = "/movie/22843";
+const EvangelionRebuild3 = "/movie/75629";
 let Film = [
   TrentejoursMax,
   LeVoyageDeChihiro,
@@ -74,7 +78,11 @@ let Film = [
   UsualSuspect,
   TheGentlemen,
   NeonEvangelion,
-  EvangelionFILM,
+  TokyoGhoul,
+  EvangelionFILMFIN,
+  EvangelionRebuild1,
+  EvangelionRebuild2,
+  EvangelionRebuild3,
 ];
 const BreakingBad = "/tv/1396";
 const PulpFiction = "/movie/680";
