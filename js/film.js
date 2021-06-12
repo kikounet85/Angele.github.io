@@ -40,6 +40,8 @@ const EvangelionFILMFIN = "/movie/18491";
 const EvangelionRebuild1 = "/movie/15137";
 const EvangelionRebuild2 = "/movie/22843";
 const EvangelionRebuild3 = "/movie/75629";
+const Invincible = "/tv/95557";
+const Castlevania = "/tv/71024";
 let Film = [
   TrentejoursMax,
   LeVoyageDeChihiro,
@@ -83,6 +85,8 @@ let Film = [
   EvangelionRebuild1,
   EvangelionRebuild2,
   EvangelionRebuild3,
+  Invincible,
+  Castlevania,
 ];
 const BreakingBad = "/tv/1396";
 const PulpFiction = "/movie/680";
