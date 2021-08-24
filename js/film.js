@@ -41,8 +41,10 @@ const EvangelionRebuild1 = "/movie/15137";
 const EvangelionRebuild2 = "/movie/22843";
 const EvangelionRebuild3 = "/movie/75629";
 const Castlevania = "/tv/71024";
-const EvangelionRebuild4 = "/movie/283566"
 const JojoOAV = "/tv/60862"
+const FreeGuy = "/movie/550988"
+const OSS117 = "/movie/604563"
+const EvangelionRebuild4 = "/movie/283566"
 const Invincible = "/tv/95557";
 let Film = [
   TrentejoursMax,
@@ -89,6 +91,8 @@ let Film = [
   EvangelionRebuild3,
   Castlevania,
   JojoOAV,
+  FreeGuy,
+  OSS117,
   EvangelionRebuild4,
   Invincible,
 ];
