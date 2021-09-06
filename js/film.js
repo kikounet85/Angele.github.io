@@ -44,7 +44,11 @@ const Castlevania = "/tv/71024";
 const JojoOAV = "/tv/60862"
 const FreeGuy = "/movie/550988"
 const OSS117 = "/movie/604563"
-const EvangelionRebuild4 = "/movie/283566"
+const EvangelionRebuild4 = "/movie/283566";
+const WallStreetWolf = "/movie/106646";
+const VioletEverGardenSerie = "/tv/75214";
+const VioletEverGardenFILM1 = "/movie/610892";
+const ViolentEverGardenFILM2 = "/movie/533514";
 const Invincible = "/tv/95557";
 let Film = [
   TrentejoursMax,
@@ -94,6 +98,10 @@ let Film = [
   FreeGuy,
   OSS117,
   EvangelionRebuild4,
+  WallStreetWolf,
+  VioletEverGardenSerie,
+  VioletEverGardenFILM1,
+  ViolentEverGardenFILM2,
   Invincible,
 ];
 const BreakingBad = "/tv/1396";
