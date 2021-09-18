@@ -47,9 +47,7 @@ const OSS117 = "/movie/604563"
 const EvangelionRebuild4 = "/movie/283566";
 const WallStreetWolf = "/movie/106646";
 const VioletEverGardenSerie = "/tv/75214";
-const VioletEverGardenFILM1 = "/movie/610892";
-const ViolentEverGardenFILM2 = "/movie/533514";
-const Invincible = "/tv/95557";
+const DeathNote = "/tv/13916";
 let Film = [
   TrentejoursMax,
   LeVoyageDeChihiro,
@@ -100,9 +98,7 @@ let Film = [
   EvangelionRebuild4,
   WallStreetWolf,
   VioletEverGardenSerie,
-  VioletEverGardenFILM1,
-  ViolentEverGardenFILM2,
-  Invincible,
+  DeathNote
 ];
 const BreakingBad = "/tv/1396";
 const PulpFiction = "/movie/680";
@@ -122,6 +118,9 @@ const BlackMirror = "/tv/42009";
 const MrRobot = "/tv/62560";
 const Bojack = "/tv/61222";
 const LigneVerte = "/movie/497";
+const VioletEverGardenFILM1 = "/movie/610892";
+const ViolentEverGardenFILM2 = "/movie/533514";
+const Invincible = "/tv/95557";
 let FilmPasvu = [
   BreakingBad,
   PulpFiction,
@@ -141,6 +140,9 @@ let FilmPasvu = [
   MrRobot,
   Bojack,
   LigneVerte,
+  VioletEverGardenFILM1,
+  ViolentEverGardenFILM2,
+  Invincible,
 ];
 let Imagelist = [];
 let Filmlist = [];
