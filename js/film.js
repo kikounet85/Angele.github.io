@@ -348,10 +348,9 @@ async function ActualFilm ( Film, FilmNumber, i ) {
       $( "#text" + FilmNumber ).append(
         '<div id="Genre' + FilmNumber + '"></div>'
       );
-      $ ^
-        $( "#list" + ID ).append(
-          '<div id="Genrelist' + ID + '" class="Genrelist"></div>'
-        );
+      $( "#list" + ID ).append(
+        '<div id="Genrelist' + ID + '" class="Genrelist"></div>'
+      );
       $( "#list" + ID ).append(
         '<div id="Backdropdiv' + FilmNumber + '" class="Backdropdiv"></div>'
       );

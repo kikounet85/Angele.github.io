@@ -235,6 +235,22 @@ p {
     transition: background-color 0.8s;
 }
 
+.film {
+    box-shadow: 0px 0px 5px rgb(0, 0, 0);
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 20%;
+    height: 17%;
+    padding: 4px 10px 10px 10px;
+    position: absolute;
+    top: 30.5%;
+    left: 60.5%;
+    cursor: pointer;
+    opacity: 0;
+    transition: background-color 0.8s;
+}
+
 .temp {
     position: absolute;
     left: 227px;
@@ -255,7 +271,7 @@ body.night {
     transform: scale(1.2);
 }
 
-.vérité.night, .calendrier.night {
+.vérité.night, .calendrier.night, .film.night {
     background-color: black;
     color: white;
 }
